@@ -12,6 +12,11 @@ const nextConfig = {
             '.js': ['.js', '.ts', '.tsx'],
         };
 
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: ['@svgr/webpack'],
+        });
+
         return config;
     },
     transpilePackages: ['@makify/ui'],

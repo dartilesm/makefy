@@ -11,6 +11,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@/public/*": [
+        "public/*"
+      ],
       "@/components/*": [
         "app/components/*"
       ],
