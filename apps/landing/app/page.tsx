@@ -3,9 +3,7 @@
 import LogoHorizontal from "@/public/logo-horizontal.svg";
 import { Button } from "@makify/ui";
 import { useEffect, useState } from "react";
-import { TextScramble } from "./components/shared/text-scramble";
 import { TextRotate } from "./components/shared/text-rotate";
-import { AnimatePresence, motion } from "framer-motion";
 
 const dynamicTexts = ["optimize it", "simplify it", "accelerate it"];
 

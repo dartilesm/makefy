@@ -1,27 +1,17 @@
 "use client";
 
 import {
-  AudioWaveform,
   BadgeCheck,
   Bell,
-  BookOpen,
-  Bot,
   ChevronsUpDown,
-  Command,
   CreditCard,
-  Frame,
-  GalleryVerticalEnd,
   LogOut,
-  Map,
-  PieChart,
   Plus,
-  Settings2,
   Sparkles,
-  SparklesIcon,
-  SquareTerminal,
 } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";
+import Logo from "@/public/logo.svg";
 import {
   Avatar,
   AvatarFallback,
@@ -48,11 +38,10 @@ import {
   SidebarRail,
 } from "@makify/ui/components/sidebar";
 import { User } from "@supabase/supabase-js";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import RecentConversationsSidebarGroup from "./recent-conversation-sidebar-group";
 import { SecondarySidebarMenu } from "./secondary-sidebar-menu";
-import Logo from "@/public/logo.svg";
-import Link from "next/link";
 
 export function AppSidebar({ userInfo }: { userInfo: User }) {
   const router = useRouter();
