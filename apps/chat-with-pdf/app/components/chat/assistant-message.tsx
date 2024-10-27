@@ -20,10 +20,21 @@ export function AssistantMessage({
 }) {
   const {
     useChatReturn: { append },
+    globalContext: { setDocumentState },
   } = useGlobalChat();
 
   function submitQuestion(question: string) {
     append({ role: "user", content: question });
+  }
+
+  function handlePageNumberChange(event: React.MouseEvent<HTMLButtonElement>) {
+    // find a element with a data-page attribute value
+    const pageElement =
+      event.currentTarget.closest("[data-page]") ||
+      event.currentTarget.querySelector("[data-page]");
+    const pageNumber = parseInt(pageElement?.getAttribute("data-page") ?? "1");
+
+    if (pageNumber) setDocumentState({ currentPage: pageNumber });
   }
 
   return (
@@ -105,7 +116,10 @@ export function AssistantMessage({
             [key: string]: any;
           };
           return (
-            <button className="contents text-left">
+            <button
+              className="contents text-left"
+              onClick={handlePageNumberChange}
+            >
               <u {...attributes} className="decoration-dotted">
                 {children}
               </u>

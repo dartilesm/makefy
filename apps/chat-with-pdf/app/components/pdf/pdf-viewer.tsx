@@ -23,7 +23,7 @@ import { useTheme } from "next-themes";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/api/pdf-helper?url=unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const documentOptions = {
+export const documentOptions = {
   cMapUrl: `/api/pdf-helper?url=unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
 };
 
@@ -51,11 +51,10 @@ export function PdfViewer({ className }: { className?: string }) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [pdfData, setPdfData] = useState<PdfData | null>(null);
   const {
-    globalContext: { chatData, setExtraData },
+    globalContext: { chatData, setExtraData, documentState, setDocumentState },
   } = useGlobalChat();
   useOnClickOutside(popoverRef, () => setSelectedTextOptions(null));
   /* Tools */
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentZoom, setCurrentZoom] = useState<number>(1);
   const [enableChangePageOnScroll, setEnableChangePageOnScroll] =
     useState<boolean>(true);
@@ -120,16 +119,19 @@ export function PdfViewer({ className }: { className?: string }) {
     if (canGoNextPage || canGoPrevPage) {
       const safeNextPage = Math.min(
         pdfData?.numPages as number,
-        Math.max(1, currentPage + (scrollDirection === "down" ? 1 : -1)),
+        Math.max(
+          1,
+          documentState.currentPage + (scrollDirection === "down" ? 1 : -1),
+        ),
       );
-      setCurrentPage(safeNextPage);
-    }
+      setDocumentState({ currentPage: safeNextPage });
 
-    return null;
+      return null;
+    }
   }
 
   function handlePageNumberChange(pageNumber: number) {
-    setCurrentPage(pageNumber);
+    setDocumentState({ currentPage: pageNumber });
     pdfPagesRef.current[pageNumber - 1]?.scrollIntoView();
   }
 
@@ -170,7 +172,7 @@ export function PdfViewer({ className }: { className?: string }) {
     setSelectedTextOptions(null);
     setExtraData({
       quotedText: selectedTextOptions?.selectedText,
-      page: currentPage,
+      page: documentState.currentPage,
     });
   }
 
@@ -180,7 +182,7 @@ export function PdfViewer({ className }: { className?: string }) {
         <PdfToolbar
           pdfData={pdfData as PdfData}
           zoom={currentZoom}
-          page={currentPage}
+          page={documentState.currentPage}
           changePageOnScroll={enableChangePageOnScroll}
           onPageChange={handlePageNumberChange}
           onZoomChange={handlePageZoomChange}
@@ -208,7 +210,7 @@ export function PdfViewer({ className }: { className?: string }) {
               >
                 <Popover open={!!selectedTextOptions}>
                   <Page
-                    pageNumber={currentPage}
+                    pageNumber={documentState.currentPage}
                     className="border-border max-w-max border shadow-lg"
                     scale={currentZoom}
                     onMouseUp={handleTextSelection}

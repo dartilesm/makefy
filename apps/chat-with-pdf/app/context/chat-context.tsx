@@ -31,6 +31,12 @@ export const ChatContext = createContext({
     setExtraData: (() => null) as Dispatch<
       SetStateAction<Record<string, unknown>>
     >,
+    documentState: {
+      currentPage: 1,
+    },
+    setDocumentState: (() => null) as Dispatch<
+      SetStateAction<{ currentPage: number }>
+    >,
   },
   initOptions: {} as UseChatOptions,
   useChatReturn: {} as ReturnType<typeof useChat>,
@@ -44,6 +50,9 @@ type ChatProviderProps = {
 export function ChatProvider({ children, chatData }: ChatProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [extraData, setExtraData] = useState<Record<string, unknown>>({});
+  const [documentState, setDocumentState] = useState({
+    currentPage: 1,
+  });
   const params = useParams();
   const initOptions = {
     id: chatData.id,
@@ -168,6 +177,8 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
           isLoading,
           extraData,
           setExtraData,
+          documentState,
+          setDocumentState,
         },
         useChatReturn,
         initOptions,
