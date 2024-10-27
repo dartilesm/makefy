@@ -1,4 +1,4 @@
-import Modal from "@/components/shared/modal";
+import Modal from "@/app/components/shared/modal";
 import {
   useState,
   Dispatch,
