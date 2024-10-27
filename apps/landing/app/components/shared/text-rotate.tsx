@@ -16,8 +16,8 @@ export const TextRotate = ({
 }: TextRotateProps) => {
   return (
     <Component className={cn(className, "relative")} style={style}>
-      <span className="pl-8 opacity-0">{children}</span>
-      <AnimatePresence>
+      <AnimatePresence mode="popLayout">
+        <span className="opacity-0">{children}</span>
         <motion.span
           className="absolute left-0 inline-block bg-inherit bg-gradient-to-br from-inherit to-inherit bg-clip-text text-inherit"
           key={children}
