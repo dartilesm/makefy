@@ -51,7 +51,7 @@ import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import RecentConversationsSidebarGroup from "./recent-conversation-sidebar-group";
 import { SecondarySidebarMenu } from "./secondary-sidebar-menu";
-import Logo2 from "@/public/logo2.svg";
+import Logo from "@/public/logo.svg";
 import Link from "next/link";
 
 export function AppSidebar({ userInfo }: { userInfo: User }) {
@@ -85,8 +85,8 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <div className="bg-foreground text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Logo2 className="fill-accent h-auto w-5" />
+                <div className="bg-foreground text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-md">
+                  <Logo className="fill-accent h-auto w-5" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Chat with PDF</span>

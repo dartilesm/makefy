@@ -16,19 +16,19 @@ export const metadata: Metadata = {
     icon: [
       {
         rel: "icon",
-        url: "/icon3.svg",
+        url: "/icon1.svg",
         media: "(prefers-color-scheme: dark)",
         type: "image/svg+xml",
       },
       {
         rel: "icon",
-        url: "/icon4.svg",
+        url: "/icon2.svg",
         media: "(prefers-color-scheme: light)",
         type: "image/svg+xml",
       },
       {
         rel: "apple-touch-icon",
-        url: "/icon3.svg",
+        url: "/icon1.svg",
       },
     ],
   },
