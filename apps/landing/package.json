@@ -12,35 +12,22 @@
   },
   "dependencies": {
     "@makify/ui": "workspace:*",
-    "class-variance-authority": "0.7.0",
-    "classnames": "2.3.2",
-    "clsx": "2.1.0",
-    "framer-motion": "8.5.5",
+    "framer-motion": "11.3.2",
     "lucide-react": "0.408.0",
     "react-hook-form": "7.52.1",
-    "next": "15.0.1",
+    "next": "14.2.5",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@tailwindcss/forms": "0.5.6",
-    "@tailwindcss/line-clamp": "0.4.4",
-    "@tailwindcss/typography": "0.5.10",
-    "@types/ms": "0.7.32",
-    "@types/node": "18.11.18",
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@types/node": "20",
+    "@types/react": "18.2.61",
+    "@types/react-dom": "18.2.19",
     "autoprefixer": "10.4.16",
-    "concurrently": "7.6.0",
-    "eslint-config-next": "15.0.1",
     "postcss": "8.4.31",
     "tailwindcss": "3.4.14",
     "tailwindcss-animate": "1.0.7",
     "zod": "3.23.8"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
   }
 }

@@ -1,10 +1,10 @@
 import "./globals.css";
 import "@makify/ui/globals.css";
-import cx from "classnames";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/app/components/layout/nav";
 import { Suspense } from "react";
 import { BackgroundBeamsWithCollision } from "./components/shared/background-beams-with-collision.tsx";
+import { cn } from "@makify/ui/lib/utils";
 
 export const metadata = {
   title: "Makify - Tools that make your life easier",
@@ -39,7 +39,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={cx(sfPro.variable, inter.variable)}>
+      <body className={cn(sfPro.variable, inter.variable)}>
         <Suspense fallback="...">
           <Nav />
         </Suspense>

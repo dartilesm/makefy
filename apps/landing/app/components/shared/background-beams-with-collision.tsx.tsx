@@ -80,8 +80,8 @@ export const BackgroundBeamsWithCollision = ({
         <CollisionMechanism
           key={beam.initialX + "beam-idx"}
           beamOptions={beam}
-          containerRef={containerRef}
-          parentRef={parentRef}
+          containerRef={containerRef as React.RefObject<HTMLDivElement>}
+          parentRef={parentRef as React.RefObject<HTMLDivElement>}
         />
       ))}
 
@@ -202,7 +202,7 @@ const CollisionMechanism = React.forwardRef<
         }}
         className={cn(
           "absolute left-0 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-indigo-500 via-purple-500 to-transparent",
-          beamOptions.className,
+          beamOptions.className!,
         )}
       />
       <AnimatePresence>
