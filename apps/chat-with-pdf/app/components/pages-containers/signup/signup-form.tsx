@@ -47,7 +47,7 @@ const FormSchema = z
     { message: "Password does't match", path: ["confirm-pass"] },
   );
 
-export function SignUp({ redirectTo }: { redirectTo: string }) {
+export function SignUpForm({ redirectTo }: { redirectTo: string }) {
   const queryString =
     typeof window !== "undefined" ? window.location.search : "";
   const urlParams = new URLSearchParams(queryString);
@@ -139,12 +139,9 @@ export function SignUp({ redirectTo }: { redirectTo: string }) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={cn(
-            `inline-block w-full transform space-y-3 transition-all`,
-            {
-              "-translate-x-[110%]": isConfirmed,
-            },
-          )}
+          className={cn(`inline-block w-full transform transition-all`, {
+            "-translate-x-[110%]": isConfirmed,
+          })}
         >
           <FormField
             control={form.control}
@@ -235,12 +232,12 @@ export function SignUp({ redirectTo }: { redirectTo: string }) {
             Continue
             <RiArrowRightSFill className=" size-4" />
           </Button>
-          <div className="text-center text-sm">
+          <div className="mt-4 text-center text-sm">
             <h1>
               Already have account?{" "}
               <Link
                 href={redirectTo ? `/login?next=` + redirectTo : "/login"}
-                className="text-blue-400"
+                className="underline"
               >
                 Log in
               </Link>

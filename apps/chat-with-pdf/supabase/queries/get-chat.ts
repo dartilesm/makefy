@@ -17,12 +17,6 @@ async function retrieveChat(supabase: SupabaseClient, id: string) {
   if (chatData.suggestedQuestions) {
     return chatData;
   }
-
-  const suggestedQuestions = await generateAndUpdateSuggestedQuestions(
-    supabase,
-    id,
-  );
-  return { ...chatData, suggestedQuestions };
 }
 
 async function generateAndUpdateSuggestedQuestions(
@@ -56,7 +50,7 @@ export async function getChat(id: string) {
     throw errorOnFetchingSession;
   }
 
-  const chat = unstable_cache(
+  const chat = await unstable_cache(
     (supabase: SupabaseClient) => retrieveChat(supabase, id),
     [data.user.id || "", id],
     {
@@ -64,6 +58,15 @@ export async function getChat(id: string) {
       tags: ["chat", data.user.id || "", id],
     },
   )(supabase);
+
+  console.log({ chat, id });
+  if (!chat?.suggestedQuestions) {
+    const suggestedQuestions = await generateAndUpdateSuggestedQuestions(
+      supabase,
+      id,
+    );
+    return { ...chat, suggestedQuestions };
+  }
 
   return chat;
 }
