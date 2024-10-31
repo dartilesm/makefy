@@ -41,7 +41,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <PlausibleProvider domain="makify.ai" enabled />
+        <PlausibleProvider domain="makify.app" enabled />
       </head>
       <body className={cn(sfPro.variable, inter.variable)}>
         <Nav />
