@@ -5,6 +5,7 @@ import Nav from "@/app/components/layout/nav";
 import { BackgroundBeamsWithCollision } from "./components/shared/background-beams-with-collision.tsx";
 import { cn } from "@makify/ui/lib/utils";
 import { Toaster } from "@makify/ui";
+import PlausibleProvider from "next-plausible";
 
 export const metadata = {
   title: "Makify - Tools that make your life easier",
@@ -39,6 +40,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <PlausibleProvider domain="makify.ai" enabled />
+      </head>
       <body className={cn(sfPro.variable, inter.variable)}>
         <Nav />
         <Toaster />
