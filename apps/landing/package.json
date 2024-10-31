@@ -12,12 +12,15 @@
   },
   "dependencies": {
     "@makify/ui": "workspace:*",
+    "@upstash/ratelimit": "2.0.1",
+    "@vercel/kv": "2.0.0",
     "framer-motion": "11.3.2",
     "lucide-react": "0.408.0",
     "react-hook-form": "7.52.1",
     "next": "14.2.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "resend": "4.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

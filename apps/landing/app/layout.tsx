@@ -2,9 +2,9 @@ import "./globals.css";
 import "@makify/ui/globals.css";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/app/components/layout/nav";
-import { Suspense } from "react";
 import { BackgroundBeamsWithCollision } from "./components/shared/background-beams-with-collision.tsx";
 import { cn } from "@makify/ui/lib/utils";
+import { Toaster } from "@makify/ui";
 
 export const metadata = {
   title: "Makify - Tools that make your life easier",
@@ -40,9 +40,8 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={cn(sfPro.variable, inter.variable)}>
-        <Suspense fallback="...">
-          <Nav />
-        </Suspense>
+        <Nav />
+        <Toaster />
         <main className="bg-background flex min-h-screen w-full flex-col items-center justify-center py-32">
           <BackgroundBeamsWithCollision className="fixed top-0 h-screen">
             {children}
