@@ -100,15 +100,13 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
     const chatId = chatData.id as string;
 
     // Check if the document title is already set
-    const {
-      data: { name: documentTitle },
-      error,
-    } = await supabase
+    const { data, error } = await supabase
       .from("Document")
       .select("name")
       .eq("chatId", chatId)
       .single();
 
+    const documentTitle = data?.name;
     if (!documentTitle) {
       const { title: generatedTitle } =
         await generateDocumentTitleAction(chatId);
