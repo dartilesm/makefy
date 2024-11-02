@@ -3,7 +3,10 @@ import { supabaseAdmin } from "lib/supabase/admin";
 import { Resend } from "resend";
 
 if (!process.env.RESEND_API_KEY) {
-  console.error("RESEND_API_KEY is not set");
+  console.error(
+    "RESEND_API_KEY is not set",
+    JSON.stringify(process.env.RESEND_API_KEY),
+  );
 }
 
 if (process.env.RESEND_API_KEY) {
