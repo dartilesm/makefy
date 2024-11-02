@@ -2,7 +2,13 @@ import { VerifyEmailTemplate } from "@/components/email-templates/verify-email-t
 import { supabaseAdmin } from "lib/supabase/admin";
 import { Resend } from "resend";
 
-export const dynamic = "force-dynamic";
+if (!process.env.RESEND_API_KEY) {
+  console.error("RESEND_API_KEY is not set");
+}
+
+if (process.env.RESEND_API_KEY) {
+  console.log("RESEND_API_KEY is set", process.env.RESEND_API_KEY);
+}
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
