@@ -7,7 +7,7 @@
     "prisma:dev": "dotenv -e .env.development.local -- prisma",
     "prisma:generate:dev": "dotenv -e .env.development.local -- prisma generate",
     "prisma:generate": "prisma generate dev",
-    "build": "echo $RESEND_API_KEY; next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
