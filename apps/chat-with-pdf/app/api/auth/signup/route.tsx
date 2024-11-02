@@ -4,6 +4,14 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+if (!process.env.RESEND_API_KEY) {
+  console.error("RESEND_API_KEY is not set");
+}
+
+if (process.env.RESEND_API_KEY) {
+  console.log("RESEND_API_KEY is set", process.env.RESEND_API_KEY);
+}
+
 export async function POST(request: Request) {
   // rate limit
 
