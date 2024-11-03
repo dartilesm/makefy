@@ -78,7 +78,7 @@ export async function POST(req: Request) {
   data.append(messageData);
 
   const result = await streamText({
-    model: google("models/gemini-1.5-pro-latest"),
+    model: google("gemini-1.5-flash-latest"),
     messages: convertToCoreMessages(messages),
     system: systemInstructions,
     maxTokens: 3000,
