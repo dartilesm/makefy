@@ -38,7 +38,10 @@ export function DocumentTitle({ className }: DocumentTitleProps) {
   }, [params]);
 
   async function getDocument() {
-    if (!params.documentId) return;
+    if (!params.documentId) {
+      setDocument(undefined);
+      return;
+    }
 
     try {
       const document = await getDocumentByChatId(params.documentId as string);

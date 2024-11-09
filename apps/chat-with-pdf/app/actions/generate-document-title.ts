@@ -4,7 +4,7 @@ import { getContext } from "@/lib/context";
 import { createClient } from "@/lib/supabase/server";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 
 export async function generateDocumentTitle(documentId: string) {
@@ -24,7 +24,8 @@ export async function generateDocumentTitle(documentId: string) {
   if (object.title) {
     const supabase = createClient();
     const { data } = await supabase.auth.getSession();
-    revalidateTag(data.session?.user.id || "documents");
+    revalidatePath(`/chat/${documentId}`);
+    revalidateTag(documentId);
   }
 
   return object;

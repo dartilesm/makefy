@@ -101,6 +101,8 @@ export async function POST(req: Request) {
 }
 
 function parsedUserMessage(lastMessage: Message, quotedText: string) {
+  if (!lastMessage) return "";
+
   if (quotedText) {
     return `Given this text extracted from the document: 
       "${quotedText}" 

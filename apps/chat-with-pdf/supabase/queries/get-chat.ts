@@ -14,9 +14,7 @@ async function retrieveChat(supabase: SupabaseClient, id: string) {
     throw chatError;
   }
 
-  if (chatData.suggestedQuestions) {
-    return chatData;
-  }
+  return chatData;
 }
 
 async function generateAndUpdateSuggestedQuestions(
@@ -29,7 +27,7 @@ async function generateAndUpdateSuggestedQuestions(
     return null;
   }
 
-  const { data, error: updateError } = await supabase
+  const { error: updateError } = await supabase
     .from("Chat")
     .update({ suggestedQuestions: result.questions })
     .eq("id", id)
