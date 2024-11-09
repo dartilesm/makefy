@@ -22,6 +22,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  useToast,
 } from "@makify/ui";
 import { Tables } from "database.types";
 import { LoaderCircleIcon, PencilIcon, TrashIcon } from "lucide-react";
@@ -80,6 +81,8 @@ export function EditDocumentDialog({
     },
   });
 
+  const { toast } = useToast();
+
   useEffect(() => {
     editForm.reset();
     deleteForm.reset();
@@ -97,7 +100,13 @@ export function EditDocumentDialog({
   async function onDeleteDocument(
     values: z.infer<ReturnType<typeof getDeleteFormSchema>>,
   ) {
-    await deleteChat(values.documentId);
+    const deleteResponse = await deleteChat(values.documentId);
+    if (deleteResponse?.error)
+      return toast({
+        title: "Oops! We couldn't delete the document.",
+        description: deleteResponse?.error?.message,
+        variant: "destructive",
+      });
     handleDialogToggle(false);
   }
 

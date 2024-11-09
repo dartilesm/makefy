@@ -75,8 +75,11 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
 
   useEffect(() => {
     fetchChatData();
-    generateDocumentTitle();
   }, []);
+
+  useEffect(() => {
+    generateDocumentTitle();
+  }, [chatData.id]);
 
   useEffect(sendPreloadedPrompts, [isLoading]);
 
@@ -95,6 +98,7 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
   }
 
   async function generateDocumentTitle() {
+    if (!chatData.id) return;
     const supabase = createClient();
 
     const chatId = chatData.id as string;

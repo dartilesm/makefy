@@ -11,18 +11,25 @@ export async function deleteChat(
 ) {
   const supabase = createClient();
 
-  await supabase.from("Chat").delete().eq("id", chatId).select("id");
+  const { data, error } = await supabase
+    .from("Chat")
+    .delete()
+    .eq("id", chatId)
+    .select("id");
+
+  if (error) return { error };
 
   revalidateTag("documents");
   revalidatePath("/chat");
 
-  if (!shouldRedirect) return;
+  if (!shouldRedirect) return { error: null };
 
   const { data: firstDocument } = await supabase
     .from("Document")
     .select("chatId")
     .single();
 
-  if (firstDocument?.chatId) return redirect(`/chat/${firstDocument.chatId}`);
+  if (firstDocument?.chatId) redirect(`/chat/${firstDocument.chatId}`);
+
   redirect("/chat");
 }
