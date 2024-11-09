@@ -1,24 +1,13 @@
 "use client";
 
 import {
-  AudioWaveform,
   BadgeCheck,
   Bell,
-  BookOpen,
-  Bot,
   ChevronsUpDown,
-  Command,
   CreditCard,
-  Frame,
-  GalleryVerticalEnd,
   LogOut,
-  Map,
-  PieChart,
   Plus,
-  Settings2,
   Sparkles,
-  SparklesIcon,
-  SquareTerminal,
 } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";

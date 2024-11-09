@@ -1,17 +1,36 @@
 import "./globals.css";
 import "@makify/ui/globals.css";
-import { Analytics } from "@vercel/analytics/react";
-import cx from "classnames";
 import { sfPro, inter } from "./fonts";
-import Nav from "@/components/layout/nav";
-import { Suspense } from "react";
+import Nav from "@/app/components/layout/nav";
+import { BackgroundBeamsWithCollision } from "./components/shared/background-beams-with-collision.tsx";
+import { cn } from "@makify/ui/lib/utils";
+import { Toaster } from "@makify/ui";
+import PlausibleProvider from "next-plausible";
 
 export const metadata = {
   title: "Makify - Tools that make your life easier",
   description:
     "Makify is all you need to make your life easier. It includes such useful tools as a chat with your PDF app, a media file sharing app, and a QR code generator.",
-  metadataBase: new URL("https://precedent.dev"),
-  themeColor: "#FFF",
+  icons: {
+    icon: [
+      {
+        rel: "icon",
+        url: "/icon2.svg",
+        media: "(prefers-color-scheme: dark)",
+        type: "image/svg+xml",
+      },
+      {
+        rel: "icon",
+        url: "/icon2.svg",
+        media: "(prefers-color-scheme: light)",
+        type: "image/svg+xml",
+      },
+      {
+        rel: "apple-touch-icon",
+        url: "/icon2.svg",
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
@@ -20,16 +39,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={cx(sfPro.variable, inter.variable)}>
-        <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
-        <Suspense fallback="...">
-          <Nav />
-        </Suspense>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
-          {children}
+    <html lang="en" className="dark">
+      <head>
+        <PlausibleProvider domain="makify.app" enabled />
+      </head>
+      <body className={cn(sfPro.variable, inter.variable)}>
+        <Nav />
+        <Toaster />
+        <main className="bg-background flex min-h-screen w-full flex-col items-center justify-center py-32">
+          <BackgroundBeamsWithCollision className="fixed top-0 h-screen">
+            {children}
+          </BackgroundBeamsWithCollision>
         </main>
-        <Analytics />
       </body>
     </html>
   );
