@@ -1,7 +1,6 @@
 "use client";
 
 import { MESSAGE_TYPE } from "@/components/chat/constants/message-type";
-import { Chat } from "@prisma/client";
 import { Message, useChat, UseChatOptions } from "ai/react";
 import { useParams } from "next/navigation";
 import {
@@ -13,8 +12,11 @@ import {
   useState,
 } from "react";
 import { updateChatMessages } from "../actions/update-chat-messages";
+import { Tables } from "database.types";
+import { createClient } from "@/lib/supabase/client";
+import { generateDocumentTitle as generateDocumentTitleAction } from "../actions/generate-document-title";
 
-const EMPTY_CHAT_DATA: Partial<Chat> = {
+const EMPTY_CHAT_DATA: Partial<Tables<"Chat">> = {
   id: "",
   documentMetadata: "",
   documentUrl: "",
@@ -29,6 +31,12 @@ export const ChatContext = createContext({
     setExtraData: (() => null) as Dispatch<
       SetStateAction<Record<string, unknown>>
     >,
+    documentState: {
+      currentPage: 1,
+    },
+    setDocumentState: (() => null) as Dispatch<
+      SetStateAction<{ currentPage: number }>
+    >,
   },
   initOptions: {} as UseChatOptions,
   useChatReturn: {} as ReturnType<typeof useChat>,
@@ -36,12 +44,15 @@ export const ChatContext = createContext({
 
 type ChatProviderProps = {
   children: React.ReactNode;
-  chatData: Partial<Chat>;
+  chatData: Partial<Tables<"Chat">>;
 };
 
 export function ChatProvider({ children, chatData }: ChatProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [extraData, setExtraData] = useState<Record<string, unknown>>({});
+  const [documentState, setDocumentState] = useState({
+    currentPage: 1,
+  });
   const params = useParams();
   const initOptions = {
     id: chatData.id,
@@ -57,19 +68,18 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
   const preloadPrompts = useRef([
     {
       message:
-        "Introduce yourself without mention your name and summarize the document.",
+        "Introduce yourself and explain your purpose here. Mention that you're here to assist with the provided document. Avoid mentioning your name. Make your message friendly and professional.",
       type: MESSAGE_TYPE.INTRODUCTION,
-    },
-    {
-      message:
-        "Give me a list of a few questions that are already answered by the document content. Give me the questions as a list. Say those questions are suggestions to start and don't mention the questions are already answered by the document content.",
-      type: MESSAGE_TYPE.SUGGESTION_MESSAGES,
     },
   ]);
 
   useEffect(() => {
     fetchChatData();
   }, []);
+
+  useEffect(() => {
+    generateDocumentTitle();
+  }, [chatData.id]);
 
   useEffect(sendPreloadedPrompts, [isLoading]);
 
@@ -85,6 +95,32 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
 
     // restore messages from db
     useChatReturn.setMessages(chatData?.messages as unknown as Message[]);
+  }
+
+  async function generateDocumentTitle() {
+    if (!chatData.id) return;
+    const supabase = createClient();
+
+    const chatId = chatData.id as string;
+
+    // Check if the document title is already set
+    const { data, error } = await supabase
+      .from("Document")
+      .select("name")
+      .eq("chatId", chatId)
+      .single();
+
+    const documentTitle = data?.name;
+    if (!documentTitle) {
+      const { title: generatedTitle } =
+        await generateDocumentTitleAction(chatId);
+      console.log({ generatedTitle });
+
+      await supabase
+        .from("Document")
+        .update({ name: generatedTitle })
+        .eq("chatId", chatId);
+    }
   }
 
   function sendPreloadedPrompts() {
@@ -130,7 +166,8 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
     if (hasAddedMessages && !useChatReturn.isLoading)
       updateChatMessages({
         documentId: params.documentId as string,
-        messages: useChatReturn.messages as unknown as Chat["messages"],
+        messages:
+          useChatReturn.messages as unknown as Tables<"Chat">["messages"],
       });
   }
 
@@ -142,6 +179,8 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
           isLoading,
           extraData,
           setExtraData,
+          documentState,
+          setDocumentState,
         },
         useChatReturn,
         initOptions,
