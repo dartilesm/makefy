@@ -114,7 +114,7 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
                 <SidebarMenuButton
                   tooltip="New conversation"
                   variant="outline"
-                  onClick={() => handleNewChatDialogToggle(true)}
+                  onClick={handleNewChatDialogToggle}
                 >
                   <Plus />
                   <span>New conversation</span>
