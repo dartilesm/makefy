@@ -111,9 +111,6 @@ export const SuggestedQuestions = forwardRef<
             <AnimatedButton
               variant="outline"
               size="sm"
-              animate={{
-                whiteSpace: isSuggestedQuestionsOpen ? "pre-wrap" : "nowrap",
-              }}
               transition={{
                 duration: 0.3,
                 delay: !isSuggestedQuestionsOpen ? 0.3 : 0,
@@ -128,9 +125,18 @@ export const SuggestedQuestions = forwardRef<
                 <SparkleIcon className="absolute -top-1 left-1 h-3 w-3" />
                 <MessageSquareIcon className="h-3 w-3" />
               </span>
-              <span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+              <motion.span
+                className="max-w-full overflow-hidden text-ellipsis"
+                animate={{
+                  whiteSpace: isSuggestedQuestionsOpen ? "pre-wrap" : "nowrap",
+                }}
+                transition={{
+                  duration: 0.3,
+                  delay: !isSuggestedQuestionsOpen ? 0.3 : 0,
+                }}
+              >
                 {question}
-              </span>
+              </motion.span>
             </AnimatedButton>
           ))}
         </motion.div>

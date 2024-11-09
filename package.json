@@ -4,8 +4,10 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --env-mode=loose",
-    "dev:landing": "turbo dev --filter={apps/landing} --env-mode=loose",
-    "dev:chat-with-pdf": "turbo dev --filter={apps/chat-with-pdf} --env-mode=loose",
+    "dev:landing": "turbo dev --filter=@makify/landing --env-mode=loose",
+    "dev:chat-with-pdf": "turbo dev --filter=@makify/chat-with-pdf --env-mode=loose",
+    "build:landing": "turbo build --filter=@makify/landing --env-mode=loose",
+    "build:chat-with-pdf": "turbo build --filter=@makify/chat-with-pdf --env-mode=loose",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "sui-mono commit"

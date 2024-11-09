@@ -15,6 +15,6 @@ export const config = {
      * - api/auth (API authentication routes)
      * - Image file extensions like svg, png, jpg, etc.
      */
-    "/((?!_next/static|_next/image|favicon.ico|api/auth|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|auth|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

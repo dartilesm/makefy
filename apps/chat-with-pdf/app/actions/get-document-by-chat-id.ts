@@ -34,7 +34,7 @@ export async function getDocumentByChatId(chatId: string) {
     [data.user.id || "", chatId],
     {
       revalidate: 60 * 60,
-      tags: ["document", data.user.id || "", chatId],
+      tags: ["document", data?.user?.id || "", chatId],
     },
   )(supabase);
 

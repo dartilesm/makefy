@@ -75,8 +75,11 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
 
   useEffect(() => {
     fetchChatData();
-    generateDocumentTitle();
   }, []);
+
+  useEffect(() => {
+    generateDocumentTitle();
+  }, [chatData.id]);
 
   useEffect(sendPreloadedPrompts, [isLoading]);
 
@@ -95,20 +98,19 @@ export function ChatProvider({ children, chatData }: ChatProviderProps) {
   }
 
   async function generateDocumentTitle() {
+    if (!chatData.id) return;
     const supabase = createClient();
 
     const chatId = chatData.id as string;
 
     // Check if the document title is already set
-    const {
-      data: { name: documentTitle },
-      error,
-    } = await supabase
+    const { data, error } = await supabase
       .from("Document")
       .select("name")
       .eq("chatId", chatId)
       .single();
 
+    const documentTitle = data?.name;
     if (!documentTitle) {
       const { title: generatedTitle } =
         await generateDocumentTitleAction(chatId);

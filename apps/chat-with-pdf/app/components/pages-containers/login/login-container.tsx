@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Social } from "../signup/social";
 import { LoginForm } from "./login-form";
+import Logo from "@/public/logo.svg";
 
 export function LoginContainer() {
   const queryString =
@@ -16,14 +17,10 @@ export function LoginContainer() {
     <div className="w-full rounded-md border shadow  sm:w-[26rem] sm:p-5 dark:border-zinc-800">
       <div className="space-y-5 p-5">
         <div className="space-y-3 text-center">
-          <Image
-            src={"/supabase.png"}
-            alt="supabase logo"
-            width={50}
-            height={50}
-            className=" mx-auto rounded-full"
-          />
-          <h1 className="font-bold">Sign in to SupaAuth</h1>
+          <div className="bg-background mx-auto flex size-16 items-center justify-center overflow-hidden rounded-full p-2">
+            <Logo />
+          </div>
+          <h1 className="font-bold">Sign in to Makify</h1>
           <p className="text-sm">Welcome back! Please sign in to continue</p>
         </div>
         <Social redirectTo={next || "/"} />
