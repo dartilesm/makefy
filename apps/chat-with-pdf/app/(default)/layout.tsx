@@ -2,7 +2,7 @@ import { Header } from "@/components/header/header";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SidebarProvider } from "@makify/ui";
 import { cn } from "@makify/ui/lib/utils";
-import { User } from "@supabase/supabase-js";
+import type { User } from "@makify/supabase/types";
 import { Metadata } from "next";
 import { createSupabaseServer } from "@makify/supabase/server";
 

@@ -2,7 +2,7 @@ import {
   loadingPdfFileMessages,
   loadingPdfLinkMessages,
 } from "@/components/header/document-title/constants/loading-messages";
-import { PostgrestError } from "@supabase/supabase-js";
+import type { PostgrestError } from "@makify/supabase/types";
 
 let currentActiveIndex = -1;
 let loadingMessagesCopy = [] as

@@ -1,4 +1,4 @@
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@makify/supabase/types";
 import { unstable_cache } from "next/cache";
 import { createSupabaseServer } from "@makify/supabase/server";
 

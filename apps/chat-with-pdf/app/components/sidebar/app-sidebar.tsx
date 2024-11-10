@@ -38,7 +38,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@makify/ui/components/sidebar";
-import { User } from "@supabase/supabase-js";
+import type { User } from "@makify/supabase/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import { type EmailOtpType } from "@supabase/supabase-js";
+import type { EmailOtpType } from "@makify/supabase/types";
 import { type NextRequest } from "next/server";
 
 import { redirect } from "next/navigation";
