@@ -24,6 +24,11 @@
             "types": "./dist/client/client.d.ts",
             "import": "./src/client/client.ts",
             "default": "./dist/client/client.js"
+        },
+        "./middleware": {
+            "types": "./dist/middleware.d.ts",
+            "import": "./src/middleware.ts",
+            "default": "./dist/middleware.js"
         }
     },
     "typesVersions": {
@@ -33,6 +38,9 @@
             ],
             "client": [
                 "./src/client/client.ts"
+            ],
+            "middleware": [
+                "./src/middleware.ts"
             ],
             "*": [
                 "./src/index.ts"
