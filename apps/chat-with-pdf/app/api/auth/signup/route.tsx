@@ -1,5 +1,5 @@
 import { VerifyEmailTemplate } from "@/components/email-templates/verify-email-template";
-import { supabaseAdmin } from "lib/supabase/admin";
+import { createSupabaseAdmin } from "@makify/supabase/admin";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   // rate limit
 
   const data = await request.json();
-  const supabase = supabaseAdmin();
+  const supabase = createSupabaseAdmin();
 
   const res = await supabase.auth.admin.generateLink({
     type: "signup",
