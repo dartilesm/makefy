@@ -34,6 +34,11 @@
             "types": "./dist/client/admin.d.ts",
             "import": "./src/client/admin.ts",
             "default": "./dist/client/admin.js"
+        },
+        "./types": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./src/types/index.ts",
+            "default": "./dist/types/index.js"
         }
     },
     "typesVersions": {
@@ -49,6 +54,9 @@
             ],
             "admin": [
                 "./src/client/admin.ts"
+            ],
+            "types": [
+                "./src/types/index.ts"
             ],
             "*": [
                 "./src/index.ts"
