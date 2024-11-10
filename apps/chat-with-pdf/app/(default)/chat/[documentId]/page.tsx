@@ -1,7 +1,7 @@
 import { ChatIdContainer } from "@/components/pages-containers/chat-id-container";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { getChat } from "supabase/queries/get-chat";
+import { getChat } from "lib/supabase/queries/get-chat";
 import { getDocumentByChatId } from "@/app/actions/get-document-by-chat-id";
 
 type Props = {

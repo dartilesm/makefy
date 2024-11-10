@@ -1,6 +1,6 @@
 import { ChatsContainer } from "@/components/pages-containers/chats-container";
-import { getChats } from "supabase/queries/get-chats";
-import { getDocuments } from "supabase/queries/get-documents";
+import { getChats } from "lib/supabase/queries/get-chats";
+import { getDocuments } from "lib/supabase/queries/get-documents";
 
 export const dynamic = "force-dynamic";
 

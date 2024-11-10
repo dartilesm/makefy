@@ -30,6 +30,11 @@
       ],
       "cache": false,
       "persistent": true
+    },
+    "@makify/supabase#gen:types:local": {
+      "dependsOn": [
+        "@makify/supabase#build"
+      ]
     }
   }
 }
