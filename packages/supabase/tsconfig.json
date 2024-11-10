@@ -1,0 +1,29 @@
+{
+    "extends": "@makify/typescript-config/react-library.json",
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "ES2015"
+        ],
+        "module": "ESNext",
+        "target": "ES6",
+        "rootDir": "src",
+        "outDir": "dist",
+        "moduleResolution": "bundler",
+        "declaration": true,
+        "declarationDir": "./dist",
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "jsx": "react-jsx"
+    },
+    "include": [
+        "src/**/*",
+        "."
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
