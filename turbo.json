@@ -31,12 +31,6 @@
       ],
       "cache": false,
       "persistent": true
-    },
-    "@makify/supabase#build": {
-      "dependsOn": [
-        "@makify/supabase#gen:types:local"
-      ]
-    },
-    "@makify/supabase#gen:types:local": {}
+    }
   }
 }
