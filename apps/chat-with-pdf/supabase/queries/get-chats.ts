@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { unstable_cache } from "next/cache";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makify/supabase";
 /* import { supabase } from "@makify/supabase"; */
 
 async function retrieveChats(supabase: SupabaseClient) {
