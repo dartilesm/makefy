@@ -2,10 +2,10 @@
     "name": "@makify/supabase",
     "version": "0.0.1",
     "private": true,
+    "type": "module",
     "exports": {
         "./server": "./src/client/server.ts",
-        "./client": "./src/client/client.ts",
-        ".": "./src/client/index.ts"
+        "./client": "./src/client/client.ts"
     },
     "scripts": {
         "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
