@@ -29,6 +29,11 @@
             "types": "./dist/middleware.d.ts",
             "import": "./src/middleware.ts",
             "default": "./dist/middleware.js"
+        },
+        "./admin": {
+            "types": "./dist/client/admin.d.ts",
+            "import": "./src/client/admin.ts",
+            "default": "./dist/client/admin.js"
         }
     },
     "typesVersions": {
@@ -42,6 +47,9 @@
             "middleware": [
                 "./src/middleware.ts"
             ],
+            "admin": [
+                "./src/client/admin.ts"
+            ],
             "*": [
                 "./src/index.ts"
             ]
@@ -54,10 +62,10 @@
         "type-check": "tsc --noEmit"
     },
     "dependencies": {
-        "@supabase/ssr": "0.5.1"
+        "@supabase/ssr": "0.5.1",
+        "@supabase/supabase-js": "2.39.0"
     },
     "devDependencies": {
-        "@supabase/supabase-js": "^2.39.0",
         "@types/node": "^20.0.0",
         "tsup": "8.0.0",
         "typescript": "5.3.3"
