@@ -8,7 +8,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { z } from "zod";
 
-import { createClient } from "@/lib/supabase/client";
+import { createSupabaseServer } from "@makify/supabase/client";
 import {
   Button,
   Form,
@@ -44,7 +44,7 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    const supabase = createClient();
+    const supabase = createSupabaseClient();
     if (!isPending) {
       startTransition(async () => {
         const { error } = await supabase.auth.signInWithPassword({

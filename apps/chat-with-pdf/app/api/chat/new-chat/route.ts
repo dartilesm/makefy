@@ -4,10 +4,9 @@ import { embedDocument, prepareDocument } from "@/lib/embed-document";
 import { getLoadingMessages } from "@/lib/get-loading-messages";
 import { getPdfData } from "@/lib/get-pdf-metadata";
 import { rateLimitRequests } from "@/lib/rate-limit-requests";
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 import { PineconeRecord } from "@pinecone-database/pinecone";
-import { Tables } from "database.types";
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -85,7 +84,7 @@ async function* createNewChat({
   documentUrl: string;
   documentFile?: File;
 }) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
   // Fetching PDF data and creating a new chat in the database
   yield getLoadingMessages({
     isViaLink: !!documentUrl,

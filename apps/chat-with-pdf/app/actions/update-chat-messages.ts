@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 import { Tables } from "database.types";
 import { revalidatePath } from "next/cache";
 
@@ -15,7 +15,7 @@ export async function updateChatMessages({
   messages,
   documentMetadata,
 }: UpdateChatMessagesParams) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
 
   await supabase
     .from("Chat")

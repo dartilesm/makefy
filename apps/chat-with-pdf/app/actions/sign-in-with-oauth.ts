@@ -1,7 +1,7 @@
 "use server";
 
 import { getOAuthRedirectUrl } from "@/lib/oauth-redirect-url";
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 import { SignInWithOAuthCredentials } from "@supabase/supabase-js";
 import { ReadonlyURLSearchParams, redirect } from "next/navigation";
 
@@ -9,7 +9,7 @@ export async function signInWithOAuth(
   provider: SignInWithOAuthCredentials["provider"],
   searchParams: ReadonlyURLSearchParams,
 ) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
   const redirectTo = getOAuthRedirectUrl(searchParams);
 
   const { data, error } = await supabase.auth.signInWithOAuth({

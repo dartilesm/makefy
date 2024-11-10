@@ -1,10 +1,10 @@
 import { Header } from "@/components/header/header";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import { createClient } from "@/lib/supabase/server";
 import { SidebarProvider } from "@makify/ui";
 import { cn } from "@makify/ui/lib/utils";
 import { User } from "@supabase/supabase-js";
 import { Metadata } from "next";
+import { createSupabaseServer } from "@makify/supabase/server";
 
 export const metadata: Metadata = {
   title: "Chats",
@@ -15,7 +15,7 @@ export default async function DefaultLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
   const {
     data: { user },
   } = await supabase.auth.getUser();

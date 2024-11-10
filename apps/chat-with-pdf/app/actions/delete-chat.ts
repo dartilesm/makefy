@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 import { Tables } from "database.types";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
@@ -9,7 +9,7 @@ export async function deleteChat(
   chatId: Tables<"Chat">["id"],
   shouldRedirect = true,
 ) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
 
   const { data, error } = await supabase
     .from("Chat")

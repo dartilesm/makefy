@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/client";
+import { createSupabaseClient } from "@makify/supabase/client";
 import {
   Button,
   SidebarGroup,
@@ -28,7 +28,7 @@ export default function RecentConversationsSidebarGroup() {
   }, []);
 
   async function getRecentConversations() {
-    const supabase = createClient();
+    const supabase = createSupabaseClient();
 
     const { data, error } = await supabase
       .from("Chat")

@@ -9,6 +9,7 @@ type Props = {
     documentId: string;
   };
 };
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const document = await getDocumentByChatId(params.documentId);
 

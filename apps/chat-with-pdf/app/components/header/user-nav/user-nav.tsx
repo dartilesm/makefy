@@ -8,10 +8,10 @@ import {
 } from "@makify/ui/components/dropdown-menu";
 import { UserAvatar } from "@/components/ui/user-avatar";
 import { UserNavMenuItems } from "./user-nav-menu-items";
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/client";
 
 export async function UserNav() {
-  const supabase = createClient();
+  const supabase = createSupabaseClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

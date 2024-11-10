@@ -3,7 +3,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@makify/ui/components/avatar";
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/client";
 import { cn } from "@makify/ui/lib/utils";
 
 interface UserAvatarProps {
@@ -11,7 +11,7 @@ interface UserAvatarProps {
 }
 
 export async function UserAvatar({ className }: UserAvatarProps) {
-  const supabase = createClient();
+  const supabase = createSupabaseClient();
   const {
     data: { user },
     error,
