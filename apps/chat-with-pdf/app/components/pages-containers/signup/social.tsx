@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
 import { IoLogoGithub } from "react-icons/io5";
-import { createSupabaseServer } from "@makify/supabase/client";
 import { Button, useToast } from "@makify/ui";
+import { createSupabaseClient } from "@makify/supabase/client";
 
 export function Social({ redirectTo }: { redirectTo: string }) {
   const { toast } = useToast();

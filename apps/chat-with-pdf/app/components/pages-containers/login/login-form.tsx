@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -8,7 +9,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { z } from "zod";
 
-import { createSupabaseServer } from "@makify/supabase/client";
 import {
   Button,
   Form,
@@ -22,6 +22,7 @@ import {
 } from "@makify/ui";
 import { cn } from "@makify/ui/lib/utils";
 import Link from "next/link";
+import { createSupabaseClient } from "@makify/supabase/client";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid Email Address" }),

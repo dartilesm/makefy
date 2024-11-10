@@ -1,12 +1,12 @@
 import { Tables } from "database.types";
 import { getEmbeddings } from "./vector-store";
-import { createSupabaseServer } from "@makify/supabase/client";
+import { createSupabaseServer } from "@makify/supabase/server";
 
 export async function getContext(query: string, documentId: string) {
   // User query embeddings
   const userQueryEmbeddings = await getEmbeddings(query);
 
-  const supabase = createSupabaseClient();
+  const supabase = createSupabaseServer();
 
   const { data: documentSections, error } = await supabase.rpc(
     "match_documents",
