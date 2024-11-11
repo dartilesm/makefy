@@ -12,6 +12,9 @@
             "inputs": [
                 "src/supabase/**/*.sql",
                 "src/supabase/**/*.toml"
+            ],
+            "env": [
+                "VERCEL_ENV"
             ]
         }
     }

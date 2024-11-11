@@ -68,7 +68,7 @@
         "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
         "lint": "eslint src/",
         "type-check": "tsc --noEmit",
-        "gen:types:local": "if [ \"$VERCEL_ENV\" ]; then dotenv -e ../../.env.development.local -- supabase gen types typescript --workdir ./src --local > src/types/database.ts; fi"
+        "gen:types:local": "if [ -z ${VERCEL_ENV} ]; then dotenv -e ../../.env.development.local -- supabase gen types typescript --workdir ./src --local > src/types/database.ts; fi"
     },
     "dependencies": {
         "@supabase/ssr": "0.5.1",
