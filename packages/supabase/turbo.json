@@ -9,9 +9,7 @@
             ]
         },
         "gen:types:local": {
-            "inputs": [
-                "./**"
-            ],
+            "cache": false,
             "env": [
                 "VERCEL_ENV"
             ]

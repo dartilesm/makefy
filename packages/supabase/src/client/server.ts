@@ -1,7 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { Database } from "@makify/supabase/types/database";
-import { SupabaseClient } from "@supabase/supabase-js";
 
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
   throw new Error("Missing env.NEXT_PUBLIC_SUPABASE_URL");
@@ -14,7 +13,9 @@ if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
 export function createSupabaseServer() {
   const cookieStore = cookies();
 
-  return createServerClient<Database>(
+  // TODO: add types for example: SupabaseClient<Database>.
+  // NOTE: it was removed since it was causing issues with the types.
+  return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {

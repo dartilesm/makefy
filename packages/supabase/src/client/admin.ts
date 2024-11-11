@@ -10,7 +10,9 @@ if (!process.env.SUPABASE_ADMIN) {
 }
 
 export function createSupabaseAdmin() {
-  return createClient<Database>(
+  // TODO: add types for example: SupabaseClient<Database>.
+  // NOTE: it was removed since it was causing issues with the types.
+  return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_ADMIN!,
     {
