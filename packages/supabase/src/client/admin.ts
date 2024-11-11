@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
-import type { Database, SupabaseClient } from "@makify/supabase/types";
+import type { Database } from "@makify/supabase/types";
+
+type SupabaseClient = ReturnType<typeof createClient<Database>>;
 
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
   throw new Error("Missing env.NEXT_PUBLIC_SUPABASE_URL");
@@ -9,7 +11,7 @@ if (!process.env.SUPABASE_ADMIN) {
   throw new Error("Missing env.SUPABASE_ADMIN");
 }
 
-export function createSupabaseAdmin(): SupabaseClient<Database> {
+export function createSupabaseAdmin(): SupabaseClient {
   return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_ADMIN!,
