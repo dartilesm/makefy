@@ -1,6 +1,6 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { Database } from "./types/database";
+import type { Database } from "@makify/supabase/types/database";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 type MiddlewareClient = {
@@ -17,7 +17,7 @@ export async function createMiddlewareClient(
     },
   });
 
-  const supabase = createServerClient<Database>(
+  const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
