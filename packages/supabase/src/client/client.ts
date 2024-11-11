@@ -1,7 +1,5 @@
 import { createBrowserClient } from "@supabase/ssr";
-import type { Database } from "@makify/supabase/types";
-
-type SupabaseClient = ReturnType<typeof createBrowserClient<Database>>;
+import type { Database, SupabaseClient } from "@makify/supabase/types";
 
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
   throw new Error("Missing env.NEXT_PUBLIC_SUPABASE_URL");
