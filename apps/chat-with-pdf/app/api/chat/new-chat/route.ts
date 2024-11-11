@@ -9,6 +9,7 @@ import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 import { PineconeRecord } from "@pinecone-database/pinecone";
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { Tables } from "@makify/supabase/types";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
@@ -259,7 +260,7 @@ async function* createNewChat({
 
   const { error: documentSectionsError } = await supabase
     .from("DocumentSections")
-    .insert(vectorsToInsert);
+    .insert(vectorsToInsert as unknown as Tables<"DocumentSections">[]);
   if (documentSectionsError) {
     await deleteChat(chat.id, false);
     return getLoadingMessages({
