@@ -12,7 +12,7 @@ import {
   useState,
 } from "react";
 import { updateChatMessages } from "../actions/update-chat-messages";
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 import { createSupabaseClient } from "@makify/supabase/client";
 import { generateDocumentTitle as generateDocumentTitleAction } from "../actions/generate-document-title";
 

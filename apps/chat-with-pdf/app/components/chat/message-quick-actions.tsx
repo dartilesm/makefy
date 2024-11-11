@@ -26,7 +26,7 @@ import { useParams } from "next/navigation";
 import { forwardRef, RefAttributes, useState } from "react";
 import { QUICK_ACTIONS } from "./constants/message-quick-actions";
 import { MessageActions } from "./types/message-actions";
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 
 type MessageQuickActionsProps = {
   message: Message;

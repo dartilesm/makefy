@@ -1,4 +1,4 @@
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 import { getEmbeddings } from "./vector-store";
 import { createSupabaseServer } from "@makify/supabase/server";
 

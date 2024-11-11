@@ -1,7 +1,7 @@
 "use server";
 
 import { createSupabaseServer } from "@makify/supabase/server";
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 import { revalidatePath } from "next/cache";
 
 type UpdateChatMessagesParams = {

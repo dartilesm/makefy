@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@makify/ui";
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 import { ChevronRight, MessageSquareIcon, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
