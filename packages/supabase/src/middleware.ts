@@ -1,8 +1,16 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import type { Database } from "./types";
+import { Database } from "./types/database";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-export async function createMiddlewareClient(request: NextRequest) {
+type MiddlewareClient = {
+  supabase: SupabaseClient<Database>;
+  response: NextResponse;
+};
+
+export async function createMiddlewareClient(
+  request: NextRequest,
+): Promise<MiddlewareClient> {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
