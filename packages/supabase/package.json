@@ -64,7 +64,7 @@
         }
     },
     "scripts": {
-        "build": "tsup",
+        "build": "tsc --build",
         "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
         "lint": "eslint src/",
         "type-check": "tsc --noEmit",
@@ -75,7 +75,7 @@
         "@supabase/supabase-js": "2.39.0"
     },
     "devDependencies": {
-        "@types/node": "^20.0.0",
+        "@types/node": "20.0.0",
         "supabase": "1.219.2",
         "tsup": "8.0.0",
         "typescript": "5.3.3"

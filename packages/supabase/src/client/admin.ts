@@ -10,7 +10,7 @@ if (!process.env.SUPABASE_ADMIN) {
 }
 
 export function createSupabaseAdmin(): SupabaseClient<Database> {
-  return createClient(
+  return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_ADMIN!,
     {

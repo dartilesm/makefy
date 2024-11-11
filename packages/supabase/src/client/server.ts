@@ -15,7 +15,7 @@ export function createSupabaseServer(): SupabaseClient<Database> {
 
   // TODO: add types for example: SupabaseClient<Database>.
   // NOTE: it was removed since it was causing issues with the types.
-  return createServerClient(
+  return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
