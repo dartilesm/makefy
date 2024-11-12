@@ -9,7 +9,7 @@ if (!process.env.SUPABASE_ADMIN) {
   throw new Error("Missing env.SUPABASE_ADMIN");
 }
 
-export function createSupabaseAdmin(): SupabaseAdminClient {
+export function createSupabaseAdmin() {
   return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_ADMIN!,
