@@ -4,9 +4,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --env-mode=loose",
-    "dev:landing": "turbo dev --filter=@makefy/landing --env-mode=loose",
+    "dev:web": "turbo dev --filter=@makefy/web --env-mode=loose",
     "dev:chat-with-pdf": "turbo dev --filter=@makefy/chat-with-pdf --env-mode=loose",
-    "build:landing": "turbo build --filter=@makefy/landing --env-mode=loose",
+    "build:web": "turbo build --filter=@makefy/web --env-mode=loose",
     "build:chat-with-pdf": "turbo build --filter=@makefy/chat-with-pdf --env-mode=loose",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
