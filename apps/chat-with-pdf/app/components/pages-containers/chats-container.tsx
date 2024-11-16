@@ -12,7 +12,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui";
+} from "@makefy/ui";
 import { FileTextIcon, PlusCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -20,7 +20,7 @@ import { Container } from "../ui/container";
 import { Heading } from "../ui/heading";
 import { SadFaceIcon } from "icons/sad-face";
 import { NewDocumentDialog } from "../header/document-title/new-document-dialog/new-document-dialog";
-import { Tables } from "@makify/supabase/types";
+import { Tables } from "@makefy/supabase/types";
 
 type ChatsContainerProps =
   | {

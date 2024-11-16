@@ -1,6 +1,6 @@
 import { generateSuggestedQuestions } from "@/app/actions/generate-suggested-questions";
-import { createSupabaseServer } from "@makify/supabase/server";
-import type { SupabaseClient } from "@makify/supabase/types";
+import { createSupabaseServer } from "@makefy/supabase/server";
+import type { SupabaseClient } from "@makefy/supabase/types";
 import { unstable_cache } from "next/cache";
 
 async function retrieveChat(supabase: SupabaseClient, id: string) {

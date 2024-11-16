@@ -5,7 +5,7 @@
     "tasks": {
         "build": {
             "dependsOn": [
-                "@makify/supabase#gen:types:local"
+                "@makefy/supabase#gen:types:local"
             ]
         },
         "gen:types:local": {

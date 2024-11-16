@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+import { Button } from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { motion } from "framer-motion";
 import { useGlobalChat } from "hooks/use-global-chat";
 import {

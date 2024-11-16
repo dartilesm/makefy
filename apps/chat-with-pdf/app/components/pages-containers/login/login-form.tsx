@@ -19,10 +19,10 @@ import {
   FormMessage,
   Input,
   useToast,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import Link from "next/link";
-import { createSupabaseClient } from "@makify/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid Email Address" }),

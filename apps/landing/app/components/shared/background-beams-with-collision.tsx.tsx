@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@makify/ui/lib/utils";
+import { cn } from "@makefy/ui/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useRef, useState, useEffect } from "react";
 

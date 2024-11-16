@@ -6,8 +6,8 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
 
-import { cn } from "@makify/ui/lib/utils";
-import { Button } from "@makify/ui/components/button";
+import { cn } from "@makefy/ui/lib/utils";
+import { Button } from "@makefy/ui/components/button";
 import { Slot } from "@radix-ui/react-slot";
 
 type CarouselApi = UseEmblaCarouselType[1];

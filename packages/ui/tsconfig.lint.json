@@ -1,5 +1,5 @@
 {
-  "extends": "@makify/typescript-config/react-library.json",
+  "extends": "@makefy/typescript-config/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": ".",

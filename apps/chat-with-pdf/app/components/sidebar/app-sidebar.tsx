@@ -11,13 +11,13 @@ import {
 } from "lucide-react";
 
 import { NewDocumentDialog } from "@/components/header/document-title/new-document-dialog/new-document-dialog";
-import { createSupabaseClient } from "@makify/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client";
 import Logo from "@/public/logo.svg";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@makify/ui/components/avatar";
+} from "@makefy/ui/components/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,7 +26,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@makify/ui/components/dropdown-menu";
+} from "@makefy/ui/components/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
@@ -37,8 +37,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@makify/ui/components/sidebar";
-import type { User } from "@makify/supabase/types";
+} from "@makefy/ui/components/sidebar";
+import type { User } from "@makefy/supabase/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -89,7 +89,7 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
                     <span className="truncate font-semibold">
                       Chat with PDF
                     </span>
-                    <span className="truncate text-xs">by Makify ✨</span>
+                    <span className="truncate text-xs">by Makefy ✨</span>
                   </div>
                 </Link>
               </SidebarMenuButton>

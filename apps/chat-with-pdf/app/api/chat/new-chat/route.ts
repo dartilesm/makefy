@@ -4,12 +4,12 @@ import { embedDocument, prepareDocument } from "@/lib/embed-document";
 import { getLoadingMessages } from "@/lib/get-loading-messages";
 import { getPdfData } from "@/lib/get-pdf-metadata";
 import { rateLimitRequests } from "@/lib/rate-limit-requests";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 import { PineconeRecord } from "@pinecone-database/pinecone";
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { Tables } from "@makify/supabase/types";
+import { Tables } from "@makefy/supabase/types";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";

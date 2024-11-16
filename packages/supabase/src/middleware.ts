@@ -1,6 +1,6 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import type { Database, SupabaseClient } from "@makify/supabase/types";
+import type { Database, SupabaseClient } from "@makefy/supabase/types";
 
 type MiddlewareClient = {
   supabase: SupabaseClient;

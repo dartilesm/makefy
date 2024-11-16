@@ -26,7 +26,7 @@ const nextConfig = {
       }
     }
   },
-  transpilePackages: ['@makify/ui'],
+  transpilePackages: ['@makefy/ui'],
   reactStrictMode: true,
   swcMinify: true,
 };

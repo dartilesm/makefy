@@ -50,7 +50,7 @@ export default function Hero() {
           className="animate-in fade-in slide-in-from-bottom-10 delay-250 mt-6 text-center text-gray-500 duration-1000 [text-wrap:balance] md:text-xl"
           style={{ animationFillMode: "forwards" }}
         >
-          Makify is a collection of tools with AI to make your life easier than
+          Makefy is a collection of tools with AI to make your life easier than
           ever. Join the waitlist to get early access.
         </p>
         <div className="animate-in fade-in slide-in-from-bottom-10 fill-mode-forwards mx-auto mt-6 flex items-center justify-center space-x-5 delay-300 duration-1000">

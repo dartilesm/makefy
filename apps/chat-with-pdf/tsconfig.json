@@ -1,5 +1,5 @@
 {
-  "extends": "@makify/typescript-config/nextjs.json",
+  "extends": "@makefy/typescript-config/nextjs.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [

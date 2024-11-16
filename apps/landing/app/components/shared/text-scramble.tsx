@@ -1,4 +1,4 @@
-import { cn } from "@makify/ui/lib/utils";
+import { cn } from "@makefy/ui/lib/utils";
 import React, { useState, useEffect } from "react";
 
 type TextScrambleProps = {

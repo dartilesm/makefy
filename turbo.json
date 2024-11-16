@@ -27,7 +27,7 @@
     },
     "dev": {
       "dependsOn": [
-        "@makify/supabase#build"
+        "@makefy/supabase#build"
       ],
       "cache": false,
       "persistent": true

@@ -12,8 +12,8 @@ import {
   useFormContext,
 } from "react-hook-form";
 
-import { cn } from "@makify/ui/lib/utils";
-import { Label } from "@makify/ui/components/label";
+import { cn } from "@makefy/ui/lib/utils";
+import { Label } from "@makefy/ui/components/label";
 
 const Form = FormProvider;
 

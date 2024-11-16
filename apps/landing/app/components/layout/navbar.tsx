@@ -1,4 +1,4 @@
-import { Button } from "@makify/ui";
+import { Button } from "@makefy/ui";
 import Link from "next/link";
 
 export default function NavBar() {
@@ -12,7 +12,7 @@ export default function NavBar() {
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" asChild>
               <Link
-                href="https://x.com/intent/follow?screen_name=makifyapp"
+                href="https://x.com/intent/follow?screen_name=makefyapp"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X (Twitter)"

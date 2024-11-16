@@ -25,7 +25,7 @@ import {
   SelectValue,
   Textarea,
   useToast,
-} from "@makify/ui";
+} from "@makefy/ui";
 import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

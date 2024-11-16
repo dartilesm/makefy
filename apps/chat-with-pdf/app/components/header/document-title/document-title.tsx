@@ -1,18 +1,18 @@
 "use client";
 
-import { Button } from "@makify/ui/components/button";
+import { Button } from "@makefy/ui/components/button";
 import {
   Command,
   CommandItem,
   CommandList,
-} from "@makify/ui/components/command";
+} from "@makefy/ui/components/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@makify/ui/components/popover";
-import { cn } from "@makify/ui/lib/utils";
-import { Tables } from "@makify/supabase/types";
+} from "@makefy/ui/components/popover";
+import { cn } from "@makefy/ui/lib/utils";
+import { Tables } from "@makefy/supabase/types";
 import { ChevronDownIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
