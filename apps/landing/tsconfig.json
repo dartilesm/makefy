@@ -12,7 +12,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": [
-        "components/*"
+        "app/components/*"
       ],
       "@/pages/*": [
         "pages/*"
@@ -26,6 +26,9 @@
       "@/styles/*": [
         "styles/*"
       ],
+      "@/public/*": [
+        "public/*"
+      ]
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,
