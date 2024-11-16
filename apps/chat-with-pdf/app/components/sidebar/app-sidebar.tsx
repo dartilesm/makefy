@@ -10,7 +10,9 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { createClient } from "@/lib/supabase/client";
+import { NewDocumentDialog } from "@/components/header/document-title/new-document-dialog/new-document-dialog";
+import { createSupabaseClient } from "@makify/supabase/client";
+import Logo from "@/public/logo.svg";
 import {
   Avatar,
   AvatarFallback,
@@ -36,14 +38,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@makify/ui/components/sidebar";
-import { User } from "@supabase/supabase-js";
+import type { User } from "@makify/supabase/types";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import RecentConversationsSidebarGroup from "./recent-conversation-sidebar-group";
 import { SecondarySidebarMenu } from "./secondary-sidebar-menu";
-import Logo from "@/public/logo.svg";
-import Link from "next/link";
-import { NewDocumentDialog } from "@/components/header/document-title/new-document-dialog/new-document-dialog";
-import { useState } from "react";
 
 export function AppSidebar({ userInfo }: { userInfo: User }) {
   const router = useRouter();
@@ -67,7 +67,7 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
   }
 
   async function handleLogout() {
-    const supabase = createClient();
+    const supabase = createSupabaseClient();
 
     await supabase.auth.signOut();
 

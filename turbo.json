@@ -3,6 +3,7 @@
   "globalDependencies": [
     "**/.env.*local"
   ],
+  "envMode": "loose",
   "tasks": {
     "build": {
       "dependsOn": [
@@ -25,6 +26,9 @@
       ]
     },
     "dev": {
+      "dependsOn": [
+        "@makify/supabase#build"
+      ],
       "cache": false,
       "persistent": true
     }

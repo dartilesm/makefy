@@ -1,24 +1,24 @@
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 import { getEmbeddings } from "./vector-store";
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 
 export async function getContext(query: string, documentId: string) {
   // User query embeddings
   const userQueryEmbeddings = await getEmbeddings(query);
 
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
 
   const { data: documentSections, error } = await supabase.rpc(
     "match_documents",
     {
-      query_embedding: userQueryEmbeddings,
+      query_embedding: userQueryEmbeddings.toString(),
       match_threshold: 0.7,
       match_count: 200,
       document_id: documentId,
     },
   );
 
-  const supabaseTextContent = documentSections.reduce(
+  const supabaseTextContent = documentSections?.reduce(
     (acc: string, currentDocSections: Tables<"DocumentSections">) => {
       const { pageNumber, textChunk } = currentDocSections;
       // Return the accumulator in this format:
@@ -35,9 +35,9 @@ export async function getContext(query: string, documentId: string) {
     "",
   );
 
-  const textContentNormalized = supabaseTextContent.replace(/\n/g, " ");
+  const textContentNormalized = supabaseTextContent?.replace(/\n/g, " ");
 
   // Limit the block text to 3000 characters
 
-  return textContentNormalized.substring(0, 3000);
+  return textContentNormalized?.substring(0, 3000);
 }

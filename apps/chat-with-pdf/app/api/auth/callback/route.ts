@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 // The client you created from the Server-Side Auth instructions
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const next = searchParams.get("next") ?? "/";
 
   if (code) {
-    const supabase = createClient();
+    const supabase = createSupabaseServer();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {

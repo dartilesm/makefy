@@ -1,6 +1,6 @@
 import { generateSuggestedQuestions } from "@/app/actions/generate-suggested-questions";
-import { createClient } from "@/lib/supabase/server";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { createSupabaseServer } from "@makify/supabase/server";
+import type { SupabaseClient } from "@makify/supabase/types";
 import { unstable_cache } from "next/cache";
 
 async function retrieveChat(supabase: SupabaseClient, id: string) {
@@ -41,7 +41,7 @@ async function generateAndUpdateSuggestedQuestions(
 }
 
 export async function getChat(id: string) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

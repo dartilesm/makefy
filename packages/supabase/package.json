@@ -1,0 +1,83 @@
+{
+    "name": "@makify/supabase",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./src/index.ts",
+            "default": "./dist/index.js"
+        },
+        "./server": {
+            "types": "./dist/client/server.d.ts",
+            "import": "./src/client/server.ts",
+            "default": "./dist/client/server.js"
+        },
+        "./client": {
+            "types": "./dist/client/client.d.ts",
+            "import": "./src/client/client.ts",
+            "default": "./dist/client/client.js"
+        },
+        "./middleware": {
+            "types": "./dist/middleware.d.ts",
+            "import": "./src/middleware.ts",
+            "default": "./dist/middleware.js"
+        },
+        "./admin": {
+            "types": "./dist/client/admin.d.ts",
+            "import": "./src/client/admin.ts",
+            "default": "./dist/client/admin.js"
+        },
+        "./types": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./src/types/index.ts",
+            "default": "./dist/types/index.js"
+        }
+    },
+    "typesVersions": {
+        "*": {
+            "server": [
+                "./src/client/server.ts"
+            ],
+            "client": [
+                "./src/client/client.ts"
+            ],
+            "middleware": [
+                "./src/middleware.ts"
+            ],
+            "admin": [
+                "./src/client/admin.ts"
+            ],
+            "types": [
+                "./src/types/index.ts"
+            ],
+            "*": [
+                "./src/index.ts"
+            ]
+        }
+    },
+    "scripts": {
+        "build": "tsc --build",
+        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+        "lint": "eslint src/",
+        "type-check": "tsc --noEmit",
+        "gen:types:local": "if [ -z ${VERCEL_ENV} ]; then dotenv -e ../../.env.development.local -- supabase gen types typescript --workdir ./src --local > src/types/database.ts; fi"
+    },
+    "dependencies": {
+        "@supabase/ssr": "0.5.1",
+        "supabase": "1.219.2"
+    },
+    "devDependencies": {
+        "@supabase/supabase-js": "2.46.1",
+        "@types/node": "20.0.0",
+        "tsup": "8.0.0",
+        "typescript": "5.3.3"
+    }
+}

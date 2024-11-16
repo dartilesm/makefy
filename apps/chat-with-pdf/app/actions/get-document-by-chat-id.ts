@@ -1,8 +1,8 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
-import { SupabaseClient } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
+import { createSupabaseServer } from "@makify/supabase/server";
+import type { SupabaseClient } from "@makify/supabase/types";
 
 async function retrieveDocumentByChatId(
   supabase: SupabaseClient,
@@ -22,7 +22,7 @@ async function retrieveDocumentByChatId(
 }
 
 export async function getDocumentByChatId(chatId: string) {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

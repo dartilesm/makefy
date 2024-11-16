@@ -8,7 +8,7 @@ import {
   ToastTitle,
   ToastViewport,
 } from "@makify/ui/components/toast";
-import { useToast } from "@makify/ui/components/use-toast";
+import { useToast } from "@makify/ui";
 
 export function Toaster() {
   const { toasts } = useToast();

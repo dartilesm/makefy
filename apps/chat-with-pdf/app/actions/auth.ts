@@ -1,13 +1,13 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 
 export const verifyOtp = async (data: {
   email: string;
   otp: string;
   type: string;
 }) => {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
 
   const res = await supabase.auth.verifyOtp({
     email: data.email,

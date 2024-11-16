@@ -1,7 +1,7 @@
 "use server";
 
 import { getContext } from "@/lib/context";
-import { createClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@makify/supabase/server";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { revalidatePath, revalidateTag } from "next/cache";
@@ -22,7 +22,7 @@ export async function generateDocumentTitle(documentId: string) {
   });
 
   if (object.title) {
-    const supabase = createClient();
+    const supabase = createSupabaseServer();
     const { data } = await supabase.auth.getSession();
     revalidatePath(`/chat/${documentId}`);
     revalidateTag(documentId);

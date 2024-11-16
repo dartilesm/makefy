@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { createSupabaseClient } from "@makify/supabase/client";
 import {
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -19,7 +19,7 @@ export function UserNavMenuItems() {
   console.log(theme);
 
   async function handleLogout() {
-    const supabase = createClient();
+    const supabase = createSupabaseClient();
 
     await supabase.auth.signOut();
 

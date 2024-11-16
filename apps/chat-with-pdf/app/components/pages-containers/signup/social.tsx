@@ -1,16 +1,15 @@
 "use client";
 
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
 import { IoLogoGithub } from "react-icons/io5";
-import { createClient } from "@/lib/supabase/client";
 import { Button, useToast } from "@makify/ui";
+import { createSupabaseClient } from "@makify/supabase/client";
 
 export function Social({ redirectTo }: { redirectTo: string }) {
   const { toast } = useToast();
 
   const loginWithProvider = async (provider: "github" | "google") => {
-    const supbase = createClient();
+    const supbase = createSupabaseClient();
     const { error, data } = await supbase.auth.signInWithOAuth({
       provider,
       options: {

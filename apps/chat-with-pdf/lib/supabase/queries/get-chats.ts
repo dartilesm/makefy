@@ -1,6 +1,6 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/server";
+import type { SupabaseClient } from "@makify/supabase/types";
 import { unstable_cache } from "next/cache";
+import { createSupabaseServer } from "@makify/supabase/server";
 
 async function retrieveChats(supabase: SupabaseClient) {
   const { data, error } = await supabase.from("Chat").select("*");
@@ -13,7 +13,7 @@ async function retrieveChats(supabase: SupabaseClient) {
 }
 
 export async function getChats() {
-  const supabase = createClient();
+  const supabase = createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

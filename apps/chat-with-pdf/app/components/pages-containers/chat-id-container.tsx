@@ -1,6 +1,6 @@
 import { ChatProvider } from "@/app/context/chat-context";
 import { ChatScreen } from "../chat/chat-screen";
-import { Tables } from "database.types";
+import { Tables } from "@makify/supabase/types";
 
 type ChatIdContainerProps =
   | {
