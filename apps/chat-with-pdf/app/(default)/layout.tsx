@@ -1,10 +1,10 @@
 import { Header } from "@/components/header/header";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import { SidebarProvider } from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
-import type { User } from "@makify/supabase/types";
+import { SidebarProvider } from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
+import type { User } from "@makefy/supabase/types";
 import { Metadata } from "next";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 
 export const metadata: Metadata = {
   title: "Chats",

@@ -1,8 +1,8 @@
-import type { EmailOtpType } from "@makify/supabase/types";
+import type { EmailOtpType } from "@makefy/supabase/types";
 import { type NextRequest } from "next/server";
 
 import { redirect } from "next/navigation";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

@@ -1,5 +1,5 @@
-import { Skeleton } from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+import { Skeleton } from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 
 export function ChatLoading() {
   const fakeMessagesLoading = Array.from({ length: 6 }, () => null);

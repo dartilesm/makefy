@@ -1,5 +1,5 @@
 {
-  "name": "@makify/ui",
+  "name": "@makefy/ui",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -15,8 +15,8 @@
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
-    "@makify/eslint-config": "workspace:*",
-    "@makify/typescript-config": "workspace:*",
+    "@makefy/eslint-config": "workspace:*",
+    "@makefy/typescript-config": "workspace:*",
     "@turbo/gen": "1.12.4",
     "@types/eslint": "8.56.5",
     "@types/node": "20.11.24",

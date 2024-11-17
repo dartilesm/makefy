@@ -25,7 +25,7 @@ export function ChatPDF({ documentId, messages }: ChatPDFProps) {
           }}
           fixed
         >
-          ~ Makify - Chat with PDF ~
+          ~ Makefy - Chat with PDF ~
         </Text>
         <Text
           style={{

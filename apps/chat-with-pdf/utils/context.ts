@@ -1,6 +1,6 @@
-import { Tables } from "@makify/supabase/types";
+import { Tables } from "@makefy/supabase/types";
 import { getEmbeddings } from "./vector-store";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 
 export async function getContext(query: string, documentId: string) {
   // User query embeddings

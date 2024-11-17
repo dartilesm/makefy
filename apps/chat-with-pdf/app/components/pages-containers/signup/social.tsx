@@ -2,8 +2,8 @@
 
 import React from "react";
 import { IoLogoGithub } from "react-icons/io5";
-import { Button, useToast } from "@makify/ui";
-import { createSupabaseClient } from "@makify/supabase/client";
+import { Button, useToast } from "@makefy/ui";
+import { createSupabaseClient } from "@makefy/supabase/client";
 
 export function Social({ redirectTo }: { redirectTo: string }) {
   const { toast } = useToast();

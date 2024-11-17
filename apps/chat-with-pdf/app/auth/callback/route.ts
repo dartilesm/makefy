@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {

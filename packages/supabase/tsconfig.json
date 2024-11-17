@@ -1,5 +1,5 @@
 {
-    "extends": "@makify/typescript-config/react-library.json",
+    "extends": "@makefy/typescript-config/react-library.json",
     "compilerOptions": {
         "lib": [
             "dom",
@@ -19,7 +19,7 @@
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
-            "@makify/supabase/*": [
+            "@makefy/supabase/*": [
                 "./src/*"
             ]
         }

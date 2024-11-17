@@ -1,7 +1,7 @@
 import { rateLimitRequests } from "@/lib/rate-limit-requests";
 import { google } from "@ai-sdk/google";
 import { Message, StreamData, convertToCoreMessages, streamText } from "ai";
-import { Tables } from "@makify/supabase/types";
+import { Tables } from "@makefy/supabase/types";
 import { getContext } from "utils/context";
 
 export const revalidate = 0;

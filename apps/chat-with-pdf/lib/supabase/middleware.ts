@@ -1,4 +1,4 @@
-import { createMiddlewareClient } from "@makify/supabase";
+import { createMiddlewareClient } from "@makefy/supabase";
 import { protectedPaths, authPaths } from "lib/constants";
 import { NextResponse, type NextRequest } from "next/server";
 

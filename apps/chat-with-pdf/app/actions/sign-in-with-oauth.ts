@@ -1,9 +1,9 @@
 "use server";
 
 import { getOAuthRedirectUrl } from "@/lib/oauth-redirect-url";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 import { ReadonlyURLSearchParams, redirect } from "next/navigation";
-import type { SignInWithOAuthCredentials } from "@makify/supabase/types";
+import type { SignInWithOAuthCredentials } from "@makefy/supabase/types";
 export async function signInWithOAuth(
   provider: SignInWithOAuthCredentials["provider"],
   searchParams: ReadonlyURLSearchParams,

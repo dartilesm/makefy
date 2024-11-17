@@ -9,8 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
   useToast,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { Message } from "ai";
 import { AnimatePresence, CustomDomComponent, motion } from "framer-motion";
 import { useGlobalChat } from "hooks/use-global-chat";
@@ -26,7 +26,7 @@ import { useParams } from "next/navigation";
 import { forwardRef, RefAttributes, useState } from "react";
 import { QUICK_ACTIONS } from "./constants/message-quick-actions";
 import { MessageActions } from "./types/message-actions";
-import { Tables } from "@makify/supabase/types";
+import { Tables } from "@makefy/supabase/types";
 
 type MessageQuickActionsProps = {
   message: Message;

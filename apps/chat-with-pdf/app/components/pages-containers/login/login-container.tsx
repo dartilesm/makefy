@@ -20,7 +20,7 @@ export function LoginContainer() {
           <div className="bg-background mx-auto flex size-16 items-center justify-center overflow-hidden rounded-full p-2">
             <Logo />
           </div>
-          <h1 className="font-bold">Sign in to Makify</h1>
+          <h1 className="font-bold">Sign in to Makefy</h1>
           <p className="text-sm">Welcome back! Please sign in to continue</p>
         </div>
         <Social redirectTo={next || "/"} />

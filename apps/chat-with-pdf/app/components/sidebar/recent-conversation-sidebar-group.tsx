@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@makify/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client";
 import {
   Button,
   SidebarGroup,
@@ -7,8 +7,8 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@makify/ui";
-import { Tables } from "@makify/supabase/types";
+} from "@makefy/ui";
+import { Tables } from "@makefy/supabase/types";
 import { ChevronRight, MessageSquareIcon, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";

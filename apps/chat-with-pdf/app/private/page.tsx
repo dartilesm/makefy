@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function PrivatePage() {

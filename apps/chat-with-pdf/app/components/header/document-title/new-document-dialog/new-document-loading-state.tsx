@@ -1,4 +1,4 @@
-import { Button } from "@makify/ui";
+import { Button } from "@makefy/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { SadFaceIcon } from "icons/sad-face";
 import { SparkleIcon } from "icons/sparkle";
@@ -112,7 +112,7 @@ export function NewDocumentLoadingState({
         <div className="flex h-20 flex-col gap-[6px] overflow-hidden">
           {loadingMessages.map((step, index) => (
             <Fragment key={index}>
-              {index === 0 && <div className="min-h-5 block w-full" />}
+              {index === 0 && <div className="block min-h-5 w-full" />}
               <motion.div
                 layout
                 className="flex w-full justify-center space-x-4"
@@ -152,7 +152,7 @@ export function NewDocumentLoadingState({
                 </div>
               </motion.div>
               {index === loadingMessages.length - 1 && (
-                <div className="min-h-5 block w-full" />
+                <div className="block min-h-5 w-full" />
               )}
             </Fragment>
           ))}

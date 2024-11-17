@@ -2,9 +2,9 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@makify/ui/components/avatar";
-import { createSupabaseServer } from "@makify/supabase/server";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui/components/avatar";
+import { createSupabaseServer } from "@makefy/supabase/server";
+import { cn } from "@makefy/ui/lib/utils";
 
 interface UserAvatarProps {
   className?: string;

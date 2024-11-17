@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { getChats } from "lib/supabase/queries/get-chats";

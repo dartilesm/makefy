@@ -1,5 +1,5 @@
 {
-  "name": "@makify/chat-with-pdf",
+  "name": "@makefy/chat-with-pdf",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "0.0.50",
-    "@makify/ui": "workspace:*",
-    "@makify/supabase": "workspace:*",
+    "@makefy/ui": "workspace:*",
+    "@makefy/supabase": "workspace:*",
     "@react-email/components": "0.0.25",
     "@react-pdf/renderer": "3.4.4",
     "@upstash/ratelimit": "2.0.1",
@@ -46,8 +46,8 @@
     "@langchain/google-genai": "0.0.21",
     "@langchain/openai": "0.2.1",
     "@langchain/pinecone": "0.0.7",
-    "@makify/eslint-config": "workspace:*",
-    "@makify/typescript-config": "workspace:*",
+    "@makefy/eslint-config": "workspace:*",
+    "@makefy/typescript-config": "workspace:*",
     "@pinecone-database/pinecone": "2.2.2",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "20",

@@ -3,8 +3,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { Message } from "ai";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { AssistantMessage } from "./assistant-message";
