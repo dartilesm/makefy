@@ -6,18 +6,18 @@ import { VariantProps, cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
 
 import { useIsMobile } from "../hooks/use-mobile";
-import { cn } from "@makify/ui/lib/utils";
-import { Button } from "@makify/ui/components/button";
-import { Input } from "@makify/ui/components/input";
-import { Separator } from "@makify/ui/components/separator";
-import { Sheet, SheetContent } from "@makify/ui/components/sheet";
-import { Skeleton } from "@makify/ui/components/skeleton";
+import { cn } from "@makefy/ui/lib/utils";
+import { Button } from "@makefy/ui/components/button";
+import { Input } from "@makefy/ui/components/input";
+import { Separator } from "@makefy/ui/components/separator";
+import { Sheet, SheetContent } from "@makefy/ui/components/sheet";
+import { Skeleton } from "@makefy/ui/components/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui/components/tooltip";
+} from "@makefy/ui/components/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;

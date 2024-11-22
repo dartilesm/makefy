@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@makify/ui/lib/utils";
+import { cn } from "@makefy/ui/lib/utils";
 import { ChatFooter } from "./chat-footer";
 import { ChatHeader } from "./chat-header/chat-header";
 import { ChatMessages } from "./chat-messages";

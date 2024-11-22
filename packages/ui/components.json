@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@makify/ui/components",
-    "utils": "@makify/ui/lib/utils"
+    "components": "@makefy/ui/components",
+    "utils": "@makefy/ui/lib/utils"
   }
 }

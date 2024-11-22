@@ -1,6 +1,6 @@
 "use client";
 
-import { createSupabaseClient } from "@makify/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client";
 import {
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -8,7 +8,7 @@ import {
   DropdownMenuShortcut,
   ToggleGroup,
   ToggleGroupItem,
-} from "@makify/ui";
+} from "@makefy/ui";
 import { LaptopMinimalIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";

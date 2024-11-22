@@ -1,4 +1,4 @@
-import { Skeleton } from "@makify/ui";
+import { Skeleton } from "@makefy/ui";
 
 export function PDFLoading() {
   return (

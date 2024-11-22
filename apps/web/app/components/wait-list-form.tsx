@@ -1,9 +1,9 @@
-import { Button, Form, FormField, Input, useToast } from "@makify/ui";
+import { Button, Form, FormField, Input, useToast } from "@makefy/ui";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Loader2 } from "lucide-react";
-import { cn } from "@makify/ui/lib/utils";
+import { cn } from "@makefy/ui/lib/utils";
 import { resendCreateContact } from "actions/resend-create-contact";
 
 const waitListFormSchema = z.object({

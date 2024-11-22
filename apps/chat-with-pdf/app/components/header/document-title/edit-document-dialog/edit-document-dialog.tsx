@@ -23,8 +23,8 @@ import {
   TabsList,
   TabsTrigger,
   useToast,
-} from "@makify/ui";
-import { Tables } from "@makify/supabase/types";
+} from "@makefy/ui";
+import { Tables } from "@makefy/supabase/types";
 import { LoaderCircleIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";

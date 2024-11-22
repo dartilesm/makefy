@@ -1,14 +1,14 @@
-import { Button } from "@makify/ui/components/button";
+import { Button } from "@makefy/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@makify/ui/components/dropdown-menu";
+} from "@makefy/ui/components/dropdown-menu";
 import { UserAvatar } from "@/components/ui/user-avatar";
 import { UserNavMenuItems } from "./user-nav-menu-items";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 
 export async function UserNav() {
   const supabase = createSupabaseServer();

@@ -6,8 +6,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { AnimatePresence, inView, motion } from "framer-motion";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { ArrowDown } from "lucide-react";

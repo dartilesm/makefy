@@ -1,4 +1,4 @@
-import { cn } from "@makify/ui/lib/utils";
+import { cn } from "@makefy/ui/lib/utils";
 
 type LogoProps = {
   className?: string;
@@ -14,7 +14,7 @@ export function Logo({ className }: LogoProps) {
     >
       Chat with PDF
       <span className="text-muted-foreground text-right text-[8px] leading-none">
-        by Makify ✨
+        by Makefy ✨
       </span>
     </div>
   );

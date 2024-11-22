@@ -1,8 +1,8 @@
 "use server";
 
 import { unstable_cache } from "next/cache";
-import { createSupabaseServer } from "@makify/supabase/server";
-import type { SupabaseClient } from "@makify/supabase/types";
+import { createSupabaseServer } from "@makefy/supabase/server";
+import type { SupabaseClient } from "@makefy/supabase/types";
 
 async function retrieveDocumentByChatId(
   supabase: SupabaseClient,

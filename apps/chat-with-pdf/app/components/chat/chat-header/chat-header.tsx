@@ -11,7 +11,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui";
+} from "@makefy/ui";
 import { BookmarkIcon, DownloadIcon } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";

@@ -7,8 +7,8 @@ import {
   PopoverContent,
   PopoverPortal,
   Skeleton,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { MessageSquareQuoteIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";

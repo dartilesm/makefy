@@ -1,4 +1,4 @@
-import { Button, Skeleton } from "@makify/ui";
+import { Button, Skeleton } from "@makefy/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ReactElement } from "react";

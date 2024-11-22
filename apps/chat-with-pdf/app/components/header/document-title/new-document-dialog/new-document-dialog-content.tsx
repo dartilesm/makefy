@@ -6,8 +6,8 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { TrashIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { RefObject, useEffect, useState } from "react";

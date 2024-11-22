@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 

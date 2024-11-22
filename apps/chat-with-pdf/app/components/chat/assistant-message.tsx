@@ -3,8 +3,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+} from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { useGlobalChat } from "hooks/use-global-chat";
 import Markdown, { ExtraProps } from "react-markdown";
 import rehypeRaw from "rehype-raw";

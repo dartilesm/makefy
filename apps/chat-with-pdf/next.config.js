@@ -19,7 +19,7 @@ const nextConfig = {
 
         return config;
     },
-    transpilePackages: ['@makify/ui', '@makify/supabase'],
+    transpilePackages: ['@makefy/ui', '@makefy/supabase'],
     reactStrictMode: false,
     swcMinify: true
 };

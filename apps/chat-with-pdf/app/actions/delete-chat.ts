@@ -1,7 +1,7 @@
 "use server";
 
-import { createSupabaseServer } from "@makify/supabase/server";
-import { Tables } from "@makify/supabase/types";
+import { createSupabaseServer } from "@makefy/supabase/server";
+import { Tables } from "@makefy/supabase/types";
 
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";

@@ -1,6 +1,6 @@
-import type { SupabaseClient } from "@makify/supabase/types";
+import type { SupabaseClient } from "@makefy/supabase/types";
 import { unstable_cache } from "next/cache";
-import { createSupabaseServer } from "@makify/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/server";
 
 async function retrieveDocuments(supabase: SupabaseClient) {
   const { data: documents, error: errorOnFetchingDocuments } = await supabase

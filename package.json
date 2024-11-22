@@ -1,20 +1,20 @@
 {
-  "name": "makify",
+  "name": "makefy",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --env-mode=loose",
-    "dev:landing": "turbo dev --filter=@makify/landing --env-mode=loose",
-    "dev:chat-with-pdf": "turbo dev --filter=@makify/chat-with-pdf --env-mode=loose",
-    "build:landing": "turbo build --filter=@makify/landing --env-mode=loose",
-    "build:chat-with-pdf": "turbo build --filter=@makify/chat-with-pdf --env-mode=loose",
+    "dev:web": "turbo dev --filter=@makefy/web --env-mode=loose",
+    "dev:chat-with-pdf": "turbo dev --filter=@makefy/chat-with-pdf --env-mode=loose",
+    "build:web": "turbo build --filter=@makefy/web --env-mode=loose",
+    "build:chat-with-pdf": "turbo build --filter=@makefy/chat-with-pdf --env-mode=loose",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "sui-mono commit"
   },
   "devDependencies": {
-    "@makify/eslint-config": "workspace:*",
-    "@makify/typescript-config": "workspace:*",
+    "@makefy/eslint-config": "workspace:*",
+    "@makefy/typescript-config": "workspace:*",
     "@s-ui/mono": "2.45.0",
     "dotenv-cli": "7.4.2",
     "eslint-config-next": "14.2.5",

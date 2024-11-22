@@ -1,5 +1,5 @@
-import { Alert, AlertDescription, AlertTitle } from "@makify/ui";
-import { cn } from "@makify/ui/lib/utils";
+import { Alert, AlertDescription, AlertTitle } from "@makefy/ui";
+import { cn } from "@makefy/ui/lib/utils";
 import { Message } from "ai";
 
 type UserMessageProps = {

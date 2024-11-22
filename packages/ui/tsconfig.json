@@ -1,12 +1,12 @@
 {
-  "extends": "@makify/typescript-config/react-library.json",
+  "extends": "@makefy/typescript-config/react-library.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "rootDir": ".",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@makify/ui/*": [
+      "@makefy/ui/*": [
         "./*"
       ],
     },

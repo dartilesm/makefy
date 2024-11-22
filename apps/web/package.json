@@ -1,5 +1,5 @@
 {
-  "name": "@makify/landing",
+  "name": "@makefy/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@makify/ui": "workspace:*",
+    "@makefy/ui": "workspace:*",
     "@upstash/ratelimit": "2.0.1",
     "@vercel/kv": "2.0.0",
     "framer-motion": "11.3.2",

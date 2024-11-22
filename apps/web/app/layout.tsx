@@ -1,16 +1,16 @@
 import "./globals.css";
-import "@makify/ui/globals.css";
+import "@makefy/ui/globals.css";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/app/components/layout/nav";
 import { BackgroundBeamsWithCollision } from "./components/shared/background-beams-with-collision.tsx";
-import { cn } from "@makify/ui/lib/utils";
-import { Toaster } from "@makify/ui";
+import { cn } from "@makefy/ui/lib/utils";
+import { Toaster } from "@makefy/ui";
 import PlausibleProvider from "next-plausible";
 
 export const metadata = {
-  title: "Makify - Tools that make your life easier",
+  title: "Makefy - Tools that make your life easier",
   description:
-    "Makify is all you need to make your life easier. It includes such useful tools as a chat with your PDF app, a media file sharing app, and a QR code generator.",
+    "Makefy is all you need to make your life easier. It includes such useful tools as a chat with your PDF app, a media file sharing app, and a QR code generator.",
   icons: {
     icon: [
       {
@@ -41,7 +41,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <PlausibleProvider domain="makify.app" enabled />
+        <PlausibleProvider domain="makefy.app" enabled />
       </head>
       <body className={cn(sfPro.variable, inter.variable)}>
         <Nav />

@@ -1,6 +1,6 @@
 import path from "path";
 import type { Config as TailwindConfig } from "tailwindcss";
-import { default as uiTailwindConfig } from "@makify/ui/tailwind.config";
+import { default as uiTailwindConfig } from "@makefy/ui/tailwind.config";
 
 const config: TailwindConfig = {
   darkMode: ["class"],
@@ -8,9 +8,9 @@ const config: TailwindConfig = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    // Makify ui components
+    // Makefy ui components
     path.join(
-      path.dirname(require.resolve("@makify/ui")),
+      path.dirname(require.resolve("@makefy/ui")),
       "components/**/*.{ts,tsx}",
     ),
   ],

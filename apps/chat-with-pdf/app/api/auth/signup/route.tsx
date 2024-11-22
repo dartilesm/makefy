@@ -1,5 +1,5 @@
 import { VerifyEmailTemplate } from "@/components/email-templates/verify-email-template";
-import { createSupabaseAdmin } from "@makify/supabase/admin";
+import { createSupabaseAdmin } from "@makefy/supabase/admin";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   if (res.data.properties?.email_otp) {
     // resend email
     const resendRes = await resend.emails.send({
-      from: `Makify <onboarding@${process.env.RESEND_DOMAIN}>`,
+      from: `Makefy <onboarding@${process.env.RESEND_DOMAIN}>`,
       to: [data.email],
       subject: "Verify Email",
       react: (

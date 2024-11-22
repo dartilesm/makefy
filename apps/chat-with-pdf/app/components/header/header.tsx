@@ -5,7 +5,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@makify/ui";
+} from "@makefy/ui";
 import { DocumentTitle } from "./document-title/document-title";
 
 export async function Header() {
