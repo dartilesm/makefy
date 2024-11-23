@@ -85,7 +85,7 @@ async function* createNewChat({
   documentUrl: string;
   documentFile?: File;
 }) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   // Fetching PDF data and creating a new chat in the database
   yield getLoadingMessages({
     isViaLink: !!documentUrl,

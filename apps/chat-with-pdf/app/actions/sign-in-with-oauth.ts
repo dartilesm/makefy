@@ -8,7 +8,7 @@ export async function signInWithOAuth(
   provider: SignInWithOAuthCredentials["provider"],
   searchParams: ReadonlyURLSearchParams,
 ) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const redirectTo = getOAuthRedirectUrl(searchParams);
 
   const { data, error } = await supabase.auth.signInWithOAuth({

@@ -15,7 +15,7 @@ export default async function DefaultLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const {
     data: { user },
   } = await supabase.auth.getUser();

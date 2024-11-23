@@ -12,7 +12,7 @@ import { cn } from "@makefy/ui/lib/utils";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { MessageSquareQuoteIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
-import { useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -53,7 +53,9 @@ export function PdfViewer({ className }: { className?: string }) {
   const {
     globalContext: { chatData, setExtraData, documentState, setDocumentState },
   } = useGlobalChat();
-  useOnClickOutside(popoverRef, () => setSelectedTextOptions(null));
+  useOnClickOutside(popoverRef as RefObject<HTMLDivElement>, () =>
+    setSelectedTextOptions(null),
+  );
   /* Tools */
   const [currentZoom, setCurrentZoom] = useState<number>(1);
   const [enableChangePageOnScroll, setEnableChangePageOnScroll] =

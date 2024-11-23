@@ -11,7 +11,7 @@ interface UserAvatarProps {
 }
 
 export async function UserAvatar({ className }: UserAvatarProps) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const {
     data: { user },
     error,

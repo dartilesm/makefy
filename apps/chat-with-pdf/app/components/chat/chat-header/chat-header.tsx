@@ -21,14 +21,7 @@ import dynamic from "next/dynamic";
 import { Message } from "ai";
 import { useState } from "react";
 import { SadFaceIcon } from "icons/sad-face";
-
-// Dynamically import BlobProvider from react-pdf/renderer to avoid SSR issues
-const BlobProvider = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.BlobProvider),
-  {
-    ssr: false,
-  },
-);
+import { BlobProvider } from "@react-pdf/renderer";
 
 export function ChatHeader() {
   const params = useParams();

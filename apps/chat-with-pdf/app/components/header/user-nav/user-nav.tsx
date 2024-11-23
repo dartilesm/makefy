@@ -11,7 +11,7 @@ import { UserNavMenuItems } from "./user-nav-menu-items";
 import { createSupabaseServer } from "@makefy/supabase/server";
 
 export async function UserNav() {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const {
     data: { user },
   } = await supabase.auth.getUser();

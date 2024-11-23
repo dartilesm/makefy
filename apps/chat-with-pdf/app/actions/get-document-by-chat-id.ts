@@ -22,7 +22,7 @@ async function retrieveDocumentByChatId(
 }
 
 export async function getDocumentByChatId(chatId: string) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

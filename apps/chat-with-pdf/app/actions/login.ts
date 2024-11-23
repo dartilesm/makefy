@@ -10,7 +10,7 @@ type LoginProps = {
 };
 
 export async function login(loginData: LoginProps) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { error } = await supabase.auth.signInWithPassword(loginData);
 

@@ -22,7 +22,7 @@ export async function generateDocumentTitle(documentId: string) {
   });
 
   if (object.title) {
-    const supabase = createSupabaseServer();
+    const supabase = await createSupabaseServer();
     const { data } = await supabase.auth.getSession();
     revalidatePath(`/chat/${documentId}`);
     revalidateTag(documentId);
