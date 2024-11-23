@@ -10,7 +10,7 @@ export async function deleteChat(
   chatId: Tables<"Chat">["id"],
   shouldRedirect = true,
 ) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { data, error } = await supabase
     .from("Chat")

@@ -12,7 +12,7 @@ export async function submitFeedback({
     throw new Error("Type and message are required");
   }
 
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { data, error } = await supabase.from("Feedback").insert({
     type,

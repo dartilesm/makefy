@@ -92,12 +92,12 @@ export function ChatFooter() {
 
   return (
     <div className="border-border bg-background relative z-10 flex flex-col gap-2 border-t p-3">
-      <AnimatePresence>
+      <AnimatePresence key="suggested-questions">
         {chatData.suggestedQuestions && (
           <AnimatedSuggestedQuestions questions={chatData.suggestedQuestions} />
         )}
       </AnimatePresence>
-      <AnimatePresence>
+      <AnimatePresence key="quoted-text">
         {(extraData?.quotedText as string) && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}

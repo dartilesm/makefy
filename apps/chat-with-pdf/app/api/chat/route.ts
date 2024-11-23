@@ -77,12 +77,12 @@ export async function POST(req: Request) {
   const data = new StreamData();
   data.append(messageData);
 
-  const result = streamText({
+  const result = await streamText({
     model: google("gemini-1.5-flash-latest"),
     messages: convertToCoreMessages(messages),
     system: systemInstructions,
     maxTokens: 3000,
-    onFinish({ text, toolCalls, toolResults, usage, finishReason, ...rest }) {
+    onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
       console.log({
         onFinish: {
           text,
@@ -90,7 +90,6 @@ export async function POST(req: Request) {
           toolResults,
           usage,
           finishReason,
-          ...rest,
         },
       });
       data.close();

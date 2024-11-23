@@ -61,8 +61,10 @@ export function SecondarySidebarMenu() {
                     <CurrentThemeIcon className="h-4 w-4" />
                     Theme
                   </span>
-                  <SidebarMenuAction>
-                    <Settings2Icon className="h-4 w-4" />
+                  <SidebarMenuAction asChild>
+                    <span className="flex items-center justify-start gap-2">
+                      <Settings2Icon className="h-4 w-4" />
+                    </span>
                   </SidebarMenuAction>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>

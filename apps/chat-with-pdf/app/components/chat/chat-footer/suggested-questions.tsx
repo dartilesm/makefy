@@ -91,6 +91,7 @@ export const SuggestedQuestions = forwardRef<
         })}
       >
         <motion.div
+          key="suggested-questions-container"
           className={cn("flex", {
             "space-x-2 overflow-x-auto pb-3": !isSuggestedQuestionsOpen,
             "max-h-full w-full overflow-auto": isSuggestedQuestionsOpen,
@@ -109,6 +110,7 @@ export const SuggestedQuestions = forwardRef<
         >
           {questions.map((question) => (
             <AnimatedButton
+              key={question}
               variant="outline"
               size="sm"
               transition={{
