@@ -19,7 +19,7 @@
     "@upstash/ratelimit": "2.0.1",
     "@vercel/kv": "2.0.0",
     "ai": "4.0.0",
-    "framer-motion": "11.11.17",
+    "framer-motion": "12.0.0-alpha.1",
     "lucide-react": "0.408.0",
     "next": "15.0.3",
     "next-plausible": "3.12.2",
