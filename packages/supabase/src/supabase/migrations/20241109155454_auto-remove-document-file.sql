@@ -35,4 +35,7 @@ AS $function$BEGIN
 END;$function$
 ;
 
+CREATE TRIGGER remove_document_file_after_chat_delete
+AFTER DELETE ON public."Chat" FOR EACH ROW
+EXECUTE FUNCTION public.remove_document_file_after_removing_chats ();
 

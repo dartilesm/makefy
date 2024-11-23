@@ -57,7 +57,6 @@ export async function getChat(id: string) {
     },
   )(supabase);
 
-  console.log({ chat, id });
   if (!chat?.suggestedQuestions) {
     const suggestedQuestions = await generateAndUpdateSuggestedQuestions(
       supabase,

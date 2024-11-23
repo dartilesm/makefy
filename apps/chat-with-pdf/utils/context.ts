@@ -11,7 +11,9 @@ export async function getContext(query: string, documentId: string) {
   const { data: documentSections, error } = await supabase.rpc(
     "match_documents",
     {
-      query_embedding: userQueryEmbeddings.toString(),
+      query_embedding: Array.isArray(userQueryEmbeddings)
+        ? JSON.stringify(userQueryEmbeddings)
+        : JSON.stringify([userQueryEmbeddings]),
       match_threshold: 0.7,
       match_count: 200,
       document_id: documentId,
