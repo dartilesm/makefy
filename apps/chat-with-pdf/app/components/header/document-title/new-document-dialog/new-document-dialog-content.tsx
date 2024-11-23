@@ -10,7 +10,7 @@ import {
 import { cn } from "@makefy/ui/lib/utils";
 import { TrashIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useState, type JSX } from "react";
 import { DropzoneInputProps, useDropzone } from "react-dropzone";
 import {
   Controller,
@@ -146,7 +146,7 @@ export function NewDocumentDialogContent() {
       INPUT_NAME.FILE
     >,
     reactDropzoneInputProps: DropzoneInputProps & {
-      ref: RefObject<HTMLInputElement>;
+      ref: RefObject<HTMLInputElement | null>;
     },
   ) {
     const {

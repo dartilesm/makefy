@@ -19,9 +19,18 @@ const nextConfig = {
 
         return config;
     },
+    experimental: {
+        turbo: {
+            rules: {
+                '*.svg': {
+                    loaders: ['@svgr/webpack'],
+                    as: '*.js'
+                }
+            }
+        }
+    },
     transpilePackages: ['@makefy/ui', '@makefy/supabase'],
     reactStrictMode: false,
-    swcMinify: true
 };
 
 module.exports = nextConfig
