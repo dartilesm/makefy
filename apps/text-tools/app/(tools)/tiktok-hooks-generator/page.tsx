@@ -20,7 +20,8 @@ import {
 import { useState } from "react";
 import { MarkdownViewer } from "@/app/components/markdown-viewer";
 import { ToolHero } from "@/app/components/tool-hero";
-import { VideoIcon } from "lucide-react";
+import { VideoIcon, ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function TikTokHookGenerator() {
   const [topic, setTopic] = useState("");
@@ -49,6 +50,15 @@ export default function TikTokHookGenerator() {
 
   return (
     <>
+      <div className="container mx-auto max-w-4xl p-4">
+        <Link href="/">
+          <Button variant="ghost" className="mb-4 gap-2">
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back
+          </Button>
+        </Link>
+      </div>
+
       <ToolHero
         title="TikTok Hook Generator"
         description="Create attention-grabbing hooks for your TikTok videos using AI. Get the perfect first 3 seconds that make viewers want to keep watching."
