@@ -39,11 +39,11 @@ import {
   SidebarRail,
 } from "@makefy/ui/components/sidebar";
 import type { User } from "@makefy/supabase/types";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import RecentConversationsSidebarGroup from "./recent-conversation-sidebar-group";
 import { SecondarySidebarMenu } from "./secondary-sidebar-menu";
+import { SidebarApplicationSwitcher } from "@makefy/ui";
 
 export function AppSidebar({ userInfo }: { userInfo: User }) {
   const router = useRouter();
@@ -78,23 +78,11 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
     <>
       <Sidebar className="z-20" collapsible="icon">
         <SidebarHeader className="transition-all duration-300 group-data-[collapsible=icon]:py-3">
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild>
-                <Link href="/">
-                  <div className="bg-foreground text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-md">
-                    <Logo className="fill-accent h-auto w-5" />
-                  </div>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">
-                      Chat with PDF
-                    </span>
-                    <span className="truncate text-xs">by Makefy ✨</span>
-                  </div>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
+          <SidebarApplicationSwitcher
+            icon={<Logo className="fill-accent h-auto w-5" />}
+            name="Chat with PDF"
+            href="/"
+          />
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
