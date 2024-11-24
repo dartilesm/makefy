@@ -8,7 +8,6 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    // Makefy ui components
     path.join(
       path.dirname(require.resolve("@makefy/ui")),
       "components/**/*.{ts,tsx}",
@@ -16,9 +15,22 @@ const config: Config = {
   ],
   presets: [uiTailwindConfig],
   theme: {
-    extend: {},
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+          },
+        },
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 
 export default config;

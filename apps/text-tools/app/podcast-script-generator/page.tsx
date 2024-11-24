@@ -19,6 +19,7 @@ import {
 } from "@makefy/ui/components/select";
 import { Textarea } from "@makefy/ui/components/textarea";
 import { useState } from "react";
+import { MarkdownViewer } from "@/app/components/markdown-viewer";
 
 export default function PodcastScriptGenerator() {
   const [topic, setTopic] = useState("");
@@ -138,8 +139,8 @@ export default function PodcastScriptGenerator() {
           {completion && (
             <div className="mt-6 space-y-4">
               <h3 className="font-medium">Generated Script:</h3>
-              <div className="bg-muted whitespace-pre-wrap rounded-lg p-4 text-sm">
-                {completion}
+              <div className="bg-card rounded-lg border p-4">
+                <MarkdownViewer content={completion} />
               </div>
             </div>
           )}

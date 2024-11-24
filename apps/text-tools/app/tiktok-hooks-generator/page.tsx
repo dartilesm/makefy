@@ -7,6 +7,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@makefy/ui/components/card";
 import { Input } from "@makefy/ui/components/input";
 import {
@@ -17,10 +18,12 @@ import {
   SelectValue,
 } from "@makefy/ui/components/select";
 import { useState } from "react";
+import { MarkdownViewer } from "@/app/components/markdown-viewer";
 
 export default function TikTokHookGenerator() {
   const [topic, setTopic] = useState("");
   const [tone, setTone] = useState("casual");
+  const [error, setError] = useState("");
 
   const { complete, completion, isLoading } = useCompletion({
     api: "/api/tiktok-hooks-generator/generate",
@@ -28,7 +31,18 @@ export default function TikTokHookGenerator() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await complete("", { body: { topic, tone } });
+    setError("");
+
+    try {
+      await complete("", {
+        body: {
+          topic,
+          tone,
+        },
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
+    }
   };
 
   return (
@@ -36,6 +50,9 @@ export default function TikTokHookGenerator() {
       <Card>
         <CardHeader>
           <CardTitle>TikTok Hook Generator</CardTitle>
+          <CardDescription>
+            Generate attention-grabbing hooks for your TikTok videos
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -65,16 +82,18 @@ export default function TikTokHookGenerator() {
               </Select>
             </div>
 
+            {error && <div className="text-sm text-red-500">{error}</div>}
+
             <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? "Generating..." : "Generate Hooks"}
+              {isLoading ? "Generating Hooks..." : "Generate Hooks"}
             </Button>
           </form>
 
           {completion && (
             <div className="mt-6 space-y-4">
               <h3 className="font-medium">Generated Hooks:</h3>
-              <div className="bg-muted whitespace-pre-wrap rounded-lg p-4 text-sm">
-                {completion}
+              <div className="bg-card rounded-lg border p-4">
+                <MarkdownViewer content={completion} />
               </div>
             </div>
           )}

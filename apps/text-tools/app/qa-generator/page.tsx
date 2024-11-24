@@ -19,6 +19,7 @@ import {
 } from "@makefy/ui/components/select";
 import { Input } from "@makefy/ui/components/input";
 import { useState } from "react";
+import { MarkdownViewer } from "@/app/components/markdown-viewer";
 
 export default function QAGenerator() {
   const [content, setContent] = useState("");
@@ -127,8 +128,8 @@ export default function QAGenerator() {
           {completion && (
             <div className="mt-6 space-y-4">
               <h3 className="font-medium">Generated Q&A:</h3>
-              <div className="bg-muted whitespace-pre-wrap rounded-lg p-4 text-sm">
-                {completion}
+              <div className="bg-card rounded-lg border p-4">
+                <MarkdownViewer content={completion} />
               </div>
             </div>
           )}
