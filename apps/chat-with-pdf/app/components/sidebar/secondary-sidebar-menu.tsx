@@ -1,31 +1,12 @@
 import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  ToggleGroup,
-  ToggleGroupItem,
-  SidebarMenuAction,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  SidebarBottomMenu,
-  SidebarBottomMenuFeedbackItem,
-  SidebarBottomMenuThemeItem,
+  DropdownMenuTrigger,
+  MakefySidebarBottomMenu,
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
-import {
-  LaptopMinimalIcon,
-  MessageSquareIcon,
-  MoonIcon,
-  MoreHorizontal,
-  Plus,
-  Settings2Icon,
-  SunIcon,
-  SunMoonIcon,
-} from "lucide-react";
+import { LaptopMinimalIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { FeedbackDialog } from "../header/feedback-dialog";
 
@@ -41,11 +22,11 @@ export function SecondarySidebarMenu() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <SidebarBottomMenu>
-      <FeedbackDialog triggerEl={<SidebarBottomMenuFeedbackItem />} />
+    <MakefySidebarBottomMenu>
+      <FeedbackDialog triggerEl={<MakefySidebarBottomMenu.FeedbackItem />} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <SidebarBottomMenuThemeItem theme={theme} />
+          <MakefySidebarBottomMenu.ThemeItem theme={theme} />
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" align="end">
           {themeIconList.map((themeIcon) => {
@@ -66,6 +47,6 @@ export function SecondarySidebarMenu() {
           })}
         </DropdownMenuContent>
       </DropdownMenu>
-    </SidebarBottomMenu>
+    </MakefySidebarBottomMenu>
   );
 }

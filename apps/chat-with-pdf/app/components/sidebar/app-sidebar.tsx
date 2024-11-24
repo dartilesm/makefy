@@ -43,7 +43,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import RecentConversationsSidebarGroup from "./recent-conversation-sidebar-group";
 import { SecondarySidebarMenu } from "./secondary-sidebar-menu";
-import { SidebarApplicationSwitcher } from "@makefy/ui";
+import { MakefySidebarAppSwitcher } from "@makefy/ui";
 
 export function AppSidebar({ userInfo }: { userInfo: User }) {
   const router = useRouter();
@@ -78,7 +78,7 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
     <>
       <Sidebar className="z-20" collapsible="icon">
         <SidebarHeader className="transition-all duration-300 group-data-[collapsible=icon]:py-3">
-          <SidebarApplicationSwitcher
+          <MakefySidebarAppSwitcher
             icon={<Logo className="fill-accent h-auto w-5" />}
             name="Chat with PDF"
             href="/"

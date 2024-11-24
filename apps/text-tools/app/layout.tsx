@@ -4,6 +4,8 @@ import "./globals.css";
 import "@makefy/ui/globals.css";
 import { cn } from "@makefy/ui/lib/utils";
 import { ThemeProvider } from "./components/theme-provider";
+import { AppSidebar } from "./components/app-sidebar";
+import { SidebarProvider } from "@makefy/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,7 +49,24 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SidebarProvider
+            defaultOpen={false}
+            className="flex h-screen w-screen max-w-[100vw] flex-row"
+          >
+            <AppSidebar />
+            <div
+              className={cn([
+                "flex h-screen flex-1 shrink-0 flex-col",
+                // Calculate the remaining width for the main content
+                // as the css is not able to calculate it
+                "max-w-[calc(100%-(var(--sidebar-width-icon)))]",
+              ])}
+            >
+              <main className="flex flex-1 flex-col overflow-hidden">
+                {children}
+              </main>
+            </div>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

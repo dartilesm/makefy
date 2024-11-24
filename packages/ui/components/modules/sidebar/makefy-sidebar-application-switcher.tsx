@@ -5,17 +5,17 @@ import {
   SidebarMenuButton,
 } from "@makefy/ui/components/sidebar";
 
-type SidebarApplicationSwitcherProps = {
+type MakefySidebarAppSwitcherProps = {
   icon: React.ReactNode;
   name: string;
   href: string;
 };
 
-export function SidebarApplicationSwitcher({
+export function MakefySidebarAppSwitcher({
   icon,
   name,
   href,
-}: SidebarApplicationSwitcherProps) {
+}: MakefySidebarAppSwitcherProps) {
   return (
     <SidebarMenu>
       <SidebarMenuItem>

@@ -34,4 +34,4 @@ export * from "./tooltip";
 export * from "./use-toast";
 
 // Custom components
-export * from "./custom";
+export * from "./modules";

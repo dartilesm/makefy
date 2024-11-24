@@ -4,15 +4,16 @@ import { SidebarMenuButton } from "@makefy/ui/components/sidebar";
 import { MessageSquareIcon } from "lucide-react";
 import { forwardRef } from "react";
 
-type SidebarBottomMenuFeedbackItemProps = React.ComponentProps<"button"> & {
-  className?: string;
-  onClick?: () => void;
-};
+type MakefySidebarBottomMenuFeedbackItemProps =
+  React.ComponentProps<"button"> & {
+    className?: string;
+    onClick?: () => void;
+  };
 
-export const SidebarBottomMenuFeedbackItem = forwardRef<
+export const MakefySidebarBottomMenuFeedbackItem = forwardRef<
   HTMLButtonElement,
-  SidebarBottomMenuFeedbackItemProps
->(function SidebarBottomMenuFeedbackButton(
+  MakefySidebarBottomMenuFeedbackItemProps
+>(function MakefySidebarBottomMenuFeedbackButton(
   { className, onClick = () => null, ...props },
   ref,
 ) {

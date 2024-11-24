@@ -19,16 +19,16 @@ const ThemeIconsMap = {
   dark: MoonIcon,
 };
 
-type SidebarBottomMenuThemeThemeProps = React.ComponentProps<"button"> & {
+type MakefySidebarBottomMenuThemeItemProps = React.ComponentProps<"button"> & {
   theme: string | undefined;
   onClick?: () => void;
   className?: string;
 };
 
-export const SidebarBottomMenuThemeItem = forwardRef<
+export const MakefySidebarBottomMenuThemeItem = forwardRef<
   HTMLButtonElement,
-  SidebarBottomMenuThemeThemeProps
->(function SidebarBottomMenuThemeItem(
+  MakefySidebarBottomMenuThemeItemProps
+>(function MakefySidebarBottomMenuThemeItem(
   { className, onClick = () => null, theme, ...props },
   ref,
 ) {
