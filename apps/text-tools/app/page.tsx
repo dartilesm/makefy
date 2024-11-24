@@ -5,7 +5,12 @@ import {
   CardTitle,
 } from "@makefy/ui/components/card";
 import Link from "next/link";
-import { VideoIcon, MicIcon, MessageSquareIcon } from "lucide-react";
+import {
+  VideoIcon,
+  MicIcon,
+  MessageSquareIcon,
+  HelpCircleIcon,
+} from "lucide-react";
 
 const tools = [
   {
@@ -28,6 +33,13 @@ const tools = [
       "Generate professional podcast scripts tailored to your topic, style, and audience. Create engaging content with proper structure and flow.",
     icon: <MicIcon className="h-6 w-6" />,
     href: "/podcast-script-generator",
+  },
+  {
+    title: "Q&A Generator",
+    description:
+      "Generate comprehensive questions and answers from any text or topic. Perfect for study materials, quizzes, and educational content.",
+    icon: <HelpCircleIcon className="h-6 w-6" />,
+    href: "/qa-generator",
   },
 ];
 
