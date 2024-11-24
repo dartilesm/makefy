@@ -2,8 +2,6 @@ import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 import { getYouTubeVideoInfo } from "@/lib/youtube";
 
-export const runtime = "edge";
-
 export async function POST(req: Request) {
   const { videoUrl, style } = await req.json();
 
