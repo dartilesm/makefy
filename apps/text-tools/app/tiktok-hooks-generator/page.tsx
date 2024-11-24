@@ -19,6 +19,8 @@ import {
 } from "@makefy/ui/components/select";
 import { useState } from "react";
 import { MarkdownViewer } from "@/app/components/markdown-viewer";
+import { ToolHero } from "@/app/components/tool-hero";
+import { VideoIcon } from "lucide-react";
 
 export default function TikTokHookGenerator() {
   const [topic, setTopic] = useState("");
@@ -46,59 +48,60 @@ export default function TikTokHookGenerator() {
   };
 
   return (
-    <div className="container mx-auto max-w-2xl p-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>TikTok Hook Generator</CardTitle>
-          <CardDescription>
-            Generate attention-grabbing hooks for your TikTok videos
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Video Topic</label>
-              <Input
-                placeholder="Enter your video topic..."
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Tone</label>
-              <Select value={tone} onValueChange={setTone}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select tone" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="casual">Casual</SelectItem>
-                  <SelectItem value="professional">Professional</SelectItem>
-                  <SelectItem value="funny">Funny</SelectItem>
-                  <SelectItem value="dramatic">Dramatic</SelectItem>
-                  <SelectItem value="educational">Educational</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {error && <div className="text-sm text-red-500">{error}</div>}
-
-            <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? "Generating Hooks..." : "Generate Hooks"}
-            </Button>
-          </form>
-
-          {completion && (
-            <div className="mt-6 space-y-4">
-              <h3 className="font-medium">Generated Hooks:</h3>
-              <div className="bg-card rounded-lg border p-4">
-                <MarkdownViewer content={completion} />
+    <>
+      <ToolHero
+        title="TikTok Hook Generator"
+        description="Create attention-grabbing hooks for your TikTok videos using AI. Get the perfect first 3 seconds that make viewers want to keep watching."
+        icon={<VideoIcon className="h-8 w-8" />}
+      />
+      <div className="container mx-auto max-w-2xl py-10">
+        <Card>
+          <CardContent className="pt-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Video Topic</label>
+                <Input
+                  placeholder="Enter your video topic..."
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                  required
+                />
               </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Tone</label>
+                <Select value={tone} onValueChange={setTone}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select tone" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="casual">Casual</SelectItem>
+                    <SelectItem value="professional">Professional</SelectItem>
+                    <SelectItem value="funny">Funny</SelectItem>
+                    <SelectItem value="dramatic">Dramatic</SelectItem>
+                    <SelectItem value="educational">Educational</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {error && <div className="text-sm text-red-500">{error}</div>}
+
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? "Generating Hooks..." : "Generate Hooks"}
+              </Button>
+            </form>
+
+            {completion && (
+              <div className="mt-6 space-y-4">
+                <h3 className="font-medium">Generated Hooks:</h3>
+                <div className="bg-card rounded-lg border p-4">
+                  <MarkdownViewer content={completion} />
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 }

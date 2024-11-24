@@ -2,13 +2,7 @@
 
 import { useCompletion } from "ai/react";
 import { Button } from "@makefy/ui/components/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@makefy/ui/components/card";
+import { Card, CardContent } from "@makefy/ui/components/card";
 import { Textarea } from "@makefy/ui/components/textarea";
 import {
   Select,
@@ -20,6 +14,8 @@ import {
 import { Input } from "@makefy/ui/components/input";
 import { useState } from "react";
 import { MarkdownViewer } from "@/app/components/markdown-viewer";
+import { ToolHero } from "@/app/components/tool-hero";
+import { HelpCircleIcon } from "lucide-react";
 
 export default function QAGenerator() {
   const [content, setContent] = useState("");
@@ -51,90 +47,93 @@ export default function QAGenerator() {
   };
 
   return (
-    <div className="container mx-auto max-w-2xl p-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Q&A Generator</CardTitle>
-          <CardDescription>
-            Generate questions and answers from any text or topic
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Content</label>
-              <Textarea
-                placeholder="Paste your text content here..."
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                rows={6}
-                className="resize-none"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Topic (Optional)</label>
-              <Input
-                placeholder="Specify a topic for focused Q&A..."
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-              />
-              <p className="text-muted-foreground text-xs">
-                If no content is provided, questions will be generated based on
-                this topic
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Number of Questions</label>
-              <Select
-                value={numberOfQuestions}
-                onValueChange={setNumberOfQuestions}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select number of questions" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="3">3 Questions</SelectItem>
-                  <SelectItem value="5">5 Questions</SelectItem>
-                  <SelectItem value="10">10 Questions</SelectItem>
-                  <SelectItem value="15">15 Questions</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Difficulty Level</label>
-              <Select value={difficulty} onValueChange={setDifficulty}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="easy">Easy</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="hard">Hard</SelectItem>
-                  <SelectItem value="expert">Expert</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {error && <div className="text-sm text-red-500">{error}</div>}
-
-            <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? "Generating Q&A..." : "Generate Q&A"}
-            </Button>
-          </form>
-
-          {completion && (
-            <div className="mt-6 space-y-4">
-              <h3 className="font-medium">Generated Q&A:</h3>
-              <div className="bg-card rounded-lg border p-4">
-                <MarkdownViewer content={completion} />
+    <>
+      <ToolHero
+        title="Q&A Generator"
+        description="Generate comprehensive questions and answers from any text or topic. Perfect for study materials, quizzes, and educational content."
+        icon={<HelpCircleIcon className="h-8 w-8" />}
+      />
+      <div className="container mx-auto max-w-2xl py-10">
+        <Card>
+          <CardContent className="pt-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Content</label>
+                <Textarea
+                  placeholder="Paste your text content here..."
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  rows={6}
+                  className="resize-none"
+                />
               </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Topic (Optional)</label>
+                <Input
+                  placeholder="Specify a topic for focused Q&A..."
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                />
+                <p className="text-muted-foreground text-xs">
+                  If no content is provided, questions will be generated based
+                  on this topic
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Number of Questions
+                </label>
+                <Select
+                  value={numberOfQuestions}
+                  onValueChange={setNumberOfQuestions}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select number of questions" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="3">3 Questions</SelectItem>
+                    <SelectItem value="5">5 Questions</SelectItem>
+                    <SelectItem value="10">10 Questions</SelectItem>
+                    <SelectItem value="15">15 Questions</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Difficulty Level</label>
+                <Select value={difficulty} onValueChange={setDifficulty}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select difficulty" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="easy">Easy</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="hard">Hard</SelectItem>
+                    <SelectItem value="expert">Expert</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {error && <div className="text-sm text-red-500">{error}</div>}
+
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? "Generating Q&A..." : "Generate Q&A"}
+              </Button>
+            </form>
+
+            {completion && (
+              <div className="mt-6 space-y-4">
+                <h3 className="font-medium">Generated Q&A:</h3>
+                <div className="bg-card rounded-lg border p-4">
+                  <MarkdownViewer content={completion} />
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 }
