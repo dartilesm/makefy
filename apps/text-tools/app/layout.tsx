@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "@makefy/ui/globals.css";
+import { cn } from "@makefy/ui/lib/utils";
+import { ThemeProvider } from "./components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Text Tools - TikTok Hook Generator",
-  description: "Generate engaging hooks for your TikTok videos",
+  title: "Text Tools",
+  description:
+    "A collection of AI-powered tools for text generation and manipulation",
 };
 
 export default function RootLayout({
@@ -16,8 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(inter.className, "h-screen")}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
