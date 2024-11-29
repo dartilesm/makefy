@@ -20,6 +20,7 @@ export function MakefySidebarWrapper({
     <SidebarProvider
       defaultOpen={false}
       className={cn("flex h-screen w-screen max-w-[100vw]", className)}
+      id="makefy-sidebar-wrapper"
     >
       {sidebar}
       <main
