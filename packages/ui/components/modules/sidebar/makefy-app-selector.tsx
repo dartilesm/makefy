@@ -16,13 +16,13 @@ const apps: AppTileProps[] = [
     name: "Chat with PDF",
     description: "Chat with your PDF documents using AI",
     icon: MessageSquareIcon,
-    href: "/chat-with-pdf",
+    href: process.env.NEXT_PUBLIC_MAKEFY_CHAT_WITH_PDF_URL!,
   },
   {
     name: "Text Tools",
     description: "Powerful text manipulation tools",
     icon: PenLineIcon,
-    href: "/text-tools",
+    href: process.env.NEXT_PUBLIC_MAKEFY_TEXT_TOOLS_URL!,
   },
 ];
 

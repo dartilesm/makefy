@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development next dev --experimental-https",
+    "dev": "NODE_ENV=development next dev --experimental-https -p $MAKEFY_CHAT_WITH_PDF_PORT",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
