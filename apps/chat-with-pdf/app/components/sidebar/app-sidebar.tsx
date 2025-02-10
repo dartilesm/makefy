@@ -82,6 +82,7 @@ export function AppSidebar({ userInfo }: { userInfo: User }) {
             icon={<Logo className="fill-accent h-auto w-5" />}
             name="Chat with PDF"
             href="/"
+            isAlpha
           />
         </SidebarHeader>
         <SidebarContent>

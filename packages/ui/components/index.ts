@@ -35,3 +35,4 @@ export * from "./use-toast";
 
 // Custom components
 export * from "./modules";
+export * from "./tag";

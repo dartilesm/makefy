@@ -8,6 +8,7 @@ type AppTileProps = {
   name: string;
   description: string;
   icon: React.ElementType;
+  isAlpha?: boolean;
   href: string;
 };
 
@@ -16,6 +17,7 @@ const apps: AppTileProps[] = [
     name: "Chat with PDF",
     description: "Chat with your PDF documents using AI",
     icon: MessageSquareIcon,
+    isAlpha: true,
     href: process.env.NEXT_PUBLIC_MAKEFY_CHAT_WITH_PDF_URL!,
   },
   {
@@ -61,6 +63,9 @@ export function MakefyAppSelector() {
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{app.name}</span>
+                {app.isAlpha && (
+                  <span className="text-muted-foreground text-xs">Alpha</span>
+                )}
               </div>
             </div>
           </Link>
