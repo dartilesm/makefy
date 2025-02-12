@@ -7,9 +7,11 @@
     "dev:web": "turbo dev --filter=@makefy/web --env-mode=loose",
     "dev:chat-with-pdf": "turbo dev --filter=@makefy/chat-with-pdf --env-mode=loose",
     "dev:text-tools": "turbo dev --filter=@makefy/text-tools --env-mode=loose",
+    "dev:tailor-resume": "turbo dev --filter=@makefy/tailor-resume --env-mode=loose",
     "build:web": "turbo build --filter=@makefy/web --env-mode=loose",
     "build:chat-with-pdf": "turbo build --filter=@makefy/chat-with-pdf --env-mode=loose",
     "build:text-tools": "turbo build --filter=@makefy/text-tools --env-mode=loose",
+    "build:tailor-resume": "turbo build --filter=@makefy/tailor-resume --env-mode=loose",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "sui-mono commit"

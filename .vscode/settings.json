@@ -17,5 +17,29 @@
     },
     "editor.quickSuggestions": {
         "strings": "on"
-    }
+    },
+    "workbench.editor.customLabels.patterns": {
+        "*/apps/**/app/**/layout.tsx": "💻 ${dirname(-3)} | ${dirname(0)} - Layout 🖼️",
+        "*/apps/**/app/**/page.tsx": "💻 ${dirname(-3)} | ${dirname(0)} - Page 📄",
+        "*/apps/**/app/**/route.ts": "💻 ${dirname(-3)} | ${dirname(0)} - Route 🛣️",
+        "*/apps/**/app/**/components/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Component 🧩",
+        "*/apps/**/components/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Component 🧩",
+        "*/apps/**/hooks/**/*.ts": "💻 ${dirname(-3)} | ${filename} - Hook 🎣",
+        "*/apps/**/lib/**/*.ts": "💻 ${dirname(-3)} | ${filename} - Library 📚",
+        "*/apps/**/utils/**/*.ts": "💻 ${dirname(-3)} | ${filename} - Utility 🛠️",
+        "*/apps/**/env/**/*.ts": "💻 ${dirname(-3)} | ${filename} - Environment 🌍",
+        "*/apps/**/hooks/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Hook 🎣",
+        "*/apps/**/lib/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Library 📚",
+        "*/apps/**/utils/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Utility 🛠️",
+        "*/apps/**/env/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Environment 🌍",
+        "*/packages/**/components/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Component 🧩",
+        "*/packages/**/hooks/**/*.ts": "📦 ${dirname(-3)} | ${filename} - Hook 🎣",
+        "*/packages/**/lib/**/*.ts": "📦 ${dirname(-3)} | ${filename} - Library 📚",
+        "*/packages/**/utils/**/*.ts": "📦 ${dirname(-3)} | ${filename} - Utility 🛠️",
+        "*/packages/**/env/**/*.ts": "📦 ${dirname(-3)} | ${filename} - Environment 🌍",
+        "*/packages/**/hooks/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Hook 🎣",
+        "*/packages/**/lib/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Library 📚",
+        "*/packages/**/utils/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Utility 🛠️",
+        "*/packages/**/env/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Environment 🌍"
+    },
 }

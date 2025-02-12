@@ -1,0 +1,91 @@
+import { Card, CardHeader, CardTitle, CardContent } from "@makefy/ui";
+
+interface Improvements {
+  keyJobQualifications: string[];
+  skillsToHighlight: string[];
+  areasToExpand: string[];
+  keywordsToInclude: string[];
+  achievementsToQuantify: string[];
+  exampleText: string[];
+}
+
+interface ResumeSuggestionsProps {
+  suggestions?: Improvements;
+}
+
+export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
+  if (!suggestions) {
+    return null;
+  }
+
+  const SuggestionSection = ({
+    title,
+    items,
+  }: {
+    title: string;
+    items: string[];
+  }) => {
+    if (!items?.length) return null;
+
+    return (
+      <div>
+        <h3 className="mb-2 font-medium">{title}</h3>
+        <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-sm">
+          {items.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
+  const sections = [
+    {
+      title: "Key Job Qualifications",
+      items: suggestions.keyJobQualifications,
+    },
+    {
+      title: "Skills to Highlight",
+      items: suggestions.skillsToHighlight,
+    },
+    {
+      title: "Areas to Expand",
+      items: suggestions.areasToExpand,
+    },
+    {
+      title: "Keywords to Include",
+      items: suggestions.keywordsToInclude,
+    },
+    {
+      title: "Example Improvements",
+      items: suggestions.exampleText,
+    },
+  ];
+
+  const availableSections = sections.filter(
+    (section) => section.items?.length > 0,
+  );
+
+  if (!availableSections.length) {
+    return null;
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Improvement Suggestions</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-6">
+          {availableSections.map((section, index) => (
+            <SuggestionSection
+              key={index}
+              title={section.title}
+              items={section.items}
+            />
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
