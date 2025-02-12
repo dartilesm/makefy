@@ -1,4 +1,10 @@
+"use client";
+
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
   Sidebar,
   MakefySidebarAppSwitcher,
   MakefySidebarBottomMenu,
@@ -9,9 +15,20 @@ import {
   SidebarMenu,
   SidebarRail,
 } from "@makefy/ui";
+import { useTheme } from "next-themes";
+import { cn } from "@makefy/ui/lib/utils";
+import { LaptopMinimalIcon, MoonIcon, SunIcon } from "lucide-react";
 import Logo from "@/public/logo.svg";
 
+const ThemeIconsMap = {
+  system: LaptopMinimalIcon,
+  light: SunIcon,
+  dark: MoonIcon,
+};
+
+const themeIconList = Object.keys(ThemeIconsMap);
 export function AppSidebar() {
+  const { theme, setTheme } = useTheme();
   return (
     <Sidebar className="z-20" collapsible="icon">
       <SidebarHeader className="transition-all duration-300 group-data-[collapsible=icon]:py-3">
@@ -34,7 +51,29 @@ export function AppSidebar() {
         </SidebarGroup>
         <MakefySidebarBottomMenu>
           <MakefySidebarBottomMenu.FeedbackItem />
-          <MakefySidebarBottomMenu.ThemeItem theme="system" />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <MakefySidebarBottomMenu.ThemeItem theme={theme} />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side="right" align="end">
+              {themeIconList.map((themeIcon) => {
+                const ThemeIcon =
+                  ThemeIconsMap[themeIcon as keyof typeof ThemeIconsMap];
+                return (
+                  <DropdownMenuItem
+                    key={themeIcon}
+                    className={cn("cursor-pointer", {
+                      "bg-accent": theme === themeIcon,
+                    })}
+                    onClick={() => setTheme(themeIcon)}
+                  >
+                    <ThemeIcon className="h-4 w-4" />
+                    {themeIcon}
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </MakefySidebarBottomMenu>
       </SidebarContent>
       <SidebarFooter></SidebarFooter>

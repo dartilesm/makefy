@@ -1,32 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  Input,
-  Textarea,
-  Card,
-  CardContent,
-  Skeleton,
   Button,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
+  Form,
+  Skeleton
 } from "@makefy/ui";
-import { useForm } from "react-hook-form";
 import {
   Edit2Icon,
-  MapPinIcon,
-  MailIcon,
-  PhoneIcon,
   LinkIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { EditResumeFieldDialog } from "./edit-resume-field-dialog";
+import { ResumeImprovements } from "./resume-suggestions";
 
-interface ResumeFormData {
+export interface ResumeFormData {
   fullName: string;
   email: string;
   phone: string;
@@ -49,10 +40,20 @@ interface ResumeFormData {
 
 interface ResumeFormProps {
   initialData?: Partial<ResumeFormData>;
+  suggestions?: ResumeImprovements;
 }
 
-export function ResumeForm({ initialData }: ResumeFormProps) {
-  const [editingField, setEditingField] = useState<string | null>(null);
+// First, let's define the types for our editing field
+export interface EditingField {
+  title: string;
+  fields: {
+    [key: string]: string | undefined;
+  };
+  path?: string;
+}
+
+export function ResumeForm({ initialData, suggestions }: ResumeFormProps) {
+  const [editingField, setEditingField] = useState<EditingField | null>(null);
   const form = useForm<ResumeFormData>({
     defaultValues: {
       fullName: "",
@@ -130,7 +131,18 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
     return (
       <div
         className="hover:bg-muted/50 group relative space-y-1 rounded-lg py-2"
-        onClick={() => setEditingField(`experience.${index}`)}
+        onClick={() =>
+          setEditingField({
+            title: `Experience at ${experience.company} as ${experience.title}`,
+            fields: {
+              title: experience.title,
+              company: experience.company,
+              period: experience.period,
+              description: experience.description,
+            },
+            path: `experience.${index}`,
+          })
+        }
       >
         <div className="flex items-baseline justify-between">
           <div className="font-medium">{experience.title}</div>
@@ -165,7 +177,17 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
     return (
       <div
         className="hover:bg-muted/50 group relative rounded-lg py-2"
-        onClick={() => setEditingField(`education.${index}`)}
+        onClick={() =>
+          setEditingField({
+            title: `Education`,
+            fields: {
+              degree: education.degree,
+              school: education.school,
+              year: education.year,
+            },
+            path: `education.${index}`,
+          })
+        }
       >
         <div className="flex items-baseline justify-between">
           <div className="font-medium">{education.degree}</div>
@@ -184,6 +206,14 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
     );
   };
 
+  // Update click handlers to use the new structure
+  const handleEdit = (
+    title: string,
+    fields: { [key: string]: string | undefined },
+  ) => {
+    setEditingField({ title, fields });
+  };
+
   return (
     <>
       <Form {...form}>
@@ -199,7 +229,11 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
               <div className="group relative space-y-2">
                 <div
                   className="hover:bg-muted/50 cursor-pointer rounded-lg"
-                  onClick={() => setEditingField("fullName")}
+                  onClick={() =>
+                    handleEdit("Personal Info", {
+                      fullName: form.watch("fullName"),
+                    })
+                  }
                 >
                   <h1 className="text-2xl font-bold">
                     {form.watch("fullName")}
@@ -211,7 +245,9 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
               {form.watch("summary") && (
                 <div
                   className="hover:bg-muted/50 group relative cursor-pointer rounded-lg"
-                  onClick={() => setEditingField("summary")}
+                  onClick={() =>
+                    handleEdit("Summary", { summary: form.watch("summary") })
+                  }
                 >
                   <p className="text-muted-foreground">
                     {form.watch("summary")}
@@ -253,7 +289,11 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
                   <h2 className="mb-2 text-lg font-semibold">Skills</h2>
                   <div
                     className="hover:bg-muted/50 group relative cursor-pointer rounded-lg"
-                    onClick={() => setEditingField("skills")}
+                    onClick={() =>
+                      handleEdit("Skills", {
+                        skills: form.watch("skills") as unknown as string,
+                      })
+                    }
                   >
                     <div className="flex flex-wrap gap-2">
                       {form.watch("skills").map((skill, i) => (
@@ -278,49 +318,16 @@ export function ResumeForm({ initialData }: ResumeFormProps) {
             </>
           )}
         </div>
-
-        <Dialog
-          open={!!editingField}
-          onOpenChange={() => setEditingField(null)}
-        >
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit {editingField}</DialogTitle>
-            </DialogHeader>
-            {editingField && (
-              <FormField
-                control={form.control}
-                name={editingField as any}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      {editingField === "summary" ? (
-                        <Textarea {...field} className="min-h-[8rem]" />
-                      ) : editingField === "skills" ? (
-                        <Textarea
-                          {...field}
-                          value={field.value?.join(", ") || ""}
-                          onChange={(e) =>
-                            field.onChange(
-                              e.target.value
-                                .split(",")
-                                .map((skill) => skill.trim())
-                                .filter(Boolean),
-                            )
-                          }
-                          placeholder="Enter skills separated by commas"
-                        />
-                      ) : (
-                        <Input {...field} />
-                      )}
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            )}
-          </DialogContent>
-        </Dialog>
       </Form>
+
+      <EditResumeFieldDialog
+        open={!!editingField}
+        onOpenChange={(open) => !open && setEditingField(null)}
+        editingField={editingField}
+        form={form}
+        initialData={initialData}
+        suggestions={suggestions}
+      />
     </>
   );
 }

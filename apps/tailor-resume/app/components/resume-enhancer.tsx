@@ -91,7 +91,7 @@ export default function ResumeEnhancer() {
           {!rawContent ? (
             <PDFUpload onUpload={handlePDFUpload} isLoading={isLoading} />
           ) : (
-            <ResumeForm initialData={resumeData} />
+            <ResumeForm initialData={resumeData} suggestions={suggestions} />
           )}
         </div>
         <div className="space-y-6 md:col-span-1">

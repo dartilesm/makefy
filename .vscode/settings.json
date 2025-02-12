@@ -2,7 +2,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "vscode.typescript-language-features",
         "editor.formatOnSave": true,
     },
     "[typescript]": {
@@ -42,4 +42,5 @@
         "*/packages/**/utils/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Utility 🛠️",
         "*/packages/**/env/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Environment 🌍"
     },
+    "typescript.tsdk": "node_modules/typescript/lib",
 }

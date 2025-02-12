@@ -1,7 +1,7 @@
 import { google } from "@ai-sdk/google";
 import { streamObject } from "ai";
 import { NextRequest, NextResponse } from "next/server";
-import PDFParser from "pdf2json";
+import PDFParser, { Output } from "pdf2json";
 import { resumeSchema } from "../../../schemas/resume-data.schema";
 
 export const maxDuration = 30;
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const pdfData = (await getPDFData(buffer)) as PDFParser.Output;
+    const pdfData = await getPDFData(buffer);
 
     // Extract text from PDF
     const pages = pdfData.Pages || [];
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function getPDFData(buffer: Buffer) {
+function getPDFData(buffer: Buffer): Promise<Output> {
   return new Promise((resolve, reject) => {
     const pdfParser = new PDFParser();
     pdfParser.on("pdfParser_dataReady", (pdfData) => {

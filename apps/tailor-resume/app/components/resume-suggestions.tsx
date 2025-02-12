@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@makefy/ui";
 
-interface Improvements {
+export interface ResumeImprovements {
   keyJobQualifications: string[];
   skillsToHighlight: string[];
   areasToExpand: string[];
@@ -10,7 +10,7 @@ interface Improvements {
 }
 
 interface ResumeSuggestionsProps {
-  suggestions?: Improvements;
+  suggestions?: ResumeImprovements;
 }
 
 export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
