@@ -7,9 +7,9 @@ import {
   Form
 } from "@makefy/ui";
 import { UseFormReturn } from "react-hook-form";
-import { EditingField, ResumeFormData } from "./resume-form";
-import { ResumeFormField, getFieldType } from "./resume-form-field";
-import { ResumeImprovements } from "./resume-suggestions";
+import { EditingField, ResumeFormData } from "@/app/components/resume-data/resume-data";
+import { ResumeFormField, getFieldType } from "@/app/components/resume-form-field";
+import { ResumeImprovements } from "@/app/components/resume-suggestions/resume-suggestions";
 interface EditResumeFieldDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -108,7 +108,7 @@ export function EditResumeFieldDialog({
           <DialogTitle>{editingField.title}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" autoComplete='off'>
             {Object.entries(editingField.fields).map(([fieldName]) => {
               const fullPath = editingField.path
                 ? `${editingField.path}.${fieldName}`

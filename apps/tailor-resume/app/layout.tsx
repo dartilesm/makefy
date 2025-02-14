@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     icon: [
       {
         rel: "icon",
-        url: "/icon1.svg",
+        url: "/icon.svg",
         media: "(prefers-color-scheme: dark)",
         type: "image/svg+xml",
       },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       },
       {
         rel: "apple-touch-icon",
-        url: "/icon1.svg",
+        url: "/icon.svg",
       },
     ],
   },

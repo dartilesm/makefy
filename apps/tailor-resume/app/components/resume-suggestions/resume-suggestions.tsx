@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@makefy/ui";
+import { SuggestionSection } from "./suggestion-section";
 
 export interface ResumeImprovements {
   keyJobQualifications: string[];
@@ -17,27 +18,6 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
   if (!suggestions) {
     return null;
   }
-
-  const SuggestionSection = ({
-    title,
-    items,
-  }: {
-    title: string;
-    items: string[];
-  }) => {
-    if (!items?.length) return null;
-
-    return (
-      <div>
-        <h3 className="mb-2 font-medium">{title}</h3>
-        <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-sm">
-          {items.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
 
   const sections = [
     {

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { PDFUpload } from "@/app/components/pdf-upload";
-import { ResumeForm } from "@/app/components/resume-form";
-import { ResumeSuggestions } from "@/app/components/resume-suggestions";
+import { ResumeData } from "@/app/components/resume-data/resume-data";
+import { ResumeSuggestions } from "@/app/components/resume-suggestions/resume-suggestions";
 import { Textarea, Label, Button, toast } from "@makefy/ui";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { resumeSchema } from "@/schemas/resume-data.schema";
@@ -85,13 +85,13 @@ export default function ResumeEnhancer() {
   };
 
   return (
-    <div className="container mx-auto h-full max-h-full overflow-auto p-6">
+    <div className="h-full max-h-full overflow-auto p-6">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div className="space-y-6 md:col-span-2">
           {!rawContent ? (
             <PDFUpload onUpload={handlePDFUpload} isLoading={isLoading} />
           ) : (
-            <ResumeForm initialData={resumeData} suggestions={suggestions} />
+            <ResumeData initialData={resumeData} suggestions={suggestions} />
           )}
         </div>
         <div className="space-y-6 md:col-span-1">

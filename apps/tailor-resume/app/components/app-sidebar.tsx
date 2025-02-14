@@ -41,12 +41,6 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
           <SidebarMenu>
-            {/* <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Plus />
-                <span>New conversation</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem> */}
           </SidebarMenu>
         </SidebarGroup>
         <MakefySidebarBottomMenu>

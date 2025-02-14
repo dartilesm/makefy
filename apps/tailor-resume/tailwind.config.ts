@@ -16,6 +16,7 @@ const config: Config = {
   presets: [uiTailwindConfig],
   theme: {
     extend: {
+      ...uiTailwindConfig.theme.extend,
       typography: {
         DEFAULT: {
           css: {
