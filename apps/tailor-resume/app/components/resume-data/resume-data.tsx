@@ -10,6 +10,7 @@ import { PersonalInfoSection } from "./personal-info-section";
 import { SummarySection } from "./summary-section";
 import { SkillsSection } from "./skills-section";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 
 interface ResumeDataProps {
   initialData?: ResumeDataSchemaType;
@@ -32,8 +33,6 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
         fullName: initialData?.personalInfo?.fullName || "",
         email: initialData?.personalInfo?.email || "",
         phone: initialData?.personalInfo?.phone || "",
-        location: initialData?.personalInfo?.location || "",
-        website: initialData?.personalInfo?.website || "",
         links: initialData?.personalInfo?.links || [],
       },
       summary: initialData?.summary || "",
@@ -50,8 +49,6 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
           fullName: initialData.personalInfo?.fullName || "",
           email: initialData.personalInfo?.email || "",
           phone: initialData.personalInfo?.phone || "",
-          location: initialData.personalInfo?.location || "",
-          website: initialData.personalInfo?.website || "",
           links: initialData.personalInfo?.links || [],
         },
         summary: initialData.summary || "",

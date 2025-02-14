@@ -7,22 +7,20 @@ import {
   Form,
 } from "@makefy/ui";
 import { UseFormReturn } from "react-hook-form";
-import {
-  EditingField,
-  ResumeFormData,
-} from "@/app/components/resume-data/resume-data";
+import { EditingField } from "@/app/components/resume-data/resume-data";
 import {
   ResumeFormField,
   getFieldType,
 } from "@/app/components/resume-form-field";
-import { ResumeImprovements } from "@/app/components/resume-suggestions/resume-suggestions";
+import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 interface EditResumeFieldDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   editingField: EditingField | null;
-  form: UseFormReturn<ResumeFormData>;
-  initialData?: Partial<ResumeFormData>;
-  suggestions?: ResumeImprovements;
+  form: UseFormReturn<ResumeDataSchemaType>;
+  initialData?: Partial<ResumeDataSchemaType>;
+  suggestions?: ResumeSuggestionsSchemaType;
 }
 
 const enum FIELDTYPE {
@@ -34,10 +32,10 @@ const enum FIELDTYPE {
 function getOriginalValue(
   fieldName: string,
   path: string | undefined,
-  initialData: Partial<ResumeFormData> | undefined,
+  initialData: Partial<ResumeDataSchemaType> | undefined,
 ): string | string[] | undefined {
   if (!path) {
-    return initialData?.[fieldName as keyof ResumeFormData] as
+    return initialData?.[fieldName as keyof ResumeDataSchemaType] as
       | string
       | string[]
       | undefined;
@@ -45,13 +43,13 @@ function getOriginalValue(
 
   // Split path into section (e.g. 'experience') and index (e.g. '0')
   const [section, indexStr] = path.split(".");
-  const index = parseInt(indexStr);
+  const index = parseInt(indexStr || "0");
 
   // Type-safe access to nested resume data:
   // 1. Access the section (e.g. experience, education)
   // 2. Access array item at index
   // 3. Access the specific field
-  const sectionData = initialData?.[section as keyof ResumeFormData];
+  const sectionData = initialData?.[section as keyof ResumeDataSchemaType];
   const arrayItem = Array.isArray(sectionData) ? sectionData[index] : undefined;
   const fieldValue = arrayItem?.[fieldName as keyof typeof arrayItem];
 
@@ -119,7 +117,6 @@ export function EditResumeFieldDialog({
                   fieldName={fieldName}
                   fieldPath={fullPath}
                   type={getFieldType(fieldName)}
-                  form={form}
                   suggestions={suggestions}
                 />
               );

@@ -1,29 +1,29 @@
 import {
+  ImprovedFieldSchemaType,
+  improvedFieldSchema,
+} from "@/schemas/improved-file.schema";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
+import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   Input,
-  Textarea,
-  Button,
   MagicButton,
-  FormMessage,
-  Alert,
-  AlertTitle,
-  AlertDescription,
   Skeleton,
+  Textarea,
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
-import { UseFormReturn } from "react-hook-form";
 import { Loader2Icon, SparklesIcon } from "lucide-react";
-import { experimental_useObject as useObject } from "@ai-sdk/react";
-import {
-  improvedFieldSchema,
-  ImprovedFieldSchemaType,
-} from "@/schemas/improved-file.schema";
-import { ResumeFormData } from "@/app/components/resume-data/resume-data";
-import { ResumeImprovements } from "@/app/components/resume-suggestions/resume-suggestions";
 import { useEffect, useState } from "react";
+import {
+  ControllerRenderProps,
+  FieldValues,
+  useFormContext,
+  UseFormReturn,
+} from "react-hook-form";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
+import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 
 export const enum FIELDTYPE {
   TEXT = "text",
@@ -39,13 +39,16 @@ export const FIELD_CONFIGS = {
   },
 } as const;
 
-interface FormFieldProps {
+interface FieldBaseProps {
   fieldName: string;
   fieldPath: string;
+  field: ControllerRenderProps<ResumeDataSchemaType, any>;
   type: FIELDTYPE;
-  form: UseFormReturn<ResumeFormData>;
-  suggestions?: ResumeImprovements;
+  suggestions?: ResumeSuggestionsSchemaType;
 }
+
+type FieldInputProps = Omit<FieldBaseProps, "fieldPath">;
+type ResumeFormFieldProps = Omit<FieldBaseProps, "field">;
 
 const enum TEXT_STYLE {
   REWRITE = "rewrite",
@@ -54,17 +57,7 @@ const enum TEXT_STYLE {
   CASUAL = "casual",
 }
 
-function FieldInput({
-  type,
-  field,
-  fieldName,
-  suggestions,
-}: {
-  type: FIELDTYPE;
-  field: any;
-  fieldName: string;
-  suggestions?: ResumeImprovements;
-}) {
+function FieldInput({ type, field, fieldName, suggestions }: FieldInputProps) {
   const [loadingStates, setLoadingStates] = useState<
     Record<TEXT_STYLE, boolean>
   >({
@@ -84,7 +77,7 @@ function FieldInput({
   });
 
   useEffect(() => {
-    // handleImprove();
+    handleImprove();
   }, []);
 
   useEffect(() => {
@@ -93,7 +86,7 @@ function FieldInput({
     }
   }, [improvedField?.value]);
 
-  async function handleImprove(style?: TextStyle) {
+  async function handleImprove(style?: TEXT_STYLE) {
     if (!suggestions || isLoading) return;
 
     setLoadingStates((prev) => ({ ...prev, [style || "rewrite"]: true }));
@@ -114,7 +107,7 @@ function FieldInput({
     if (type === FIELDTYPE.TEXTAREA) {
       field.onChange(value);
     }
-    if (type === FIELDTYPE.SKILLS) {
+    if (type === FIELDTYPE.TEXTAREA) {
       field.onChange(
         value
           .split(",")
@@ -125,29 +118,8 @@ function FieldInput({
   }
 
   const currentLoadingState = Object.keys(loadingStates).find(
-    (key) => loadingStates[key as TextStyle],
+    (key) => loadingStates[key as TEXT_STYLE],
   );
-
-  if (type === FIELDTYPE.SKILLS) {
-    return (
-      <div className="relative">
-        <Textarea
-          {...field}
-          className="max-h-96 min-h-8 transition-[height] duration-300 ease-in-out [field-sizing:content]"
-          value={
-            Array.isArray(field.value) ? field.value.join(", ") : field.value
-          }
-          onChange={(e) => handleChange(e.target.value)}
-          placeholder={FIELD_CONFIGS.skills.placeholder}
-        />
-        {isLoading && (
-          <div className="absolute right-3 top-3">
-            <Loader2Icon className="h-4 w-4 animate-spin" />
-          </div>
-        )}
-      </div>
-    );
-  }
 
   if (type === FIELDTYPE.TEXTAREA) {
     return (
@@ -227,7 +199,7 @@ function FieldInput({
           </MagicButton>
           <MagicButton
             size="sm"
-            onClick={() => handleImprove("formal")}
+            onClick={() => handleImprove(TEXT_STYLE.FORMAL)}
             className="flex gap-2"
             theme="yellow"
             animate={loadingStates[TEXT_STYLE.FORMAL]}
@@ -269,9 +241,10 @@ export function ResumeFormField({
   fieldName,
   fieldPath,
   type,
-  form,
   suggestions,
-}: FormFieldProps) {
+}: ResumeFormFieldProps) {
+  const form = useFormContext<ResumeDataSchemaType>();
+
   return (
     <FormField
       key={fieldName}
