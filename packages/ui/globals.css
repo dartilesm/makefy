@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --r2: 0deg;
+  --x: 20px;
+}
+@property --r2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 20px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

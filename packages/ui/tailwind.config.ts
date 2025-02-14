@@ -78,6 +78,26 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "button-border-rotation-keyframes": {
+          "0%": { "--r2": "0deg" },
+          "32.8228%": { "--r2": "0deg" },
+          "50%": { "--r2": "180deg" },
+          "82.8228%": { "--r2": "180deg" },
+          "100%": { "--r2": "360deg" },
+        },
+        "button-border-translation-keyframes": {
+          "0%": {
+            "--x": "var(--button-border-min-translation-x, var(--x, 20px))",
+          },
+          "32.8228%": { "--x": "var(--button-border-translation-x, 180px)" },
+          "50%": { "--x": "var(--button-border-translation-x, 180px)" },
+          "82.8228%": {
+            "--x": "var(--button-border-min-translation-x, var(--x, 20px))",
+          },
+          "100%": {
+            "--x": "var(--button-border-min-translation-x, var(--x, 20px))",
+          },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -96,6 +116,8 @@ const config = {
         },
       },
       animation: {
+        "button-border":
+          "button-border-rotation-keyframes -0.64s linear 3s infinite, button-border-translation-keyframes -0.64s linear 3s infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

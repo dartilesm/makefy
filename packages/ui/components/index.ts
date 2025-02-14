@@ -36,3 +36,5 @@ export * from "./use-toast";
 // Custom components
 export * from "./modules";
 export * from "./tag";
+export * from "./markdown-viewer";
+export * from "./magic-button";
