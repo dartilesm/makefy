@@ -4,11 +4,17 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  Form
+  Form,
 } from "@makefy/ui";
 import { UseFormReturn } from "react-hook-form";
-import { EditingField, ResumeFormData } from "@/app/components/resume-data/resume-data";
-import { ResumeFormField, getFieldType } from "@/app/components/resume-form-field";
+import {
+  EditingField,
+  ResumeFormData,
+} from "@/app/components/resume-data/resume-data";
+import {
+  ResumeFormField,
+  getFieldType,
+} from "@/app/components/resume-form-field";
 import { ResumeImprovements } from "@/app/components/resume-suggestions/resume-suggestions";
 interface EditResumeFieldDialogProps {
   open: boolean;
@@ -25,26 +31,16 @@ const enum FIELDTYPE {
   SKILLS = "skills",
 }
 
-// Field type configurations
-const FIELD_CONFIGS = {
-  description: { type: FIELDTYPE.TEXTAREA },
-  summary: { type: FIELDTYPE.TEXTAREA },
-  skills: {
-    type: FIELDTYPE.SKILLS,
-    placeholder: "Enter skills separated by commas",
-  },
-} as const;
-
-// Helper Components
-// Utility functions
-
 function getOriginalValue(
   fieldName: string,
   path: string | undefined,
   initialData: Partial<ResumeFormData> | undefined,
 ): string | string[] | undefined {
   if (!path) {
-    return initialData?.[fieldName as keyof ResumeFormData] as string | string[] | undefined;
+    return initialData?.[fieldName as keyof ResumeFormData] as
+      | string
+      | string[]
+      | undefined;
   }
 
   // Split path into section (e.g. 'experience') and index (e.g. '0')
@@ -61,7 +57,6 @@ function getOriginalValue(
 
   return fieldValue as string | string[] | undefined;
 }
-
 
 // Main Component
 export function EditResumeFieldDialog({
@@ -108,7 +103,11 @@ export function EditResumeFieldDialog({
           <DialogTitle>{editingField.title}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={handleSubmit} className="space-y-4" autoComplete='off'>
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4"
+            autoComplete="off"
+          >
             {Object.entries(editingField.fields).map(([fieldName]) => {
               const fullPath = editingField.path
                 ? `${editingField.path}.${fieldName}`

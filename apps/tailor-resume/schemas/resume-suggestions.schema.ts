@@ -5,3 +5,7 @@ export const resumeSuggestionsSchema = z.object({
   areasToExpand: z.array(z.string()),
   exampleText: z.array(z.string()),
 });
+
+export type ResumeSuggestionsSchemaType = z.infer<
+  typeof resumeSuggestionsSchema
+>;

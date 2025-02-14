@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const resumeSchema = z.object({
+export const resumeDataSchema = z.object({
   personalInfo: z.object({
     fullName: z.string(),
     email: z.string(),
@@ -27,3 +27,5 @@ export const resumeSchema = z.object({
   ),
   skills: z.string().describe("Use markdown for the skills"),
 });
+
+export type ResumeDataSchemaType = z.infer<typeof resumeDataSchema>;

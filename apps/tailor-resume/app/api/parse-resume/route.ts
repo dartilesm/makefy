@@ -2,7 +2,7 @@ import { google } from "@ai-sdk/google";
 import { streamObject } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import PDFParser, { Output } from "pdf2json";
-import { resumeSchema } from "../../../schemas/resume-data.schema";
+import { resumeDataSchema } from "../../../schemas/resume-data.schema";
 
 export const maxDuration = 30;
 export const dynamic = "force-dynamic";

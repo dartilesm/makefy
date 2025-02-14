@@ -6,23 +6,31 @@ import { ResumeData } from "@/app/components/resume-data/resume-data";
 import { ResumeSuggestions } from "@/app/components/resume-suggestions/resume-suggestions";
 import { Textarea, Label, Button, toast } from "@makefy/ui";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { resumeSchema } from "@/schemas/resume-data.schema";
-import { resumeSuggestionsSchema } from "@/schemas/resume-suggestions.schema";
+import {
+  resumeDataSchema,
+  ResumeDataSchemaType,
+} from "@/schemas/resume-data.schema";
+import {
+  resumeSuggestionsSchema,
+  ResumeSuggestionsSchemaType,
+} from "@/schemas/resume-suggestions.schema";
 
 export default function ResumeEnhancer() {
   const [isLoading, setIsLoading] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
   const [rawContent, setRawContent] = useState<string | null>(null);
 
-  const { object: resumeData, submit: getStructuredData } = useObject({
-    api: "/api/get-structured-resume-data",
-    schema: resumeSchema,
-  });
+  const { object: resumeData, submit: getStructuredData } =
+    useObject<ResumeDataSchemaType>({
+      api: "/api/get-structured-resume-data",
+      schema: resumeDataSchema,
+    });
 
-  const { object: suggestions, submit: getSuggestions } = useObject({
-    api: "/api/resume-suggestion",
-    schema: resumeSuggestionsSchema,
-  });
+  const { object: suggestions, submit: getSuggestions } =
+    useObject<ResumeSuggestionsSchemaType>({
+      api: "/api/resume-suggestion",
+      schema: resumeSuggestionsSchema,
+    });
 
   const handlePDFUpload = async (file: File) => {
     try {

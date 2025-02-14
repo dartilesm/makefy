@@ -17,7 +17,10 @@ import { cn } from "@makefy/ui/lib/utils";
 import { UseFormReturn } from "react-hook-form";
 import { Loader2Icon, SparklesIcon } from "lucide-react";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { improvedFieldSchema } from "@/schemas/improved-file.schema";
+import {
+  improvedFieldSchema,
+  ImprovedFieldSchemaType,
+} from "@/schemas/improved-file.schema";
 import { ResumeFormData } from "@/app/components/resume-data/resume-data";
 import { ResumeImprovements } from "@/app/components/resume-suggestions/resume-suggestions";
 import { useEffect, useState } from "react";
@@ -25,14 +28,13 @@ import { useEffect, useState } from "react";
 export const enum FIELDTYPE {
   TEXT = "text",
   TEXTAREA = "textarea",
-  SKILLS = "skills",
 }
 
 export const FIELD_CONFIGS = {
   description: { type: FIELDTYPE.TEXTAREA },
   summary: { type: FIELDTYPE.TEXTAREA },
   skills: {
-    type: FIELDTYPE.SKILLS,
+    type: FIELDTYPE.TEXTAREA,
     placeholder: "Enter skills separated by commas",
   },
 } as const;
@@ -76,13 +78,13 @@ function FieldInput({
     object: improvedField,
     submit: improveField,
     isLoading,
-  } = useObject({
+  } = useObject<ImprovedFieldSchemaType>({
     api: "/api/improve-resume-field",
     schema: improvedFieldSchema,
   });
 
   useEffect(() => {
-    handleImprove();
+    // handleImprove();
   }, []);
 
   useEffect(() => {
@@ -189,6 +191,7 @@ function FieldInput({
             className="max-h-64 min-h-64 resize-none transition-[height] duration-300 ease-in-out [field-sizing:content]"
           />
         </div>
+        <span>{improvedField?.suggestionsApplied}</span>
         <div className="flex flex-wrap gap-2">
           <MagicButton
             size="sm"
