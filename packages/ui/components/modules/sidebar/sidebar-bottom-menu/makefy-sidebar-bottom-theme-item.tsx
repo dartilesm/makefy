@@ -11,7 +11,7 @@ import {
   Settings2Icon,
   SunIcon,
 } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 
 const ThemeIconsMap = {
   system: LaptopMinimalIcon,
@@ -20,7 +20,7 @@ const ThemeIconsMap = {
 };
 
 type MakefySidebarBottomMenuThemeItemProps = React.ComponentProps<"button"> & {
-  theme: string | undefined;
+  theme: keyof typeof ThemeIconsMap;
   onClick?: () => void;
   className?: string;
 };
@@ -29,9 +29,15 @@ export const MakefySidebarBottomMenuThemeItem = forwardRef<
   HTMLButtonElement,
   MakefySidebarBottomMenuThemeItemProps
 >(function MakefySidebarBottomMenuThemeItem(
-  { className, onClick = () => null, theme, ...props },
+  { className, onClick = () => null, theme = "system", ...props },
   ref,
 ) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const CurrentThemeIcon = ThemeIconsMap[theme as keyof typeof ThemeIconsMap];
 
   return (
@@ -43,8 +49,13 @@ export const MakefySidebarBottomMenuThemeItem = forwardRef<
       className={cn("flex items-center justify-between gap-2", className)}
     >
       <span className="flex items-center justify-start gap-2">
-        <CurrentThemeIcon className="h-4 w-4" />
-        Theme
+        {/* Using isClient to prevent hydration error */}
+        {isClient ? (
+          <>
+            <CurrentThemeIcon className="h-4 w-4" />
+            Theme
+          </>
+        ) : <LaptopMinimalIcon className="h-4 w-4" />}
       </span>
       <SidebarMenuAction asChild className="relative top-0">
         <span>
