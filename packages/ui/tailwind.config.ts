@@ -87,15 +87,15 @@ const config = {
         },
         "button-border-translation-keyframes": {
           "0%": {
-            "--x": "var(--button-border-min-translation-x, var(--x, 20px))",
+            "--x": "var(--button-border-min-translation-x, 20px)",
           },
           "32.8228%": { "--x": "var(--button-border-translation-x, 180px)" },
           "50%": { "--x": "var(--button-border-translation-x, 180px)" },
           "82.8228%": {
-            "--x": "var(--button-border-min-translation-x, var(--x, 20px))",
+            "--x": "var(--button-border-min-translation-x, 20px)",
           },
           "100%": {
-            "--x": "var(--button-border-min-translation-x, var(--x, 20px))",
+            "--x": "var(--button-border-min-translation-x, 20px)",
           },
         },
         "accordion-down": {

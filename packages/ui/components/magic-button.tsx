@@ -116,7 +116,7 @@ const MagicButton = React.forwardRef<HTMLButtonElement, MagicButtonProps>(
 
     function getButtonWidth() {
       const buttonWidth = buttonRef.current?.getBoundingClientRect().width || 0;
-      const buttonMinWidth = buttonWidth * 0.15;
+      const buttonMinWidth = Math.floor(buttonWidth * 0.15);
       setButtonSize({ width: buttonWidth - 20, minWidth: buttonMinWidth });
     }
 
