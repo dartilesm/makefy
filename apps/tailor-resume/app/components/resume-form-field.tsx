@@ -27,6 +27,7 @@ import { cn } from "@makefy/ui/lib/utils";
 import { SparklesIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps, useFormContext } from "react-hook-form";
+import { DeepPartial } from "ai";
 
 export const enum FIELDTYPE {
   TEXT = "text",
@@ -47,7 +48,7 @@ interface FieldBaseProps {
   fieldPath: string;
   field: ControllerRenderProps<ResumeDataSchemaType, any>;
   type: FIELDTYPE;
-  suggestions?: Partial<ResumeSuggestionsSchemaType>;
+  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
 type FieldInputProps = Omit<FieldBaseProps, "fieldPath">;

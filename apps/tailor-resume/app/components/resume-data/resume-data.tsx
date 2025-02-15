@@ -11,10 +11,11 @@ import { SummarySection } from "./summary-section";
 import { SkillsSection } from "./skills-section";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
+import { DeepPartial } from "ai";
 
 interface ResumeDataProps {
-  initialData?: Partial<ResumeDataSchemaType>;
-  suggestions?: Partial<ResumeSuggestionsSchemaType>;
+  initialData?: DeepPartial<ResumeDataSchemaType>;
+  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
 export interface EditingField {
@@ -33,7 +34,8 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
         fullName: initialData?.personalInfo?.fullName || "",
         email: initialData?.personalInfo?.email || "",
         phone: initialData?.personalInfo?.phone || "",
-        links: initialData?.personalInfo?.links || [],
+        location: initialData?.personalInfo?.location || "",
+        website: initialData?.personalInfo?.website || "",
       },
       summary: initialData?.summary || "",
       experience: initialData?.experience || [],
@@ -49,7 +51,8 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
           fullName: initialData.personalInfo?.fullName || "",
           email: initialData.personalInfo?.email || "",
           phone: initialData.personalInfo?.phone || "",
-          links: initialData.personalInfo?.links || [],
+          location: initialData.personalInfo?.location || "",
+          website: initialData.personalInfo?.website || "",
         },
         summary: initialData.summary || "",
         experience: initialData.experience || [],

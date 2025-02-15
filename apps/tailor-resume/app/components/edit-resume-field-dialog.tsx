@@ -1,3 +1,10 @@
+import { EditingField } from "@/app/components/resume-data/resume-data";
+import {
+  getFieldType,
+  ResumeFormField,
+} from "@/app/components/resume-form-field";
+import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import {
   Button,
   Dialog,
@@ -6,22 +13,16 @@ import {
   DialogTitle,
   Form,
 } from "@makefy/ui";
-import { useForm, UseFormReturn } from "react-hook-form";
-import { EditingField } from "@/app/components/resume-data/resume-data";
-import {
-  ResumeFormField,
-  getFieldType,
-} from "@/app/components/resume-form-field";
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
-import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
+import { DeepPartial } from "ai";
 import { useEffect } from "react";
+import { useForm, UseFormReturn } from "react-hook-form";
 
 interface EditResumeFieldDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   editingField: EditingField | null;
   form: UseFormReturn<ResumeDataSchemaType>;
-  suggestions?: Partial<ResumeSuggestionsSchemaType>;
+  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
 // Main Component

@@ -1,9 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@makefy/ui";
 import { SuggestionSection } from "./suggestion-section";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
-
+import { DeepPartial } from "ai";
 interface ResumeSuggestionsProps {
-  suggestions?: Partial<ResumeSuggestionsSchemaType>;
+  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
 export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
@@ -49,7 +49,7 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
             <SuggestionSection
               key={index}
               title={section.title}
-              items={section.items || []}
+              items={section?.items || []}
             />
           ))}
         </div>

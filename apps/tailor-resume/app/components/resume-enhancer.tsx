@@ -96,33 +96,37 @@ export default function ResumeEnhancer() {
     <div className="h-full max-h-full overflow-auto p-6">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div className="space-y-6 md:col-span-2">
-          {!rawContent ? (
+          {!rawContent && (
             <PDFUpload onUpload={handlePDFUpload} isLoading={isLoading} />
-          ) : (
+          )}
+
+          {resumeData && suggestions && (
             <ResumeData initialData={resumeData} suggestions={suggestions} />
           )}
         </div>
         <div className="space-y-6 md:col-span-1">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="jobDescription">Job Description</Label>
-              <Textarea
-                id="jobDescription"
-                value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
-                placeholder="Paste the job description here..."
-                className="min-h-[200px]"
-                disabled={isLoading}
-              />
+          {!rawContent && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="jobDescription">Job Description</Label>
+                <Textarea
+                  id="jobDescription"
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  placeholder="Paste the job description here..."
+                  className="min-h-[200px]"
+                  disabled={isLoading}
+                />
+                <Button
+                  onClick={handleGetSuggestions}
+                  disabled={isLoading || !rawContent}
+                  className="w-full"
+                >
+                  Get Suggestions
+                </Button>
+              </div>
             </div>
-            <Button
-              onClick={handleGetSuggestions}
-              disabled={isLoading || !rawContent}
-              className="w-full"
-            >
-              Get Suggestions
-            </Button>
-          </div>
+          )}
           {suggestions && <ResumeSuggestions suggestions={suggestions} />}
         </div>
       </div>

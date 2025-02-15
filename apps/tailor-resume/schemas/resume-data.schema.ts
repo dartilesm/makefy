@@ -5,7 +5,8 @@ export const resumeDataSchema = z.object({
     fullName: z.string(),
     email: z.string(),
     phone: z.string(),
-    links: z.array(z.string()),
+    location: z.string(),
+    website: z.string(),
   }),
   summary: z.string().describe("Use markdown for the summary"),
   experience: z.array(
