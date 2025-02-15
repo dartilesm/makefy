@@ -1,17 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@makefy/ui";
 import { SuggestionSection } from "./suggestion-section";
-
-export interface ResumeImprovements {
-  keyJobQualifications: string[];
-  skillsToHighlight: string[];
-  areasToExpand: string[];
-  keywordsToInclude: string[];
-  achievementsToQuantify: string[];
-  exampleText: string[];
-}
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 
 interface ResumeSuggestionsProps {
-  suggestions?: ResumeImprovements;
+  suggestions?: Partial<ResumeSuggestionsSchemaType>;
 }
 
 export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
@@ -25,16 +17,12 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
       items: suggestions.keyJobQualifications,
     },
     {
-      title: "Skills to Highlight",
-      items: suggestions.skillsToHighlight,
-    },
-    {
       title: "Areas to Expand",
       items: suggestions.areasToExpand,
     },
     {
-      title: "Keywords to Include",
-      items: suggestions.keywordsToInclude,
+      title: "Example Improvements",
+      items: suggestions.exampleText,
     },
     {
       title: "Example Improvements",
@@ -43,7 +31,7 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
   ];
 
   const availableSections = sections.filter(
-    (section) => section.items?.length > 0,
+    (section) => section.items && section.items.length > 0,
   );
 
   if (!availableSections.length) {
@@ -61,7 +49,7 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
             <SuggestionSection
               key={index}
               title={section.title}
-              items={section.items}
+              items={section.items || []}
             />
           ))}
         </div>

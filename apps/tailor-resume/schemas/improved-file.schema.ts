@@ -8,7 +8,12 @@ export const improvedFieldSchema = z.object({
   suggestionsApplied: z.string().describe(
     `It is the explanation of the suggestions that were applied to the field. 
       What was changed and why?
-      Etc.
+      If you want to add examples, use the ones provided in the value field.
+      It's a markdown text, make it short and to the point with bullet points and follow the structure:
+      - **Improvement 1**: [Improvement 1 explanation]
+      - **Improvement 2**: [Improvement 2 explanation]
+      - Etc.
+      Keep it short and concise.
       `,
   ),
   originalText: z.string().describe("It is the original field value"),

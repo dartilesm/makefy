@@ -13,8 +13,8 @@ import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 
 interface ResumeDataProps {
-  initialData?: ResumeDataSchemaType;
-  suggestions?: ResumeSuggestionsSchemaType;
+  initialData?: Partial<ResumeDataSchemaType>;
+  suggestions?: Partial<ResumeSuggestionsSchemaType>;
 }
 
 export interface EditingField {
@@ -93,7 +93,6 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
         onOpenChange={(open) => !open && setEditingField(null)}
         editingField={editingField}
         form={form}
-        initialData={initialData}
         suggestions={suggestions}
       />
     </>

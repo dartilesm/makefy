@@ -1,29 +1,32 @@
 import {
-  ImprovedFieldSchemaType,
   improvedFieldSchema,
+  ImprovedFieldSchemaType,
 } from "@/schemas/improved-file.schema";
+import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   Input,
   MagicButton,
+  MarkdownViewer,
   Skeleton,
   Textarea,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
-import { Loader2Icon, SparklesIcon } from "lucide-react";
+import { SparklesIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import {
-  ControllerRenderProps,
-  FieldValues,
-  useFormContext,
-  UseFormReturn,
-} from "react-hook-form";
-import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+import { ControllerRenderProps, useFormContext } from "react-hook-form";
 
 export const enum FIELDTYPE {
   TEXT = "text",
@@ -44,7 +47,7 @@ interface FieldBaseProps {
   fieldPath: string;
   field: ControllerRenderProps<ResumeDataSchemaType, any>;
   type: FIELDTYPE;
-  suggestions?: ResumeSuggestionsSchemaType;
+  suggestions?: Partial<ResumeSuggestionsSchemaType>;
 }
 
 type FieldInputProps = Omit<FieldBaseProps, "fieldPath">;
@@ -56,6 +59,29 @@ const enum TEXT_STYLE {
   FORMAL = "formal",
   CASUAL = "casual",
 }
+
+const AI_FORMAT_STYLES = [
+  {
+    label: "Rewrite it",
+    loadingLabel: "Rewriting...",
+    style: TEXT_STYLE.REWRITE,
+  },
+  {
+    label: "Shorten it",
+    loadingLabel: "Shortening...",
+    style: TEXT_STYLE.SHORTEN,
+  },
+  {
+    label: "Make it formal",
+    loadingLabel: "Making it formal...",
+    style: TEXT_STYLE.FORMAL,
+  },
+  {
+    label: "Make it casual",
+    loadingLabel: "Making it casual...",
+    style: TEXT_STYLE.CASUAL,
+  },
+];
 
 function FieldInput({ type, field, fieldName, suggestions }: FieldInputProps) {
   const [loadingStates, setLoadingStates] = useState<
@@ -107,14 +133,6 @@ function FieldInput({ type, field, fieldName, suggestions }: FieldInputProps) {
     if (type === FIELDTYPE.TEXTAREA) {
       field.onChange(value);
     }
-    if (type === FIELDTYPE.TEXTAREA) {
-      field.onChange(
-        value
-          .split(",")
-          .map((skill) => skill.trim())
-          .filter(Boolean),
-      );
-    }
   }
 
   const currentLoadingState = Object.keys(loadingStates).find(
@@ -159,76 +177,52 @@ function FieldInput({ type, field, fieldName, suggestions }: FieldInputProps) {
 
           <Textarea
             {...field}
-            value={improvedField?.value || field.value}
             className="max-h-64 min-h-64 resize-none transition-[height] duration-300 ease-in-out [field-sizing:content]"
           />
         </div>
-        <span>{improvedField?.suggestionsApplied}</span>
+        {improvedField?.suggestionsApplied && !isLoading && (
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem
+              value="suggestions"
+              className="rounded-md border-none bg-gradient-to-r from-violet-50 to-pink-50 dark:from-violet-950/50 dark:to-pink-950/50"
+            >
+              <AccordionTrigger className="flex gap-2 px-4 py-2 text-sm font-medium text-violet-700 hover:no-underline dark:text-violet-300">
+                <div className="flex items-center gap-2">
+                  <SparklesIcon className="h-4 w-4 shrink-0 fill-violet-500 dark:fill-violet-400" />
+                  <span>AI improvements</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-2">
+                <MarkdownViewer
+                  content={improvedField.suggestionsApplied}
+                  className="text-sm dark:text-gray-300"
+                  componentsClassName={{
+                    ul: "space-y-2",
+                    p: "mb-2",
+                    li: "leading-relaxed",
+                  }}
+                />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
         <div className="flex flex-wrap gap-2">
-          <MagicButton
-            size="sm"
-            onClick={() => handleImprove(TEXT_STYLE.REWRITE)}
-            className="flex gap-2"
-            theme="yellow"
-            animate={loadingStates[TEXT_STYLE.REWRITE]}
-            disabled={currentLoadingState !== TEXT_STYLE.REWRITE && isLoading}
-            type="button"
-          >
-            <SparklesIcon className="h-4 w-4 fill-yellow-600 stroke-yellow-600" />
-            <span>
-              {loadingStates[TEXT_STYLE.REWRITE]
-                ? "Rewriting..."
-                : "Rewrite it"}
-            </span>
-          </MagicButton>
-          <MagicButton
-            size="sm"
-            onClick={() => handleImprove(TEXT_STYLE.SHORTEN)}
-            className="flex gap-2"
-            theme="yellow"
-            animate={loadingStates[TEXT_STYLE.SHORTEN]}
-            disabled={currentLoadingState !== TEXT_STYLE.SHORTEN && isLoading}
-            type="button"
-          >
-            <SparklesIcon className="h-4 w-4 fill-yellow-600 stroke-yellow-600" />
-            <span>
-              {loadingStates[TEXT_STYLE.SHORTEN]
-                ? "Shortening..."
-                : "Shorten it"}
-            </span>
-          </MagicButton>
-          <MagicButton
-            size="sm"
-            onClick={() => handleImprove(TEXT_STYLE.FORMAL)}
-            className="flex gap-2"
-            theme="yellow"
-            animate={loadingStates[TEXT_STYLE.FORMAL]}
-            disabled={currentLoadingState !== TEXT_STYLE.FORMAL && isLoading}
-            type="button"
-          >
-            <SparklesIcon className="h-4 w-4 fill-yellow-600 stroke-yellow-600" />
-            <span>
-              {loadingStates[TEXT_STYLE.FORMAL]
-                ? "Making it formal..."
-                : "Make it formal"}
-            </span>
-          </MagicButton>
-          <MagicButton
-            size="sm"
-            onClick={() => handleImprove(TEXT_STYLE.CASUAL)}
-            className="flex gap-2"
-            theme="yellow"
-            animate={loadingStates[TEXT_STYLE.CASUAL]}
-            disabled={currentLoadingState !== TEXT_STYLE.CASUAL && isLoading}
-            type="button"
-          >
-            <SparklesIcon className="h-4 w-4 fill-yellow-600 stroke-yellow-600" />
-            <span>
-              {loadingStates[TEXT_STYLE.CASUAL]
-                ? "Making it casual..."
-                : "Make it casual"}
-            </span>
-          </MagicButton>
+          {AI_FORMAT_STYLES.map(({ label, loadingLabel, style }) => {
+            return (
+              <MagicButton
+                size="sm"
+                onClick={() => handleImprove(style)}
+                className="flex gap-2"
+                theme="yellow"
+                animate={loadingStates[style]}
+                disabled={currentLoadingState !== style && isLoading}
+                type="button"
+              >
+                <SparklesIcon className="h-4 w-4 fill-yellow-600 stroke-yellow-600" />
+                <span>{loadingStates[style] ? loadingLabel : label}</span>
+              </MagicButton>
+            );
+          })}
         </div>
       </div>
     );
