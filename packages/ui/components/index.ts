@@ -38,3 +38,4 @@ export * from "./modules";
 export * from "./tag";
 export * from "./markdown-viewer";
 export * from "./magic-button";
+export * from "./accordion";
