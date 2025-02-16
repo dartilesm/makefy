@@ -15,10 +15,9 @@ import {
 } from "@makefy/ui";
 import { DeepPartial } from "ai";
 import { useEffect } from "react";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { DeepMap, useForm, UseFormReturn } from "react-hook-form";
 
 interface EditResumeFieldDialogProps {
-  open: boolean;
   onOpenChange: (open: boolean) => void;
   editingField: EditingField | null;
   form: UseFormReturn<ResumeDataSchemaType>;
@@ -27,7 +26,6 @@ interface EditResumeFieldDialogProps {
 
 // Main Component
 export function EditResumeFieldDialog({
-  open,
   onOpenChange,
   editingField,
   form: parentForm,
@@ -38,47 +36,51 @@ export function EditResumeFieldDialog({
     defaultValues: parentForm.getValues(),
   });
 
-  const handleCancel = () => {
+  function handleCancel() {
     if (!editingField) return;
     onOpenChange(false);
-  };
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (!editingField) return;
 
-    // On submit, copy values from dialog form to parent form
-    Object.entries(editingField.fields).forEach(([fieldName]) => {
+    copyFormValues(dialogForm, parentForm);
+
+    onOpenChange(false);
+  }
+
+  // Initialize dialog form values when dialog opens
+  useEffect(fillDialogFormValues, [editingField]);
+
+  function fillDialogFormValues() {
+    copyFormValues(parentForm, dialogForm);
+  }
+
+  function copyFormValues(
+    originalForm: UseFormReturn<ResumeDataSchemaType>,
+    targetForm: UseFormReturn<ResumeDataSchemaType>,
+  ) {
+    if (!editingField) return;
+    const fieldNames = Object.keys(editingField?.fields || {});
+
+    fieldNames.forEach((fieldName) => {
       const path = editingField.path
         ? `${editingField.path}.${fieldName}`
         : fieldName;
 
-      const newValue = dialogForm.getValues(path as any);
-      parentForm.setValue(path as any, newValue);
+      const currentValue = originalForm.getValues(
+        path as keyof ResumeDataSchemaType,
+      );
+      targetForm.setValue(path as keyof ResumeDataSchemaType, currentValue);
     });
-
-    onOpenChange(false);
-  };
-
-  // Initialize dialog form values when dialog opens
-  useEffect(() => {
-    if (open && editingField) {
-      Object.entries(editingField.fields).forEach(([fieldName]) => {
-        const path = editingField.path
-          ? `${editingField.path}.${fieldName}`
-          : fieldName;
-
-        const currentValue = parentForm.getValues(path as any);
-        dialogForm.setValue(path as any, currentValue);
-      });
-    }
-  }, [open, editingField]);
+  }
 
   if (!editingField) return null;
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>{editingField.title}</DialogTitle>

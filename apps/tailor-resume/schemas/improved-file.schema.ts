@@ -14,6 +14,7 @@ export const improvedFieldSchema = z.object({
       - **Improvement 2**: [Improvement 2 explanation]
       - Etc.
       Keep it short and concise.
+      Specify which areasToExpand and keyJobQualifications were expanded.
       `,
   ),
   originalText: z.string().describe("It is the original field value"),

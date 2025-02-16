@@ -15,11 +15,51 @@ import {
   ResumeSuggestionsSchemaType,
 } from "@/schemas/resume-suggestions.schema";
 
+// Separate component for job description input
+function JobDescriptionSection({
+  jobDescription,
+  setJobDescription,
+  onGetSuggestions,
+  isLoading,
+  hasContent,
+}: {
+  jobDescription: string;
+  setJobDescription: (value: string) => void;
+  onGetSuggestions: () => Promise<void>;
+  isLoading: boolean;
+  hasContent: boolean;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="jobDescription">Job Description</Label>
+        <Textarea
+          id="jobDescription"
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+          placeholder="Paste the job description here..."
+          className="min-h-[200px]"
+          disabled={isLoading}
+        />
+        <Button
+          onClick={onGetSuggestions}
+          disabled={isLoading || !hasContent}
+          className="w-full"
+        >
+          Get Suggestions
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export default function ResumeEnhancer() {
+  // State management
   const [isLoading, setIsLoading] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
   const [rawContent, setRawContent] = useState<string | null>(null);
 
+  // AI object handlers
   const { object: resumeData, submit: getStructuredData } =
     useObject<ResumeDataSchemaType>({
       api: "/api/get-structured-resume-data",
@@ -32,22 +72,24 @@ export default function ResumeEnhancer() {
       schema: resumeSuggestionsSchema,
     });
 
-  const handlePDFUpload = async (file: File) => {
+  // PDF upload handler
+  async function handlePDFUpload(file: File) {
     try {
       setIsLoading(true);
       const formData = new FormData();
       formData.append("file", file);
 
-      // First, get the raw content from the PDF
       const response = await fetch("/api/parse-resume", {
         method: "POST",
         body: formData,
       });
 
-      if (!response.ok) throw new Error("Failed to parse PDF");
-      const { rawContent } = await response.json();
-      setRawContent(rawContent);
-      setIsLoading(false);
+      if (!response.ok) {
+        throw new Error("Failed to parse PDF");
+      }
+
+      const { rawContent: content } = await response.json();
+      setRawContent(content);
     } catch (error) {
       console.error("Error processing PDF:", error);
       toast({
@@ -55,11 +97,29 @@ export default function ResumeEnhancer() {
         description: "Failed to process the PDF file. Please try again.",
         variant: "destructive",
       });
+    } finally {
       setIsLoading(false);
     }
-  };
+  }
 
-  const handleGetSuggestions = async () => {
+  // Get suggestions handler
+  async function handleGetSuggestions() {
+    if (!validateInput()) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      await processResume();
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // Helper functions for better organization
+  function validateInput() {
     if (!jobDescription.trim() || !rawContent) {
       toast({
         title: "Error",
@@ -68,29 +128,28 @@ export default function ResumeEnhancer() {
           : "Please upload a resume first",
         variant: "destructive",
       });
-      return;
+      return false;
     }
+    return true;
+  }
 
-    try {
-      setIsLoading(true);
-      // First get structured data
-      await getStructuredData({ rawContent });
-      // Then get suggestions
-      await getSuggestions({
-        resumeText: rawContent,
-        jobDescription,
-      });
-    } catch (error) {
-      console.error("Error getting suggestions:", error);
-      toast({
-        title: "Error",
-        description: "Failed to get suggestions",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  async function processResume() {
+    if (!rawContent) return;
+    await getStructuredData({ rawContent });
+    await getSuggestions({
+      resumeText: rawContent,
+      jobDescription,
+    });
+  }
+
+  function handleError(error: unknown) {
+    console.error("Error getting suggestions:", error);
+    toast({
+      title: "Error",
+      description: "Failed to get suggestions",
+      variant: "destructive",
+    });
+  }
 
   return (
     <div className="h-full max-h-full overflow-auto p-6">
@@ -104,28 +163,16 @@ export default function ResumeEnhancer() {
             <ResumeData initialData={resumeData} suggestions={suggestions} />
           )}
         </div>
+
         <div className="space-y-6 md:col-span-1">
-          {!rawContent && (
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="jobDescription">Job Description</Label>
-                <Textarea
-                  id="jobDescription"
-                  value={jobDescription}
-                  onChange={(e) => setJobDescription(e.target.value)}
-                  placeholder="Paste the job description here..."
-                  className="min-h-[200px]"
-                  disabled={isLoading}
-                />
-                <Button
-                  onClick={handleGetSuggestions}
-                  disabled={isLoading || !rawContent}
-                  className="w-full"
-                >
-                  Get Suggestions
-                </Button>
-              </div>
-            </div>
+          {!resumeData && !suggestions && (
+            <JobDescriptionSection
+              jobDescription={jobDescription}
+              setJobDescription={setJobDescription}
+              onGetSuggestions={handleGetSuggestions}
+              isLoading={isLoading}
+              hasContent={!!rawContent}
+            />
           )}
           {suggestions && <ResumeSuggestions suggestions={suggestions} />}
         </div>

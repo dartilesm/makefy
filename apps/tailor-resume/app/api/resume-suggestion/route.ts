@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Stream improvement suggestions based on job description
-    /*     const result = streamObject({
+    /* const result = streamObject({
       model: google("gemini-1.5-flash-latest"),
       system: `You are a career advisor. You will analyze a resume against a job description and provide specific suggestions to help the candidate optimize their resume for the role.`,
       prompt: `Analyze this resume against the job description and provide specific suggestions for improvement.
@@ -26,37 +26,16 @@ export async function POST(request: NextRequest) {
         Job Description: ${jobDescription}`,
       schema: resumeSuggestionsSchema,
       experimental_transform: smoothStream(),
-    }); */
+    });
 
-    /* return result.toTextStreamResponse(); */
+    return result.toTextStreamResponse(); */
     return NextResponse.json({
-      areasToExpand: [
-        "Highlight NestJS/Express.js experience: The job description emphasizes experience with NestJS or Express.js.  While the resume mentions extensive frontend experience, it lacks explicit mention of backend frameworks like NestJS or Express.js.  Add a section detailing projects where these technologies were used, even if it's a smaller part of the project. Quantify achievements whenever possible (e.g., 'Improved API response time by 15% using NestJS').",
-        "Showcase Full-Stack Capabilities: The role is 60% frontend, 40% backend. The resume heavily focuses on frontend skills.  Re-organize the resume to better balance frontend and backend achievements.  Create a separate section for backend skills and projects, highlighting experience with relevant technologies like Node.js, GraphQL, PostgreSQL, CQRS, and event sourcing.  If limited backend experience exists, focus on transferable skills and a willingness to learn.",
-        "Quantify Achievements More Effectively: The resume lists many accomplishments, but many lack quantifiable results.  Instead of 'Improved app load speed,' use 'Improved app load speed by 25% as measured by [tool/metric].'  This makes the impact of the work much clearer.",
-        "Address Specific Job Requirements: The job description lists specific requirements like Docker, REST API consumption, and good software engineering fundamentals.  Explicitly mention experience with these in the skills section and provide examples in the work experience section.  For example, 'Developed and deployed microservices using Docker and Kubernetes, resulting in a 20% reduction in deployment time.'",
-        "Improve English Language Proficiency: The job description requires good spoken and written English.  Ensure the resume is free of grammatical errors and uses strong, concise language.  Consider having a native English speaker review it.",
-        "Tailor to Teramind's Culture:  The job description highlights Teramind's culture of innovation and collaboration.  Incorporate keywords and phrases that reflect these values.  For example, 'Collaborated with cross-functional teams to deliver high-quality software solutions.'",
-        "Add a Summary/Profile Section:  Start with a brief summary highlighting key skills and experience relevant to the job description.  This will immediately grab the recruiter's attention.",
-        "Refine Skills Section: The skills section is quite long and somewhat disorganized.  Categorize skills (e.g., Frontend Frameworks, Backend Frameworks, Databases, Testing, etc.) for better readability.  Remove less relevant skills unless they directly support the job requirements.",
-      ],
-      exampleText: [
-        "**Summary:** Highly skilled and results-oriented Full-Stack Developer with 8+ years of experience building and optimizing high-performance web applications. Proven ability to translate UI/UX designs into clean, efficient code using React, Next.js, Node.js, and NestJS.  Experienced in implementing scalable solutions using GraphQL, PostgreSQL, and Docker.  Passionate about delivering exceptional user experiences and collaborating effectively within agile teams.",
-        "**Backend Experience:**\n* Developed and maintained RESTful APIs using NestJS and Node.js for [Project Name], resulting in a 15% improvement in API response time.\n* Implemented a robust database schema using PostgreSQL for [Project Name], improving data retrieval efficiency by 20%.\n* Utilized Docker for containerization and deployment, reducing deployment time by 30%.",
-        "**Skills:**\nFrontend: React, Next.js, Astro, TypeScript, Redux, Zustand, React Context, Tailwind CSS, Styled Components\nBackend: Node.js, NestJS, Express.js, GraphQL, PostgreSQL, Docker, CQRS, Event Sourcing\nDatabases: PostgreSQL, MySQL\nTesting: Jest, React Testing Library, Cypress\nOther: REST APIs, Agile methodologies, Git",
-      ],
-      keyJobQualifications: [
-        "6+ years of experience in development",
-        "4+ years of experience with React (Next.js), Nest.js (or Express.js), GraphQL, Docker",
-        "Extensive programming experience in modern HTML, CSS, and JavaScript",
-        "Experience consuming REST APIs and building scalable solutions",
-        "Good software engineering fundamentals (data structures, OOP, algorithms, etc.)",
-        "Excellent interpersonal skills",
-        "Highly organized with precise attention to detail",
-        "Ability to work well with others in a fast-paced, dynamic environment",
-        "Desire to learn and adapt to new requirements",
-        "Good spoken and written English",
-      ],
+      areasToExpand:
+        "- **Quantifiable achievements**: While the resume lists several accomplishments, it would benefit from more specific quantifiable results.  For example, instead of 'reducing page load times by 25%', specify the exact improvement (e.g., 'reduced page load time from 5 seconds to 3.75 seconds').  This adds credibility and showcases the impact of the candidate's work.\n- **Project details**:  Expand on the projects mentioned. Briefly describe the project's goals, challenges, and technologies used.  For instance, for the Shell Recharge project, mention the scale of the application (number of users, transactions, etc.).\n- **Leadership and teamwork**: Highlight instances where the candidate demonstrated leadership skills, mentored team members, or collaborated effectively.  The resume mentions mentorship, but adding specific examples would strengthen this aspect.\n- **Problem-solving skills**:  Showcase the candidate's ability to solve complex problems.  Describe situations where they identified and resolved critical issues, highlighting their analytical and problem-solving abilities.\n- **Keywords**: Incorporate relevant keywords from the job description to improve the resume's visibility to Applicant Tracking Systems (ATS).  Analyze the job description carefully and identify key skills and technologies mentioned.  Then, strategically integrate those keywords throughout the resume.\n- **Modernize the format**: The resume's formatting could be improved for better readability and visual appeal. Consider using a more modern and visually appealing template.  Ensure consistent formatting and use of capitalization.\n- **Skills section**: The skills section is a bit generic.  Categorize the skills (e.g., 'Frontend Frameworks', 'Testing', 'State Management') and use a consistent format.  Consider adding a proficiency level (e.g., Expert, Proficient, Familiar) to each skill.\n- **Portfolio**: Add a link to a portfolio showcasing the candidate's work.  This allows recruiters to see tangible examples of their skills and projects.",
+      exampleText:
+        "- **Quantifiable achievements example**:  Instead of 'reducing page load times by 25%', write 'Reduced page load time from 5 seconds to 3.75 seconds for Vizio and Inscape projects, resulting in a 25% improvement and a 10% increase in user engagement.'\n- **Project details example**: For the Shell Recharge project, add: 'Engineered a high-performance Next.js and Apollo (GraphQL) application for Shell Recharge (Volta Charging), serving over 10,000 users daily.  Successfully implemented caching improvements and enhanced usability, resulting in a 40% reduction in load time (from 3 seconds to 1.8 seconds).  Overcame challenges related to integrating with existing legacy systems and ensuring data consistency across multiple platforms.'\n- **Leadership and teamwork example**: 'Mentored junior developers on best practices in React development, leading to a 15% reduction in bug reports and improved code quality.'\n- **Problem-solving example**: 'Identified and resolved a critical performance bottleneck in the e-commerce platform, reducing server response time by 20% and improving overall system stability.'\n- **Keywords example**: If the job description mentions 'Agile methodologies', add a sentence like 'Successfully implemented Agile methodologies in multiple projects, contributing to efficient project delivery and improved team collaboration.'",
+      keyJobQualifications:
+        "- Proficiency in React, Next.js, and other modern frontend frameworks\n- Experience with server-side rendering and performance optimization\n- Strong understanding of state management libraries\n- Experience with testing frameworks\n- Ability to build high-performance, scalable web applications\n- Experience with GraphQL (if applicable based on the job description)\n- Demonstrated problem-solving and analytical skills\n- Leadership and teamwork skills",
     });
   } catch (error) {
     console.error("Error generating suggestions:", error);

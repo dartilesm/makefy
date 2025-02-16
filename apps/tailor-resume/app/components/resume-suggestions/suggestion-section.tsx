@@ -3,25 +3,26 @@ import { DeepPartial } from "ai";
 
 interface SuggestionSectionProps {
   title: string;
-  items: string[];
+  content: string;
 }
 
 export function SuggestionSection({
   title,
-  items,
+  content,
 }: DeepPartial<SuggestionSectionProps>) {
-  if (!items?.length) return null;
+  if (!content) return null;
 
   return (
     <div>
-      <h3 className="mb-2 font-medium">{title}</h3>
-      <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-sm">
-        {items.map((item, i) => (
-          <li key={i}>
-            <MarkdownViewer variant="muted" size="sm" content={item!} />
-          </li>
-        ))}
-      </ul>
+      <h3 className="mb-2 font-medium leading-snug">{title}</h3>
+      <MarkdownViewer
+        size="sm"
+        componentsClassName={{
+          p: "leading-tight text-muted-foreground",
+          li: "m-0 leading-snug text-muted-foreground",
+        }}
+        content={content}
+      />
     </div>
   );
 }

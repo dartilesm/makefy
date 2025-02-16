@@ -91,13 +91,14 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
         </div>
       </Form>
 
-      <EditResumeFieldDialog
-        open={!!editingField}
-        onOpenChange={(open) => !open && setEditingField(null)}
-        editingField={editingField}
-        form={form}
-        suggestions={suggestions}
-      />
+      {!!editingField && (
+        <EditResumeFieldDialog
+          onOpenChange={(open) => !open && setEditingField(null)}
+          editingField={editingField}
+          form={form}
+          suggestions={suggestions}
+        />
+      )}
     </>
   );
 }

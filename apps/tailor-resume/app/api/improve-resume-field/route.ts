@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
             
             Rules:
             1. Maintain the core facts and experiences
-            2. Make subtle improvements based on the suggestions
+            2. Make subtle improvements based on the suggestions (focus mostly on the areasToExpand and keyJobQualifications)
             3. Keep the professional tone
             4. Focus on clarity and impact
             5. Quantify achievements where possible

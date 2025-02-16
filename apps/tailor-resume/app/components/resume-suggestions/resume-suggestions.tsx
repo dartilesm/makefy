@@ -13,26 +13,20 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
 
   const sections = [
     {
-      title: "Key Job Qualifications",
-      items: suggestions.keyJobQualifications,
+      title: "Required Skills & Experience",
+      content: suggestions.keyJobQualifications,
     },
     {
-      title: "Areas to Expand",
-      items: suggestions.areasToExpand,
+      title: "Enhancement Opportunities",
+      content: suggestions.areasToExpand,
     },
     {
-      title: "Example Improvements",
-      items: suggestions.exampleText,
-    },
-    {
-      title: "Example Improvements",
-      items: suggestions.exampleText,
+      title: "Examples to get you started",
+      content: suggestions.exampleText,
     },
   ];
 
-  const availableSections = sections.filter(
-    (section) => section.items && section.items.length > 0,
-  );
+  const availableSections = sections.filter((section) => section.content);
 
   if (!availableSections.length) {
     return null;
@@ -41,7 +35,9 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Improvement Suggestions</CardTitle>
+        <CardTitle className="text-lg font-semibold">
+          Resume Optimization Guide
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
@@ -49,7 +45,7 @@ export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
             <SuggestionSection
               key={index}
               title={section.title}
-              items={section?.items || []}
+              content={section.content}
             />
           ))}
         </div>
