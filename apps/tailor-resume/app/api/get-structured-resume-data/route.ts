@@ -9,9 +9,9 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
-    const { rawContent } = await request.json();
+    const { resumeRawContent } = await request.json();
 
-    if (!rawContent) {
+    if (!resumeRawContent) {
       return NextResponse.json(
         { error: "Resume content is required" },
         { status: 400 },
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       model: google("gemini-2.0-flash-001"),
       system:
         "You are a resume parser. Extract structured information from the resume. Fix any spelling errors and normalize whitespace in the extracted text. Ensure consistent spacing and formatting in the output.",
-      prompt: `Parse this resume into a structured format: ${rawContent}`,
+      prompt: `Parse this resume into a structured format: ${resumeRawContent}`,
       schema: resumeSchema,
       experimental_transform: smoothStream(),
     }); */

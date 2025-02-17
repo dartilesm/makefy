@@ -5,7 +5,7 @@ import "@makefy/ui/globals.css";
 import { cn } from "@makefy/ui/lib/utils";
 import { ThemeProvider } from "./components/theme-provider";
 import { AppSidebar } from "./components/app-sidebar";
-import { MakefySidebarWrapper, SidebarProvider } from "@makefy/ui";
+import { MakefySidebarWrapper, Toaster } from "@makefy/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,6 +48,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster />
           <MakefySidebarWrapper sidebar={<AppSidebar />} direction="col">
             {children}
           </MakefySidebarWrapper>
