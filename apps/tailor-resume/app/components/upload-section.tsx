@@ -9,8 +9,14 @@ import {
   FileIcon,
   FileTextIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnalyzingScreen } from "@/app/components/analyzing-screen";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
+import { resumeSuggestionsSchema } from "@/schemas/resume-suggestions.schema";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
+import { DeepPartial } from "ai";
+import { resumeDataSchema } from "@/schemas/resume-data.schema";
+import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 
 export type ProfileData = {
   resumeRawContent: string | null;
@@ -19,21 +25,52 @@ export type ProfileData = {
 };
 
 interface UploadSectionProps {
-  onGetSuggestions: ({
-    resumeRawContent,
-    jobTitle,
-    jobDescription,
-  }: ProfileData) => void;
+  onComplete: ({
+    resumeData,
+    suggestions,
+  }: {
+    resumeData: DeepPartial<ResumeDataSchemaType>;
+    suggestions: DeepPartial<ResumeSuggestionsSchemaType>;
+  }) => void;
 }
 
-export function UploadSection({ onGetSuggestions }: UploadSectionProps) {
+export function UploadSection({ onComplete }: UploadSectionProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData>({
     resumeRawContent: null,
     jobTitle: "",
     jobDescription: "",
   });
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const {
+    object: resumeData,
+    submit: getStructuredData,
+    isLoading: isResumeLoading,
+  } = useObject<ResumeDataSchemaType>({
+    api: "/api/get-structured-resume-data",
+    schema: resumeDataSchema,
+    onFinish: handleGetSuggestions,
+  });
+
+  const {
+    object: suggestions,
+    submit: getSuggestions,
+    isLoading: isSuggestionsLoading,
+  } = useObject<ResumeSuggestionsSchemaType>({
+    api: "/api/resume-suggestion",
+    schema: resumeSuggestionsSchema,
+  });
+
+  useEffect(() => {
+    if (
+      resumeData &&
+      suggestions &&
+      !isSuggestionsLoading &&
+      !isResumeLoading
+    ) {
+      handleComplete({ resumeData, suggestions });
+    }
+  }, [resumeData, suggestions, isSuggestionsLoading, isResumeLoading]);
 
   // PDF upload handler
   async function handlePDFUpload(file: File) {
@@ -67,12 +104,8 @@ export function UploadSection({ onGetSuggestions }: UploadSectionProps) {
     }
   }
 
-  async function handleGetSuggestions() {
-    if (
-      !profileData.resumeRawContent ||
-      !profileData.jobTitle ||
-      !profileData.jobDescription
-    ) {
+  async function handleResumeStructuredData() {
+    if (!profileData.resumeRawContent) {
       toast({
         title: "Error",
         description: "Please fill in all the fields",
@@ -81,19 +114,46 @@ export function UploadSection({ onGetSuggestions }: UploadSectionProps) {
       return;
     }
 
-    setIsLoading(true);
-    // Show analyzing screen while processing
-    setIsAnalyzing(true);
+    await getStructuredData({
+      resumeRawContent: profileData.resumeRawContent,
+    });
   }
 
-  function handleAnalysisComplete() {
-    onGetSuggestions(profileData);
-    setIsLoading(false);
-    setIsAnalyzing(false);
+  async function handleGetSuggestions({
+    object: resumeData,
+  }: {
+    object?: DeepPartial<ResumeDataSchemaType>;
+  }) {
+    if (!resumeData || !profileData.jobTitle || !profileData.jobDescription) {
+      toast({
+        title: "Error",
+        description: "Please fill in all the fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    await getSuggestions({
+      resumeRawContent: resumeData,
+      jobTitle: profileData.jobTitle,
+      jobDescription: profileData.jobDescription,
+    });
   }
 
-  if (isAnalyzing) {
-    return <AnalyzingScreen onComplete={handleAnalysisComplete} />;
+  function handleComplete({
+    resumeData,
+    suggestions,
+  }: {
+    resumeData: DeepPartial<ResumeDataSchemaType>;
+    suggestions: DeepPartial<ResumeSuggestionsSchemaType>;
+  }) {
+    onComplete({ resumeData, suggestions });
+  }
+
+  if (isSuggestionsLoading || isResumeLoading) {
+    return (
+      <AnalyzingScreen suggestions={suggestions} resumeData={resumeData} />
+    );
   }
 
   return (
@@ -211,7 +271,7 @@ export function UploadSection({ onGetSuggestions }: UploadSectionProps) {
 
       <div className="flex w-full flex-col items-end">
         <Button
-          onClick={handleGetSuggestions}
+          onClick={handleResumeStructuredData}
           disabled={
             isLoading ||
             !profileData.resumeRawContent ||
