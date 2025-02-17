@@ -2,7 +2,7 @@
 
 import { ResumeData } from "@/app/components/resume-data/resume-data";
 import { ResumeSuggestions } from "@/app/components/resume-suggestions/resume-suggestions";
-import { UploadSection } from "@/app/components/upload-section";
+import { ResumeAnalysisForm } from "@/app/components/resume-analysis-form";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { DeepPartial } from "ai";
@@ -28,7 +28,7 @@ export default function ResumeEnhancer() {
   return (
     <div className="h-full space-y-8 overflow-y-auto p-6">
       {!resumeData && !suggestions && (
-        <UploadSection onComplete={handleComplete} />
+        <ResumeAnalysisForm onComplete={handleComplete} />
       )}
 
       {resumeData && suggestions && (
