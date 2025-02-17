@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       model: google("gemini-1.5-flash-latest"),
       system: `You are a career advisor. You will analyze a resume against a job description and provide specific suggestions to help the candidate optimize their resume for the role.`,
       prompt: `Analyze this resume against the job description and provide specific suggestions for improvement.
-        Resume: ${resumeText}
+        Resume: ${JSON.stringify(resumeRawContent)}
         Job Title: ${jobTitle}
         Job Description: ${jobDescription}`,
       schema: resumeSuggestionsSchema,

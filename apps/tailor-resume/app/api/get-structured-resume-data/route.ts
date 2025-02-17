@@ -24,9 +24,10 @@ export async function POST(request: NextRequest) {
       system:
         "You are a resume parser. Extract structured information from the resume. Fix any spelling errors and normalize whitespace in the extracted text. Ensure consistent spacing and formatting in the output.",
       prompt: `Parse this resume into a structured format: ${resumeRawContent}`,
-      schema: resumeSchema,
+      schema: resumeDataSchema,
       experimental_transform: smoothStream(),
-    }); */
+    });
+    return result.toTextStreamResponse(); */
 
     return NextResponse.json({
       education: [
@@ -98,7 +99,6 @@ export async function POST(request: NextRequest) {
       summary:
         "Frontend Developer with over 8 years of experience in modern technologies like React, Next.js, Astro, and web animations. Proficient in building web applications, optimizing performance through server-side rendering, caching improvements, and implementing scalable solutions. Experienced in improving system efficiency, boosting user retention with interactive animations, and enhancing usability. Skilled in TypeScript, state management libraries (Redux, Zustand, React Context), and testing tools (Jest, React Testing Library, Cypress).",
     });
-    /* return result.toTextStreamResponse(); */
   } catch (error) {
     console.error("Error structuring resume data:", error);
     return NextResponse.json(
