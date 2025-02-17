@@ -67,7 +67,6 @@ export function AnalyzingScreen({
         resumeVisibleSteps.includes(step) || jobVisibleSteps.includes(step);
 
       if (step && !isStepAlreadyVisible) {
-        console.log({ step });
         if (steps === "resume")
           setResumeVisibleSteps((prev) => [...prev, step]);
         else setJobVisibleSteps((prev) => [...prev, step]);
@@ -90,72 +89,68 @@ export function AnalyzingScreen({
       </div>
 
       <div className="grid w-full max-w-4xl gap-8 px-4 md:grid-cols-2">
-        <div className="space-y-3">
+        <div className="h-56 space-y-3">
           <h3 className="text-muted-foreground mb-4 text-sm font-medium">
             Resume Analysis
           </h3>
-          {resumeVisibleSteps.length > 0 && (
-            <div className="space-y-3">
-              <AnimatePresence mode="popLayout">
-                {resumeSteps
-                  .filter((step) => resumeVisibleSteps.includes(step))
-                  .map((step) => (
-                    <motion.div
-                      key={step}
-                      initial={{ opacity: 0, height: 0, y: -20 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: 20 }}
-                      transition={{ duration: 0.2 }}
-                      className={cn(
-                        "flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors",
-                        "border-primary/50 bg-primary/5",
-                      )}
-                    >
-                      <div className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full">
-                        <CheckIcon className="h-3 w-3" />
-                      </div>
-                      <span className="text-primary text-sm font-medium">
-                        {step}
-                      </span>
-                    </motion.div>
-                  ))}
-              </AnimatePresence>
-            </div>
-          )}
+          <div className="space-y-3">
+            <AnimatePresence>
+              {resumeSteps
+                .filter((step) => resumeVisibleSteps.includes(step))
+                .map((step) => (
+                  <motion.div
+                    key={step}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors",
+                      "border-primary/50 bg-primary/5",
+                    )}
+                  >
+                    <div className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full">
+                      <CheckIcon className="h-3 w-3" />
+                    </div>
+                    <span className="text-primary text-sm font-medium">
+                      {step}
+                    </span>
+                  </motion.div>
+                ))}
+            </AnimatePresence>
+          </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="h-56 space-y-3">
           <h3 className="text-muted-foreground mb-4 text-sm font-medium">
             Job Fit Analysis
           </h3>
-          {jobVisibleSteps.length > 0 && (
-            <div className="space-y-3">
-              <AnimatePresence mode="popLayout">
-                {jobSteps
-                  .filter((step) => jobVisibleSteps.includes(step))
-                  .map((step) => (
-                    <motion.div
-                      key={step}
-                      initial={{ opacity: 0, height: 0, y: -20 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: 20 }}
-                      transition={{ duration: 0.2 }}
-                      className={cn(
-                        "flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors",
-                        "border-primary/50 bg-primary/5",
-                      )}
-                    >
-                      <div className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full">
-                        <CheckIcon className="h-3 w-3" />
-                      </div>
-                      <span className="text-primary text-sm font-medium">
-                        {step}
-                      </span>
-                    </motion.div>
-                  ))}
-              </AnimatePresence>
-            </div>
-          )}
+          <div className="space-y-3">
+            <AnimatePresence>
+              {jobSteps
+                .filter((step) => jobVisibleSteps.includes(step))
+                .map((step) => (
+                  <motion.div
+                    key={step}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors",
+                      "border-primary/50 bg-primary/5",
+                    )}
+                  >
+                    <div className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full">
+                      <CheckIcon className="h-3 w-3" />
+                    </div>
+                    <span className="text-primary text-sm font-medium">
+                      {step}
+                    </span>
+                  </motion.div>
+                ))}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>

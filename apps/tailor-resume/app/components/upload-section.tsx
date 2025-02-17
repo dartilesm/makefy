@@ -121,9 +121,12 @@ export function UploadSection({ onComplete }: UploadSectionProps) {
 
   async function handleGetSuggestions({
     object: resumeData,
+    error,
   }: {
     object?: DeepPartial<ResumeDataSchemaType>;
+    error?: Error;
   }) {
+    console.log({ resumeData, error });
     if (!resumeData || !profileData.jobTitle || !profileData.jobDescription) {
       toast({
         title: "Error",
@@ -155,6 +158,8 @@ export function UploadSection({ onComplete }: UploadSectionProps) {
       <AnalyzingScreen suggestions={suggestions} resumeData={resumeData} />
     );
   }
+
+  /* return <AnalyzingScreen suggestions={undefined} resumeData={undefined} />; */
 
   return (
     <div className="container mx-auto flex h-full flex-col justify-between gap-8">
