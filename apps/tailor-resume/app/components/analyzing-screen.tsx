@@ -4,6 +4,7 @@ import { cn } from "@makefy/ui/lib/utils";
 import { CheckIcon, SparklesIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedSparkles } from "./animated-sparkles";
 
 interface AnalyzingStep {
   id: string;
@@ -87,12 +88,7 @@ export function AnalyzingScreen({ onComplete }: AnalyzingScreenProps) {
     <div className="flex h-full flex-col items-center justify-center">
       <div className="mb-8 flex flex-col items-center space-y-4">
         <div className="relative">
-          <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-xl">
-            <SparklesIcon className="text-primary h-8 w-8" />
-          </div>
-          <div className="bg-primary absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full">
-            <SparklesIcon className="h-3 w-3 fill-white stroke-white" />
-          </div>
+          <AnimatedSparkles />
         </div>
         <div className="text-center">
           <motion.h2

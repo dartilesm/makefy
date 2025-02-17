@@ -92,8 +92,8 @@ export function UploadSection({ onGetSuggestions }: UploadSectionProps) {
     setIsAnalyzing(false);
   }
 
-  if (!isAnalyzing) {
-    return <AnalyzingScreen />;
+  if (isAnalyzing) {
+    return <AnalyzingScreen onComplete={handleAnalysisComplete} />;
   }
 
   return (
