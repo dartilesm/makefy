@@ -3,7 +3,7 @@ import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema
 import { FormControl, FormField, FormItem, FormLabel, Input } from "@makefy/ui";
 import { useFormContext } from "react-hook-form";
 import { DeepPartial } from "ai";
-import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea/ai-enhanced-textarea";
+import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea";
 
 export const enum FIELDTYPE {
   TEXT = "text",

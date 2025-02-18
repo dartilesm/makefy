@@ -38,7 +38,7 @@ export default function ResumeEnhancer() {
               <ResumeData initialData={resumeData} suggestions={suggestions} />
             </section>
 
-            <section className="space-y-4">
+            <section className="max-w-lg space-y-4">
               <ResumeSuggestions suggestions={suggestions} />
             </section>
           </div>

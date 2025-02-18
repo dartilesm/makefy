@@ -1,20 +1,29 @@
-import { MarkdownViewer } from "@makefy/ui";
-import { DeepPartial } from "ai";
+import { MarkdownViewer } from "@makefy/ui/components/markdown-viewer";
+import { cn } from "@makefy/ui/lib/utils";
 
 interface SuggestionSectionProps {
   title: string;
-  content: string;
+  content?: string;
+  icon?: string;
+  className?: string;
 }
 
 export function SuggestionSection({
   title,
   content,
-}: DeepPartial<SuggestionSectionProps>) {
+  icon,
+  className,
+}: SuggestionSectionProps) {
   if (!content) return null;
 
   return (
-    <div>
-      <h3 className="mb-2 font-medium leading-snug">{title}</h3>
+    <div className={cn(className)}>
+      <div className="mb-3 flex items-center gap-3">
+        {icon && <span className="text-xl">{icon}</span>}
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          {title}
+        </h3>
+      </div>
       <MarkdownViewer
         size="sm"
         componentsClassName={{
