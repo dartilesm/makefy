@@ -32,6 +32,7 @@
         "*/apps/**/lib/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Library 📚",
         "*/apps/**/utils/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Utility 🛠️",
         "*/apps/**/env/**/*.tsx": "💻 ${dirname(-3)} | ${filename} - Environment 🌍",
+        "*/apps/**": "💻 ${dirname(-3)} | ${filename}.${extname} 📜",
         "*/packages/**/components/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Component 🧩",
         "*/packages/**/hooks/**/*.ts": "📦 ${dirname(-3)} | ${filename} - Hook 🎣",
         "*/packages/**/lib/**/*.ts": "📦 ${dirname(-3)} | ${filename} - Library 📚",
@@ -40,7 +41,8 @@
         "*/packages/**/hooks/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Hook 🎣",
         "*/packages/**/lib/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Library 📚",
         "*/packages/**/utils/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Utility 🛠️",
-        "*/packages/**/env/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Environment 🌍"
+        "*/packages/**/env/**/*.tsx": "📦 ${dirname(-3)} | ${filename} - Environment 🌍",
+        "*/packages/**": "📦 ${dirname(-3)} | ${filename}.${extname} 📜"
     },
     "typescript.tsdk": "node_modules/typescript/lib",
 }
