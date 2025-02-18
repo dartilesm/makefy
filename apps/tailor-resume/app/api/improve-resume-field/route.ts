@@ -20,12 +20,11 @@ export async function POST(request: NextRequest) {
   try {
     const {
       fieldContent,
-      fieldName,
       suggestions,
       style = "rewrite",
     } = await request.json();
 
-    if (!fieldContent || !fieldName || !suggestions) {
+    if (!fieldContent || !suggestions) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 },
