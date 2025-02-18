@@ -1,4 +1,7 @@
-import { EditingField } from "@/app/components/resume-data/resume-data";
+import {
+  EditingField,
+  ResumeDataSchemaTypeExtended,
+} from "@/app/components/resume-data/resume-data";
 import {
   getFieldType,
   ResumeFormField,
@@ -20,7 +23,7 @@ import { DeepMap, useForm, UseFormReturn } from "react-hook-form";
 interface EditResumeFieldDialogProps {
   onOpenChange: (open: boolean) => void;
   editingField: EditingField | null;
-  form: UseFormReturn<ResumeDataSchemaType>;
+  form: UseFormReturn<ResumeDataSchemaTypeExtended>;
   suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
@@ -32,7 +35,7 @@ export function EditResumeFieldDialog({
   suggestions,
 }: EditResumeFieldDialogProps) {
   // Create a temporary form for the dialog
-  const dialogForm = useForm<ResumeDataSchemaType>({
+  const dialogForm = useForm<ResumeDataSchemaTypeExtended>({
     defaultValues: parentForm.getValues(),
   });
 
@@ -59,8 +62,8 @@ export function EditResumeFieldDialog({
   }
 
   function copyFormValues(
-    originalForm: UseFormReturn<ResumeDataSchemaType>,
-    targetForm: UseFormReturn<ResumeDataSchemaType>,
+    originalForm: UseFormReturn<ResumeDataSchemaTypeExtended>,
+    targetForm: UseFormReturn<ResumeDataSchemaTypeExtended>,
   ) {
     if (!editingField) return;
     const fieldNames = Object.keys(editingField?.fields || {});
@@ -75,6 +78,9 @@ export function EditResumeFieldDialog({
       );
       targetForm.setValue(path as keyof ResumeDataSchemaType, currentValue);
     });
+
+    const currentAiImprovements = originalForm.getValues("aiImprovements");
+    targetForm.setValue("aiImprovements", currentAiImprovements);
   }
 
   if (!editingField) return null;

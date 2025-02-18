@@ -3,7 +3,8 @@ import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema
 import { FormControl, FormField, FormItem, FormLabel, Input } from "@makefy/ui";
 import { useFormContext } from "react-hook-form";
 import { DeepPartial } from "ai";
-import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea";
+import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea/ai-enhanced-textarea";
+import { ResumeDataSchemaTypeExtended } from "./resume-data/resume-data";
 
 export const enum FIELDTYPE {
   TEXT = "text",
@@ -32,7 +33,7 @@ export function ResumeFormField({
   type,
   suggestions,
 }: ResumeFormFieldProps) {
-  const form = useFormContext<ResumeDataSchemaType>();
+  const form = useFormContext<ResumeDataSchemaTypeExtended>();
 
   return (
     <FormField
@@ -49,7 +50,7 @@ export function ResumeFormField({
             {type === FIELDTYPE.TEXTAREA ? (
               <AIEnhancedTextarea
                 field={field}
-                fieldName={fieldName}
+                fieldPath={fieldPath}
                 suggestions={suggestions}
               />
             ) : (

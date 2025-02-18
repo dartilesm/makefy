@@ -10,23 +10,28 @@ import { Textarea } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
 import { DeepPartial } from "ai";
 import { useEffect, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
+import { ControllerRenderProps, useFormContext } from "react-hook-form";
 import { AITextareaLoading } from "./ai-textarea-loading";
 import { FormatStyleButtons } from "./format-style-buttons";
 import { SuggestionsAccordion } from "./suggestions-accordion";
 import { TEXT_STYLE } from "@/constants/text-style";
+import { ResumeDataSchemaTypeExtended } from "../resume-data/resume-data";
 
 interface AIEnhancedTextareaProps {
   field: ControllerRenderProps<any, any>;
-  fieldName: string;
+  fieldPath: string;
   suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
 export function AIEnhancedTextarea({
   field,
-  fieldName,
+  fieldPath,
   suggestions,
 }: AIEnhancedTextareaProps) {
+  const form = useFormContext<ResumeDataSchemaTypeExtended>();
+  const currentAIImprovement =
+    form.getValues("aiImprovements")?.[fieldPath] || "";
+
   const [loadingStates, setLoadingStates] = useState<
     Record<TEXT_STYLE, boolean>
   >({
@@ -52,6 +57,7 @@ export function AIEnhancedTextarea({
   useEffect(() => {
     if (improvedField?.value) {
       field.onChange(improvedField.value);
+      updateAiImprovements();
     }
   }, [improvedField?.value, field]);
 
@@ -63,13 +69,22 @@ export function AIEnhancedTextarea({
     try {
       await improveField({
         fieldContent: field.value,
-        fieldName,
         suggestions,
         style,
       });
     } finally {
       setLoadingStates((prev) => ({ ...prev, [style || "rewrite"]: false }));
     }
+  }
+
+  function updateAiImprovements() {
+    const currentAiImprovements = form.getValues("aiImprovements");
+    const updatedAiImprovements = {
+      ...currentAiImprovements,
+      [fieldPath]: improvedField?.suggestionsApplied || "",
+    };
+
+    form.setValue("aiImprovements", updatedAiImprovements);
   }
 
   const currentLoadingState = Object.keys(loadingStates).find(
@@ -97,8 +112,10 @@ export function AIEnhancedTextarea({
         />
       </div>
 
-      {improvedField?.suggestionsApplied && !isLoading && (
-        <SuggestionsAccordion content={improvedField.suggestionsApplied} />
+      {(improvedField?.suggestionsApplied || currentAIImprovement) && (
+        <SuggestionsAccordion
+          content={improvedField?.suggestionsApplied || currentAIImprovement}
+        />
       )}
 
       <FormatStyleButtons

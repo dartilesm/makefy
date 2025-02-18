@@ -14,8 +14,14 @@ import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema
 import { DeepPartial } from "ai";
 
 interface ResumeDataProps {
-  initialData?: DeepPartial<ResumeDataSchemaType>;
+  initialData?: DeepPartial<ResumeDataSchemaTypeExtended>;
   suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
+}
+
+export interface ResumeDataSchemaTypeExtended extends ResumeDataSchemaType {
+  aiImprovements: {
+    [key: string]: string;
+  };
 }
 
 export interface EditingField {
@@ -28,7 +34,7 @@ export interface EditingField {
 
 export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
   const [editingField, setEditingField] = useState<EditingField | null>(null);
-  const form = useForm<ResumeDataSchemaType>({
+  const form = useForm<ResumeDataSchemaTypeExtended>({
     defaultValues: {
       personalInfo: {
         fullName: initialData?.personalInfo?.fullName || "",
@@ -41,6 +47,7 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
       experience: initialData?.experience || [],
       education: initialData?.education || [],
       skills: initialData?.skills || "",
+      aiImprovements: initialData?.aiImprovements || {},
     },
   });
 

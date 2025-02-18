@@ -1,6 +1,9 @@
 "use client";
 
-import { ResumeData } from "@/app/components/resume-data/resume-data";
+import {
+  ResumeData,
+  ResumeDataSchemaTypeExtended,
+} from "@/app/components/resume-data/resume-data";
 import { ResumeSuggestions } from "@/app/components/resume-suggestions/resume-suggestions";
 import { ResumeAnalysisForm } from "@/app/components/resume-analysis-form";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
@@ -10,7 +13,7 @@ import { useState } from "react";
 
 export default function ResumeEnhancer() {
   const [resumeData, setResumeData] =
-    useState<DeepPartial<ResumeDataSchemaType>>();
+    useState<DeepPartial<ResumeDataSchemaTypeExtended>>();
   const [suggestions, setSuggestions] =
     useState<DeepPartial<ResumeSuggestionsSchemaType>>();
 
@@ -18,7 +21,7 @@ export default function ResumeEnhancer() {
     resumeData,
     suggestions,
   }: {
-    resumeData: DeepPartial<ResumeDataSchemaType>;
+    resumeData: DeepPartial<ResumeDataSchemaTypeExtended>;
     suggestions: DeepPartial<ResumeSuggestionsSchemaType>;
   }) {
     setResumeData(resumeData);
