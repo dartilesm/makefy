@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  EditingField,
-  ResumeDataSchemaTypeExtended,
-} from "@/app/components/resume-data/resume-data";
-import { useFormContext } from "react-hook-form";
+import { EditingField } from "@/app/components/resume-data/resume-data";
+import { useResume } from "@/app/contexts/resume-context";
 import { AIEnhancedContent } from "../ui/ai-enhanced-content";
 
 interface SkillsSectionProps {
@@ -12,7 +9,10 @@ interface SkillsSectionProps {
 }
 
 export function SkillsSection({ onEdit }: SkillsSectionProps) {
-  const { watch, getValues } = useFormContext<ResumeDataSchemaTypeExtended>();
+  const { resumeForm } = useResume();
+  if (!resumeForm) return null;
+
+  const { watch, getValues } = resumeForm;
   const skills = watch("skills");
   const allAiImprovements = getValues("aiImprovements");
   const aiImprovement = allAiImprovements?.[`skills`];

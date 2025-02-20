@@ -1,26 +1,26 @@
 "use client";
 
+import { EditingField } from "@/app/components/resume-data/resume-data";
 import { AIEnhancedContent } from "@/app/components/ui/ai-enhanced-content";
-import {
-  EditingField,
-  ResumeDataSchemaTypeExtended,
-} from "@/app/components/resume-data/resume-data";
-import { useFormContext } from "react-hook-form";
+import { useResume } from "@/app/contexts/resume-context";
 
 interface ExperienceSectionProps {
   onEdit: (field: EditingField) => void;
 }
 
 export function ExperienceSection({ onEdit }: ExperienceSectionProps) {
-  const { watch, getValues } = useFormContext<ResumeDataSchemaTypeExtended>();
+  const { resumeForm } = useResume();
+  if (!resumeForm) return null;
+
+  const { watch, getValues } = resumeForm;
   const experience = watch("experience");
+  const allAiImprovements = getValues("aiImprovements");
 
   return (
     <div>
       <h2 className="mb-2 text-2xl font-semibold">Experience</h2>
       <div className="space-y-4">
         {experience.map((experience, index) => {
-          const allAiImprovements = getValues("aiImprovements");
           const aiImprovement =
             allAiImprovements?.[`experience.${index}.description`];
 

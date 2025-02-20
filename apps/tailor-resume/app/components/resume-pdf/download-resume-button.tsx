@@ -1,20 +1,19 @@
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import ResumeDocument from "./resume-document";
-import { useFormContext } from "react-hook-form";
-import { ResumeDataSchemaTypeExtended } from "../resume-data/resume-data";
+import { useResume } from "@/app/contexts/resume-context";
 import { Button } from "@makefy/ui";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Download } from "lucide-react";
+import ResumeDocument from "./resume-document";
 
 function DownloadResumeButton() {
-  const form = useFormContext<ResumeDataSchemaTypeExtended>();
+  const { resumeForm } = useResume();
 
-  if (!form || !form.getValues()) {
+  if (!resumeForm || !resumeForm.getValues()) {
     return null;
   }
 
   return (
     <PDFDownloadLink
-      document={<ResumeDocument data={form.getValues()} />}
+      document={<ResumeDocument data={resumeForm.getValues()} />}
       fileName="resume.pdf"
     >
       {({ loading }) => (

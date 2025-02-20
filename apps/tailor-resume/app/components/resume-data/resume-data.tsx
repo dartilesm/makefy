@@ -1,28 +1,14 @@
 "use client";
 
 import { Form, Skeleton } from "@makefy/ui";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { EditResumeFieldDialog } from "../edit-resume-field-dialog";
 import { ExperienceSection } from "./experience-section";
 import { EducationSection } from "./education-section";
 import { PersonalInfoSection } from "./personal-info-section";
 import { SummarySection } from "./summary-section";
 import { SkillsSection } from "./skills-section";
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
-import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
-import { DeepPartial } from "ai";
-
-interface ResumeDataProps {
-  initialData?: DeepPartial<ResumeDataSchemaTypeExtended>;
-  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
-}
-
-export interface ResumeDataSchemaTypeExtended extends ResumeDataSchemaType {
-  aiImprovements: {
-    [key: string]: string;
-  };
-}
+import { useResume } from "@/app/contexts/resume-context";
 
 export interface EditingField {
   title: string;
@@ -32,48 +18,16 @@ export interface EditingField {
   path?: string;
 }
 
-export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
+export function ResumeData() {
   const [editingField, setEditingField] = useState<EditingField | null>(null);
-  const form = useForm<ResumeDataSchemaTypeExtended>({
-    defaultValues: {
-      personalInfo: {
-        fullName: initialData?.personalInfo?.fullName || "",
-        email: initialData?.personalInfo?.email || "",
-        phone: initialData?.personalInfo?.phone || "",
-        location: initialData?.personalInfo?.location || "",
-        website: initialData?.personalInfo?.website || "",
-      },
-      summary: initialData?.summary || "",
-      experience: initialData?.experience || [],
-      education: initialData?.education || [],
-      skills: initialData?.skills || "",
-      aiImprovements: initialData?.aiImprovements || {},
-    },
-  });
-
-  useEffect(() => {
-    if (initialData) {
-      form.reset({
-        personalInfo: {
-          fullName: initialData.personalInfo?.fullName || "",
-          email: initialData.personalInfo?.email || "",
-          phone: initialData.personalInfo?.phone || "",
-          location: initialData.personalInfo?.location || "",
-          website: initialData.personalInfo?.website || "",
-        },
-        summary: initialData.summary || "",
-        experience: initialData.experience || [],
-        education: initialData.education || [],
-        skills: initialData.skills || "",
-      });
-    }
-  }, [form, initialData]);
+  const { resumeForm } = useResume();
+  if (!resumeForm) return null;
 
   return (
     <>
-      <Form {...form}>
+      <Form {...resumeForm}>
         <div className="space-y-8">
-          {form.formState.isLoading ? (
+          {resumeForm.formState.isLoading ? (
             <div className="space-y-4">
               <Skeleton className="h-8 w-48" />
               <Skeleton className="h-4 w-full" />
@@ -84,11 +38,11 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
               <PersonalInfoSection onEdit={setEditingField} />
               <SummarySection onEdit={setEditingField} />
 
-              {form.watch("experience")?.length > 0 && (
+              {resumeForm.watch("experience")?.length > 0 && (
                 <ExperienceSection onEdit={setEditingField} />
               )}
 
-              {form.watch("education")?.length > 0 && (
+              {resumeForm.watch("education")?.length > 0 && (
                 <EducationSection onEdit={setEditingField} />
               )}
 
@@ -102,8 +56,6 @@ export function ResumeData({ initialData, suggestions }: ResumeDataProps) {
         <EditResumeFieldDialog
           onOpenChange={(open) => !open && setEditingField(null)}
           editingField={editingField}
-          form={form}
-          suggestions={suggestions}
         />
       )}
     </>

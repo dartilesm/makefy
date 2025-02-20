@@ -2,15 +2,18 @@
 
 import { Button } from "@makefy/ui";
 import { Edit2Icon } from "lucide-react";
-import { useFormContext } from "react-hook-form";
+import { useResume } from "@/app/contexts/resume-context";
 import { EditingField } from "@/app/components/resume-data/resume-data";
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+
 interface EducationSectionProps {
   onEdit: (field: EditingField) => void;
 }
 
 export function EducationSection({ onEdit }: EducationSectionProps) {
-  const { watch } = useFormContext<ResumeDataSchemaType>();
+  const { resumeForm } = useResume();
+  if (!resumeForm) return null;
+
+  const { watch } = resumeForm;
   const education = watch("education");
 
   return (

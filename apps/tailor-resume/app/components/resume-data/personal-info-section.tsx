@@ -1,5 +1,7 @@
 "use client";
 
+import { EditingField } from "@/app/components/resume-data/resume-data";
+import { useResume } from "@/app/contexts/resume-context";
 import { Button } from "@makefy/ui";
 import {
   Edit2Icon,
@@ -8,16 +10,16 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from "lucide-react";
-import { useFormContext } from "react-hook-form";
-import { EditingField } from "@/app/components/resume-data/resume-data";
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 
 interface PersonalInfoSectionProps {
   onEdit: (field: EditingField) => void;
 }
 
 export function PersonalInfoSection({ onEdit }: PersonalInfoSectionProps) {
-  const { watch } = useFormContext<ResumeDataSchemaType>();
+  const { resumeForm } = useResume();
+  if (!resumeForm) return null;
+
+  const { watch } = resumeForm;
   const personalInfo = watch("personalInfo");
 
   return (

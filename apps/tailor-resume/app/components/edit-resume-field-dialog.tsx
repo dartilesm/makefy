@@ -1,13 +1,10 @@
-import {
-  EditingField,
-  ResumeDataSchemaTypeExtended,
-} from "@/app/components/resume-data/resume-data";
+import { EditingField } from "@/app/components/resume-data/resume-data";
+import { ResumeDataSchemaTypeExtended } from "@/app/components/resume-enhancer";
 import {
   getFieldType,
   ResumeFormField,
 } from "@/app/components/resume-form-field";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
-import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import {
   Button,
   Dialog,
@@ -16,27 +13,26 @@ import {
   DialogTitle,
   Form,
 } from "@makefy/ui";
-import { DeepPartial } from "ai";
 import { useEffect } from "react";
-import { DeepMap, useForm, UseFormReturn } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
+import { useResume } from "../contexts/resume-context";
 
 interface EditResumeFieldDialogProps {
   onOpenChange: (open: boolean) => void;
   editingField: EditingField | null;
-  form: UseFormReturn<ResumeDataSchemaTypeExtended>;
-  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
 // Main Component
 export function EditResumeFieldDialog({
   onOpenChange,
   editingField,
-  form: parentForm,
-  suggestions,
 }: EditResumeFieldDialogProps) {
+  const { resumeForm: resumeParentForm, suggestions } = useResume();
+  if (!resumeParentForm) return null;
+
   // Create a temporary form for the dialog
   const dialogForm = useForm<ResumeDataSchemaTypeExtended>({
-    defaultValues: parentForm.getValues(),
+    defaultValues: resumeParentForm.getValues(),
   });
 
   function handleCancel() {
@@ -49,7 +45,7 @@ export function EditResumeFieldDialog({
 
     if (!editingField) return;
 
-    copyFormValues(dialogForm, parentForm);
+    copyFormValues(dialogForm, resumeParentForm!);
 
     onOpenChange(false);
   }
@@ -58,7 +54,7 @@ export function EditResumeFieldDialog({
   useEffect(fillDialogFormValues, [editingField]);
 
   function fillDialogFormValues() {
-    copyFormValues(parentForm, dialogForm);
+    copyFormValues(resumeParentForm!, dialogForm);
   }
 
   function copyFormValues(
@@ -80,7 +76,9 @@ export function EditResumeFieldDialog({
     });
 
     const currentAiImprovements = originalForm.getValues("aiImprovements");
+    console.log({ currentAiImprovements });
     targetForm.setValue("aiImprovements", currentAiImprovements);
+    console.log({ targetForm: targetForm.getValues() });
   }
 
   if (!editingField) return null;

@@ -1,5 +1,6 @@
 "use client";
 
+import { ResumeDataSchemaTypeExtended } from "@/app/components/resume-enhancer";
 import { TEXT_STYLE } from "@/constants/text-style";
 import {
   improvedFieldSchema,
@@ -12,7 +13,6 @@ import { cn } from "@makefy/ui/lib/utils";
 import { DeepPartial } from "ai";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps, useFormContext } from "react-hook-form";
-import { ResumeDataSchemaTypeExtended } from "../resume-data/resume-data";
 import { AITextareaLoading } from "./ai-textarea-loading";
 import { FormatStyleButtons } from "./format-style-buttons";
 import { SuggestionsAccordion } from "./suggestions-accordion";
@@ -28,10 +28,12 @@ export function AIEnhancedTextarea({
   fieldPath,
   suggestions,
 }: AIEnhancedTextareaProps) {
-  const form = useFormContext<ResumeDataSchemaTypeExtended>();
+  // This field is used in the dialog form, so we need to use the form context
+  const dialogForm = useFormContext<ResumeDataSchemaTypeExtended>();
+
   const currentAIImprovement =
-    form.getValues("aiImprovements")?.[fieldPath] || "";
-  const fieldState = form.getFieldState(
+    dialogForm.getValues("aiImprovements")?.[fieldPath] || "";
+  const fieldState = dialogForm.getFieldState(
     fieldPath as keyof ResumeDataSchemaTypeExtended,
   );
 
@@ -52,7 +54,7 @@ export function AIEnhancedTextarea({
     api: "/api/improve-resume-field",
     schema: improvedFieldSchema,
     onError: (error) => {
-      form.setError(fieldPath as keyof ResumeDataSchemaTypeExtended, {
+      dialogForm.setError(fieldPath as keyof ResumeDataSchemaTypeExtended, {
         message: "Oh no! Something went wrong. Please try again.",
       });
     },
@@ -86,13 +88,15 @@ export function AIEnhancedTextarea({
   }
 
   function updateAiImprovements() {
-    const currentAiImprovements = form.getValues("aiImprovements");
+    const currentAiImprovements = dialogForm!.getValues("aiImprovements");
     const updatedAiImprovements = {
       ...currentAiImprovements,
       [fieldPath]: improvedField?.suggestionsApplied || "",
     };
 
-    form.setValue("aiImprovements", updatedAiImprovements);
+    console.log({ currentAiImprovements });
+
+    dialogForm!.setValue("aiImprovements", updatedAiImprovements);
   }
 
   const currentLoadingState = Object.keys(loadingStates).find(

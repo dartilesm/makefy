@@ -1,13 +1,9 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@makefy/ui";
+import { useResume } from "@/app/contexts/resume-context";
+import { Card, CardContent, CardHeader, CardTitle } from "@makefy/ui";
 import { SuggestionSection } from "./suggestion-section";
-import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
-import { DeepPartial } from "ai";
 
-interface ResumeSuggestionsProps {
-  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
-}
-
-export function ResumeSuggestions({ suggestions }: ResumeSuggestionsProps) {
+export function ResumeSuggestions() {
+  const { suggestions } = useResume();
   if (!suggestions) {
     return null;
   }

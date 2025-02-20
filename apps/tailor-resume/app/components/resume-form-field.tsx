@@ -1,4 +1,4 @@
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea/ai-enhanced-textarea";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import {
   FormControl,
@@ -8,10 +8,9 @@ import {
   FormMessage,
   Input,
 } from "@makefy/ui";
-import { useFormContext } from "react-hook-form";
 import { DeepPartial } from "ai";
-import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea/ai-enhanced-textarea";
-import { ResumeDataSchemaTypeExtended } from "./resume-data/resume-data";
+import { useFormContext } from "react-hook-form";
+import { ResumeDataSchemaTypeExtended } from "./resume-enhancer";
 
 export const enum FIELDTYPE {
   TEXT = "text",
@@ -40,12 +39,13 @@ export function ResumeFormField({
   type,
   suggestions,
 }: ResumeFormFieldProps) {
-  const form = useFormContext<ResumeDataSchemaTypeExtended>();
+  // This field is used in the dialog form, so we need to use the form context
+  const dialogForm = useFormContext<ResumeDataSchemaTypeExtended>();
 
   return (
     <FormField
       key={fieldName}
-      control={form.control}
+      control={dialogForm.control}
       name={fieldPath as any}
       render={({ field }) => (
         <FormItem>

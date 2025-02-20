@@ -1,22 +1,44 @@
 "use client";
 
-import {
-  ResumeData,
-  ResumeDataSchemaTypeExtended,
-} from "@/app/components/resume-data/resume-data";
+import { ResumeData } from "@/app/components/resume-data/resume-data";
 import { ResumeSuggestions } from "@/app/components/resume-suggestions/resume-suggestions";
 import { ResumeAnalysisForm } from "@/app/components/resume-analysis-form";
-import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { DeepPartial } from "ai";
 import { useState } from "react";
 import ResumeToolbar from "./resume-toolbar/resume-toolbar";
+import { useForm } from "react-hook-form";
+import { ResumeProvider } from "../contexts/resume-context";
+import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
+
+export interface ResumeDataSchemaTypeExtended extends ResumeDataSchemaType {
+  aiImprovements: {
+    [key: string]: string;
+  };
+}
 
 export default function ResumeEnhancer() {
   const [resumeData, setResumeData] =
     useState<DeepPartial<ResumeDataSchemaTypeExtended>>();
   const [suggestions, setSuggestions] =
     useState<DeepPartial<ResumeSuggestionsSchemaType>>();
+
+  const form = useForm<ResumeDataSchemaTypeExtended>({
+    defaultValues: {
+      personalInfo: {
+        fullName: resumeData?.personalInfo?.fullName || "",
+        email: resumeData?.personalInfo?.email || "",
+        phone: resumeData?.personalInfo?.phone || "",
+        location: resumeData?.personalInfo?.location || "",
+        website: resumeData?.personalInfo?.website || "",
+      },
+      summary: resumeData?.summary || "",
+      experience: resumeData?.experience || [],
+      education: resumeData?.education || [],
+      skills: resumeData?.skills || "",
+      aiImprovements: resumeData?.aiImprovements || {},
+    },
+  });
 
   function handleComplete({
     resumeData,
@@ -27,6 +49,7 @@ export default function ResumeEnhancer() {
   }) {
     setResumeData(resumeData);
     setSuggestions(suggestions);
+    form.reset(resumeData);
   }
 
   return (
@@ -36,18 +59,24 @@ export default function ResumeEnhancer() {
       )}
 
       {resumeData && suggestions && (
-        <div className="container mx-auto h-full">
-          <ResumeToolbar />
-          <div className="flex flex-col gap-8 sm:flex-row">
-            <section className="space-y-4">
-              <ResumeData initialData={resumeData} suggestions={suggestions} />
-            </section>
+        <ResumeProvider
+          resumeForm={form}
+          suggestions={suggestions}
+          setSuggestions={setSuggestions}
+        >
+          <div className="container mx-auto h-full">
+            <ResumeToolbar />
+            <div className="flex flex-col gap-8 sm:flex-row">
+              <section className="space-y-4">
+                <ResumeData />
+              </section>
 
-            <section className="max-w-lg space-y-4">
-              <ResumeSuggestions suggestions={suggestions} />
-            </section>
+              <section className="max-w-lg space-y-4">
+                <ResumeSuggestions />
+              </section>
+            </div>
           </div>
-        </div>
+        </ResumeProvider>
       )}
     </div>
   );
