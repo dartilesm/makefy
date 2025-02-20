@@ -1,36 +1,47 @@
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { ResumeDataSchemaTypeExtended } from "@/components/resume-enhancer";
 
-// Create styles
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
+    padding: 40,
     backgroundColor: "#ffffff",
   },
-  section: {
-    marginBottom: 10,
-  },
   header: {
-    marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 30,
+    borderBottom: "2px solid #333",
+    paddingBottom: 10,
   },
-  title: {
+  headerLeft: {
+    flex: 1,
+  },
+  headerRight: {
+    textAlign: "right",
+    flex: 1,
+  },
+  name: {
     fontSize: 24,
+    fontWeight: "bold",
     marginBottom: 5,
   },
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 15,
+  contact: {
+    fontSize: 10,
     color: "#666",
+    marginBottom: 2,
+  },
+  section: {
+    marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 14,
     fontWeight: "bold",
-    marginBottom: 5,
-    borderBottom: "1px solid #999",
-    paddingBottom: 3,
+    backgroundColor: "#f0f0f0",
+    padding: "4 8",
+    marginBottom: 8,
   },
   experienceItem: {
-    marginBottom: 10,
+    marginBottom: 12,
   },
   jobTitle: {
     fontSize: 12,
@@ -43,47 +54,44 @@ const styles = StyleSheet.create({
   dates: {
     fontSize: 10,
     color: "#666",
-    marginBottom: 3,
+    marginBottom: 4,
   },
   description: {
     fontSize: 10,
-    marginBottom: 5,
+    lineHeight: 1.5,
   },
   skills: {
     fontSize: 10,
-    marginBottom: 3,
-  },
-  contact: {
-    fontSize: 10,
-    marginBottom: 2,
+    lineHeight: 1.5,
   },
 });
 
-interface ResumeDocumentProps {
+interface ModernTemplateProps {
   data: ResumeDataSchemaTypeExtended;
 }
 
-function ResumeDocument({ data }: ResumeDocumentProps) {
+export function ModernTemplate({ data }: ModernTemplateProps) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header Section */}
         <View style={styles.header}>
-          <Text style={styles.title}>{data.personalInfo.fullName}</Text>
-          <Text style={styles.contact}>{data.personalInfo.email}</Text>
-          <Text style={styles.contact}>{data.personalInfo.phone}</Text>
-          <Text style={styles.contact}>{data.personalInfo.location}</Text>
+          <View style={styles.headerLeft}>
+            <Text style={styles.name}>{data.personalInfo.fullName}</Text>
+          </View>
+          <View style={styles.headerRight}>
+            <Text style={styles.contact}>{data.personalInfo.email}</Text>
+            <Text style={styles.contact}>{data.personalInfo.phone}</Text>
+            <Text style={styles.contact}>{data.personalInfo.location}</Text>
+          </View>
         </View>
 
-        {/* Professional Summary */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Professional Summary</Text>
           <Text style={styles.description}>{data.summary}</Text>
         </View>
 
-        {/* Experience Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Professional Experience</Text>
+          <Text style={styles.sectionTitle}>Experience</Text>
           {data.experience.map((exp, index) => (
             <View key={index} style={styles.experienceItem}>
               <Text style={styles.jobTitle}>{exp.title}</Text>
@@ -96,13 +104,11 @@ function ResumeDocument({ data }: ResumeDocumentProps) {
           ))}
         </View>
 
-        {/* Skills Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Skills</Text>
           <Text style={styles.skills}>{data.skills}</Text>
         </View>
 
-        {/* Education Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Education</Text>
           {data.education.map((edu, index) => (
@@ -119,5 +125,3 @@ function ResumeDocument({ data }: ResumeDocumentProps) {
     </Document>
   );
 }
-
-export default ResumeDocument;
