@@ -10,9 +10,9 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
-    const { resumeRawContent, jobDescription, jobTitle } = await request.json();
+    const { resumeData, jobDescription, jobTitle } = await request.json();
 
-    if (!resumeRawContent || !jobDescription || !jobTitle) {
+    if (!resumeData || !jobDescription || !jobTitle) {
       return NextResponse.json(
         { error: "Resume text, job description and job title are required" },
         { status: 400 },
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       model: google("gemini-1.5-flash-latest"),
       system: `You are a career advisor. You will analyze a resume against a job description and provide specific suggestions to help the candidate optimize their resume for the role.`,
       prompt: `Analyze this resume against the job description and provide specific suggestions for improvement.
-        Resume: ${JSON.stringify(resumeRawContent)}
+        Resume: ${JSON.stringify(resumeData)}
         Job Title: ${jobTitle}
         Job Description: ${jobDescription}`,
       schema: resumeSuggestionsSchema,
