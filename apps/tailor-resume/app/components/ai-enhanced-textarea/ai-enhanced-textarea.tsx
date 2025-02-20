@@ -1,5 +1,6 @@
 "use client";
 
+import { TEXT_STYLE } from "@/constants/text-style";
 import {
   improvedFieldSchema,
   ImprovedFieldSchemaType,
@@ -11,11 +12,10 @@ import { cn } from "@makefy/ui/lib/utils";
 import { DeepPartial } from "ai";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps, useFormContext } from "react-hook-form";
+import { ResumeDataSchemaTypeExtended } from "../resume-data/resume-data";
 import { AITextareaLoading } from "./ai-textarea-loading";
 import { FormatStyleButtons } from "./format-style-buttons";
 import { SuggestionsAccordion } from "./suggestions-accordion";
-import { TEXT_STYLE } from "@/constants/text-style";
-import { ResumeDataSchemaTypeExtended } from "../resume-data/resume-data";
 
 interface AIEnhancedTextareaProps {
   field: ControllerRenderProps<any, any>;
@@ -31,6 +31,9 @@ export function AIEnhancedTextarea({
   const form = useFormContext<ResumeDataSchemaTypeExtended>();
   const currentAIImprovement =
     form.getValues("aiImprovements")?.[fieldPath] || "";
+  const fieldState = form.getFieldState(
+    fieldPath as keyof ResumeDataSchemaTypeExtended,
+  );
 
   const [loadingStates, setLoadingStates] = useState<
     Record<TEXT_STYLE, boolean>
@@ -48,6 +51,11 @@ export function AIEnhancedTextarea({
   } = useObject<ImprovedFieldSchemaType>({
     api: "/api/improve-resume-field",
     schema: improvedFieldSchema,
+    onError: (error) => {
+      form.setError(fieldPath as keyof ResumeDataSchemaTypeExtended, {
+        message: "Oh no! Something went wrong. Please try again.",
+      });
+    },
   });
 
   useEffect(() => {
@@ -59,7 +67,7 @@ export function AIEnhancedTextarea({
       field.onChange(improvedField.value);
       updateAiImprovements();
     }
-  }, [improvedField?.value, field]);
+  }, [improvedField?.value]);
 
   async function handleImprove(style?: TEXT_STYLE) {
     if (!suggestions || isLoading) return;
@@ -93,21 +101,22 @@ export function AIEnhancedTextarea({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative">
+      <div className="relative flex flex-col gap-2">
         <div
           className={cn([
             "absolute h-0 w-0 overflow-hidden p-1 transition-[height] duration-300 ease-in-out",
             {
               "bg-background border-input absolute h-full w-full overflow-hidden rounded-md border p-1":
-                !improvedField?.value,
+                isLoading,
             },
           ])}
         >
-          <AITextareaLoading show={!improvedField?.value} />
+          <AITextareaLoading loading={isLoading} />
         </div>
 
         <Textarea
           {...field}
+          aria-invalid={fieldState.invalid}
           className="max-h-64 min-h-64 resize-none transition-[height] duration-300 ease-in-out [field-sizing:content]"
         />
       </div>
