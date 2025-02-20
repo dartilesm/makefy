@@ -10,6 +10,7 @@ import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { DeepPartial } from "ai";
 import { useState } from "react";
+import ResumeToolbar from "./resume-toolbar/resume-toolbar";
 
 export default function ResumeEnhancer() {
   const [resumeData, setResumeData] =
@@ -36,6 +37,7 @@ export default function ResumeEnhancer() {
 
       {resumeData && suggestions && (
         <div className="container mx-auto h-full">
+          <ResumeToolbar />
           <div className="flex flex-col gap-8 sm:flex-row">
             <section className="space-y-4">
               <ResumeData initialData={resumeData} suggestions={suggestions} />
