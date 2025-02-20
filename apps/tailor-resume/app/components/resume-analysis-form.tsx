@@ -139,7 +139,7 @@ export function ResumeAnalysisForm({
     }
 
     await getSuggestions({
-      resumeRawContent: resumeData,
+      resumeData,
       jobTitle: form.getValues().jobTitle,
       jobDescription: form.getValues().jobDescription,
     });

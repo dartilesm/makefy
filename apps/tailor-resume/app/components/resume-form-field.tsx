@@ -1,6 +1,13 @@
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
-import { FormControl, FormField, FormItem, FormLabel, Input } from "@makefy/ui";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+} from "@makefy/ui";
 import { useFormContext } from "react-hook-form";
 import { DeepPartial } from "ai";
 import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea/ai-enhanced-textarea";
@@ -57,6 +64,7 @@ export function ResumeFormField({
               <Input {...field} value={field.value || ""} />
             )}
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />
