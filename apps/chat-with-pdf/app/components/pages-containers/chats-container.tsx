@@ -126,7 +126,12 @@ export function ChatsContainer({
                       </CardContent>
                     </div>
                   </div>
-                  <Button className="flex-shrink-0" variant="secondary" asChild>
+                  <Button
+                    className="flex-shrink-0"
+                    variant="outline"
+                    variantColor="secondary"
+                    asChild
+                  >
                     <Link href={`/chat/${document.chatId}`}>Open chat</Link>
                   </Button>
                 </Card>

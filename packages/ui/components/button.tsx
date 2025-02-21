@@ -9,21 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-primary-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
 
         // New variants
         solid: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        bordered:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
         flat: "bg-primary/40 text-primary-foreground shadow hover:bg-primary/50",
       },
       variantColor: {
@@ -47,31 +39,31 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       {
-        variant: ["bordered", "outline"],
+        variant: "outline",
         variantColor: "primary",
         className:
           "bg-background text-primary shadow hover:bg-transparent border-2 border-primary hover:text-primary",
       },
       {
-        variant: ["bordered", "outline"],
+        variant: "outline",
         variantColor: "secondary",
         className:
           "bg-background text-secondary-foreground/80 shadow hover:bg-transparent border-2 border-border hover:text-secondary-foreground/80",
       },
       {
-        variant: ["bordered", "outline"],
+        variant: "outline",
         variantColor: "warning",
         className:
           "bg-background text-warning shadow hover:bg-transparent border-2 border-warning hover:text-warning",
       },
       {
-        variant: ["bordered", "outline"],
+        variant: "outline",
         variantColor: "destructive",
         className:
           "bg-background text-destructive shadow hover:bg-transparent border-2 border-destructive hover:text-destructive",
       },
       {
-        variant: ["bordered", "outline"],
+        variant: "outline",
         variantColor: "success",
         className:
           "bg-background text-success shadow hover:bg-transparent border-2 border-success hover:text-success",
@@ -139,7 +131,7 @@ const buttonVariants = cva(
     ],
     defaultVariants: {
       variantColor: "primary",
-      variant: "default",
+      variant: "solid",
       size: "default",
     },
   },
