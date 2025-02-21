@@ -22,7 +22,7 @@ const buttonVariants = cva(
         primary:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-secondary/80 text-secondary-foreground shadow-sm hover:bg-secondary",
         warning:
           "bg-warning text-warning-foreground shadow-sm hover:bg-warning/80",
         destructive:
@@ -42,31 +42,31 @@ const buttonVariants = cva(
         variant: "outline",
         variantColor: "primary",
         className:
-          "bg-background text-primary shadow hover:bg-transparent border-2 border-primary hover:text-primary",
+          "bg-background text-primary hover:bg-transparent border-2 border-primary hover:text-primary",
       },
       {
         variant: "outline",
         variantColor: "secondary",
         className:
-          "bg-background text-secondary-foreground/80 shadow hover:bg-transparent border-2 border-border hover:text-secondary-foreground/80",
+          "bg-background text-secondary-foreground/80 hover:bg-transparent border-2 border-border hover:text-secondary-foreground/80",
       },
       {
         variant: "outline",
         variantColor: "warning",
         className:
-          "bg-background text-warning shadow hover:bg-transparent border-2 border-warning hover:text-warning",
+          "bg-background text-warning hover:bg-transparent border-2 border-warning hover:text-warning",
       },
       {
         variant: "outline",
         variantColor: "destructive",
         className:
-          "bg-background text-destructive shadow hover:bg-transparent border-2 border-destructive hover:text-destructive",
+          "bg-background text-destructive hover:bg-transparent border-2 border-destructive hover:text-destructive",
       },
       {
         variant: "outline",
         variantColor: "success",
         className:
-          "bg-background text-success shadow hover:bg-transparent border-2 border-success hover:text-success",
+          "bg-background text-success hover:bg-transparent border-2 border-success hover:text-success",
       },
       {
         variant: "ghost",
@@ -108,7 +108,7 @@ const buttonVariants = cva(
         variant: "flat",
         variantColor: "secondary",
         className:
-          "bg-secondary/60 dark:bg-secondary/60 text-secondary-foreground/80 shadow hover:bg-secondary border-none shadow-none hover:[filter:brightness(1.1)]",
+          "bg-secondary/90 dark:bg-secondary/90 text-secondary-foreground shadow hover:bg-secondary border-none shadow-none hover:[filter:brightness(0.98)] dark:hover:[filter:brightness(1.3)]",
       },
       {
         variant: "flat",
@@ -152,7 +152,6 @@ const rippleVariants = cva(
           "bg-secondary/80 [filter:brightness(0.8)] dark:[filter:brightness(1.5)]",
         link: "bg-transparent opacity-0",
         solid: "bg-primary/80 [filter:brightness(1.3)]",
-        bordered: "bg-primary/80 [filter:brightness(1.3)]",
         flat: "bg-primary/30 [filter:brightness(0.8)]",
       },
       variantColor: {
@@ -167,27 +166,27 @@ const rippleVariants = cva(
     },
     compoundVariants: [
       {
-        variant: ["bordered", "outline", "ghost"],
+        variant: ["outline", "ghost"],
         variantColor: "primary",
         className: "bg-primary/20 [filter:brightness(0.8)]",
       },
       {
-        variant: ["bordered", "outline", "ghost"],
+        variant: ["outline", "ghost"],
         variantColor: "secondary",
         className: "bg-secondary-foreground/20",
       },
       {
-        variant: ["bordered", "outline", "ghost"],
+        variant: ["outline", "ghost"],
         variantColor: "warning",
         className: "bg-warning/20",
       },
       {
-        variant: ["bordered", "outline", "ghost"],
+        variant: ["outline", "ghost"],
         variantColor: "destructive",
         className: "bg-destructive/20",
       },
       {
-        variant: ["bordered", "outline", "ghost"],
+        variant: ["outline", "ghost"],
         variantColor: "success",
         className: "bg-success/20",
       },
