@@ -174,7 +174,7 @@ export function ResumeAnalysisForm({
           </p>
         </div>
 
-        <div className="relative mx-auto w-full">
+        <div className="relative mx-auto min-h-[560px] w-full">
           <Form {...form}>
             <form
               onSubmit={handleResumeStructuredData}
