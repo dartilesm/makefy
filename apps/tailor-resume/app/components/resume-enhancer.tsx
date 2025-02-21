@@ -10,7 +10,6 @@ import ResumeToolbar from "./resume-toolbar/resume-toolbar";
 import { useForm } from "react-hook-form";
 import { ResumeProvider } from "../contexts/resume-context";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
-import { Button } from "@makefy/ui";
 
 export interface ResumeDataSchemaTypeExtended extends ResumeDataSchemaType {
   aiImprovements: {
@@ -55,126 +54,6 @@ export default function ResumeEnhancer() {
 
   return (
     <div className="h-full space-y-8 overflow-y-auto p-6">
-      <div className="flex items-center gap-2">
-        <span>Variant: Solid & Color: Primary</span>
-        <Button variant="solid" variantColor="primary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Solid & Color: Secondary</span>
-        <Button variant="solid" variantColor="secondary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Solid & Color: Warning</span>
-        <Button variant="solid" variantColor="warning">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Solid & Color: Destructive</span>
-        <Button variant="solid" variantColor="destructive">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Solid & Color: Success</span>
-        <Button variant="solid" variantColor="success">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Flat & Color: Primary</span>
-        <Button variant="flat" variantColor="primary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Flat & Color: Secondary</span>
-        <Button variant="flat" variantColor="secondary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Flat & Color: Warning</span>
-        <Button variant="flat" variantColor="warning">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Flat & Color: Destructive</span>
-        <Button variant="flat" variantColor="destructive">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Flat & Color: Success</span>
-        <Button variant="flat" variantColor="success">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Ghost & Color: Primary</span>
-        <Button variant="ghost" variantColor="primary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Ghost & Color: Secondary</span>
-        <Button variant="ghost" variantColor="secondary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Ghost & Color: Warning</span>
-        <Button variant="ghost" variantColor="warning">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Ghost & Color: Destructive</span>
-        <Button variant="ghost" variantColor="destructive">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Ghost & Color: Success</span>
-        <Button variant="ghost" variantColor="success">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Outline & Color: Primary</span>
-        <Button variant="outline" variantColor="primary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Outline & Color: Secondary</span>
-        <Button variant="outline" variantColor="secondary">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Outline & Color: Warning</span>
-        <Button variant="outline" variantColor="warning">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Outline & Color: Destructive</span>
-        <Button variant="outline" variantColor="destructive">
-          Download Resume
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <span>Variant: Outline & Color: Success</span>
-        <Button variant="outline" variantColor="success">
-          Download Resume
-        </Button>
-      </div>
       {!resumeData && !suggestions && (
         <ResumeAnalysisForm onComplete={handleComplete} />
       )}
