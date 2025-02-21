@@ -114,12 +114,27 @@ const config = {
             height: "0",
           },
         },
+        "ripple-effect": {
+          "0%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "50%": {
+            transform: "scale(20)",
+            opacity: "0.375",
+          },
+          "100%": {
+            transform: "scale(45)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "button-border":
           "button-border-rotation-keyframes -0.64s linear 3s infinite, button-border-translation-keyframes -0.64s linear 3s infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        ripple: "ripple-effect 0.9s ease 1 forwards",
       },
     },
   },
