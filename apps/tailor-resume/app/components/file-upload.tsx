@@ -129,7 +129,7 @@ export function FileUpload({
               <p className="text-muted-foreground text-xs">or</p>
               <Button
                 type="button"
-                variant="outline"
+                variant="flat"
                 size="sm"
                 className="mt-2"
                 disabled={isLoading}
