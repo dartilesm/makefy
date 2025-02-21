@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import {
-  CaretSortIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -17,7 +16,8 @@ const selectTriggerVariants = cva(
   {
     variants: {
       variant: {
-        outline: "border-border border-2 shadow-sm",
+        outline:
+          "border-border/60 dark:border-border/70 border-2 shadow-sm hover:border-border",
         flat: "bg-secondary/90 dark:bg-secondary/90 text-secondary-foreground shadow hover:bg-secondary border-none shadow-none hover:[filter:brightness(0.98)] dark:hover:[filter:brightness(1.3)]",
         solid:
           "bg-secondary/80 text-secondary-foreground shadow-sm hover:bg-secondary",

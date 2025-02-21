@@ -42,31 +42,31 @@ const buttonVariants = cva(
         variant: "outline",
         variantColor: "primary",
         className:
-          "bg-background text-primary hover:bg-transparent border-2 border-primary hover:text-primary",
+          "bg-background text-primary/80 hover:bg-transparent border-2 border-primary/80 hover:border-primary hover:text-primary",
       },
       {
         variant: "outline",
         variantColor: "secondary",
         className:
-          "bg-background text-secondary-foreground/80 hover:bg-transparent border-2 border-border hover:text-secondary-foreground/80",
+          "bg-background text-secondary-foreground/80 hover:bg-transparent border-2 border-border/80 hover:border-border hover:text-secondary-foreground/80",
       },
       {
         variant: "outline",
         variantColor: "warning",
         className:
-          "bg-background text-warning hover:bg-transparent border-2 border-warning hover:text-warning",
+          "bg-background text-warning/80 hover:bg-transparent border-2 border-warning/80 hover:border-warning hover:text-warning",
       },
       {
         variant: "outline",
         variantColor: "destructive",
         className:
-          "bg-background text-destructive hover:bg-transparent border-2 border-destructive hover:text-destructive",
+          "bg-background text-destructive/80 hover:bg-transparent border-2 border-destructive/80 hover:border-destructive hover:text-destructive",
       },
       {
         variant: "outline",
         variantColor: "success",
         className:
-          "bg-background text-success hover:bg-transparent border-2 border-success hover:text-success",
+          "bg-background text-success/80 hover:bg-transparent border-2 border-success/80 hover:border-success hover:text-success",
       },
       {
         variant: "ghost",
