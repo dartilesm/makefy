@@ -254,7 +254,6 @@ export function ResumeAnalysisForm({
                               <Input
                                 {...field}
                                 placeholder="e.g. Senior Software Engineer"
-                                className="bg-background/50"
                                 disabled={isLoading}
                               />
                             </FormControl>
@@ -274,7 +273,7 @@ export function ResumeAnalysisForm({
                               <Textarea
                                 {...field}
                                 placeholder="Paste the full job description here..."
-                                className="bg-background/50 min-h-[200px] resize-none"
+                                className="min-h-[200px] resize-none"
                                 disabled={isLoading}
                               />
                             </FormControl>

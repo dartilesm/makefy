@@ -58,7 +58,7 @@ export function PreviewResumeDialog() {
                 setSelectedTemplate(value as TemplateType)
               }
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[180px]" variant="flat">
                 <SelectValue placeholder="Select template" />
               </SelectTrigger>
               <SelectContent>
