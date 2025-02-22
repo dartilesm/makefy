@@ -90,7 +90,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
           <Text style={styles.sectionTitle}>Professional Experience</Text>
           {data.experience.map((exp, index) => (
             <View key={index} style={styles.experienceItem}>
-              <View style={styles.jobHeader}>
+              <View style={styles.jobHeader} wrap={false}>
                 <View>
                   <Text style={styles.jobTitle}>{exp.title}</Text>
                   <Text style={styles.company}>{exp.company}</Text>
@@ -107,7 +107,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Education</Text>
           {data.education.map((edu, index) => (
-            <View key={index} style={styles.experienceItem}>
+            <View key={index} style={styles.experienceItem} wrap={false}>
               <View style={styles.jobHeader}>
                 <View>
                   <Text style={styles.jobTitle}>{edu.degree}</Text>
@@ -121,7 +121,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
           ))}
         </View>
 
-        <View style={styles.section}>
+        <View style={styles.section} wrap={false}>
           <Text style={styles.sectionTitle}>Skills</Text>
           <Text style={styles.skills}>{data.skills}</Text>
         </View>
