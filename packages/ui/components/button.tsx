@@ -78,7 +78,7 @@ const buttonVariants = cva(
         variant: "ghost",
         variantColor: "secondary",
         className:
-          "bg-transparent hover:bg-secondary/10 text-secondary-foreground/80 hover:text-secondary-foreground/80 border-none shadow-none focus:ring-secondary focus-visible:ring-secondary",
+          "bg-transparent hover:bg-secondary/80 text-secondary-foreground/80 hover:text-secondary-foreground/80 border-none shadow-none focus:ring-secondary focus-visible:ring-secondary",
       },
       {
         variant: "ghost",
