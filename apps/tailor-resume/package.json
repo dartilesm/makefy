@@ -25,6 +25,7 @@
     "@makefy/supabase": "*",
     "react-dropzone": "14.2.3",
     "@react-pdf/renderer": "^3.3.8",
+    "react-pdf": "9.1.0",
     "pdf2json": "3.1.5",
     "react-hook-form": "7.52.1"
   },
