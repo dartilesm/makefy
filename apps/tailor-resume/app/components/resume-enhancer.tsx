@@ -65,9 +65,9 @@ export default function ResumeEnhancer() {
           setSuggestions={setSuggestions}
         >
           <div className="container mx-auto h-full">
-            <ResumeToolbar />
             <div className="flex flex-col gap-8 sm:flex-row">
               <section className="space-y-4">
+                <ResumeToolbar />
                 <ResumeData />
               </section>
 
