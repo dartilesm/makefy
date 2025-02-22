@@ -91,9 +91,9 @@ export function AnalyzingScreen({
           </div>
         </div>
 
-        <div className="grid min-h-[560px] w-full max-w-4xl gap-8 px-4 md:grid-cols-2">
+        <div className="mx-auto grid min-h-[560px] w-full max-w-4xl gap-8 px-4 md:grid-cols-2">
           <div className="h-56 space-y-3">
-            <h3 className="text-muted-foreground mb-4 text-sm font-medium">
+            <h3 className="text-muted-foreground mb-4 text-center text-sm font-medium">
               Resume Analysis
             </h3>
             <div className="space-y-3">
@@ -125,7 +125,7 @@ export function AnalyzingScreen({
           </div>
 
           <div className="h-56 space-y-3">
-            <h3 className="text-muted-foreground mb-4 text-sm font-medium">
+            <h3 className="text-muted-foreground mb-4 text-center text-sm font-medium">
               Job Fit Analysis
             </h3>
             <div className="space-y-3">
