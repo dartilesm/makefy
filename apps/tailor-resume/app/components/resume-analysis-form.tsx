@@ -103,7 +103,8 @@ export function ResumeAnalysisForm({
     e: React.FormEvent<HTMLFormElement>,
   ) {
     e.preventDefault();
-    if (!form.getValues().resume) {
+    const resume = form.getValues().resume;
+    if (!resume) {
       toast({
         title: "Error",
         description: "Please fill in all the fields",
@@ -112,9 +113,34 @@ export function ResumeAnalysisForm({
       return;
     }
 
-    await getStructuredData({
-      resumeRawContent: await form.getValues().resume?.text(),
-    });
+    try {
+      // First parse the PDF using the parse-resume endpoint
+      const formData = new FormData();
+      formData.append("file", resume);
+
+      const response = await fetch("/api/parse-resume", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to parse resume");
+      }
+
+      const { rawContent } = await response.json();
+
+      // Then get structured data using the parsed text
+      await getStructuredData({
+        resumeRawContent: rawContent,
+      });
+    } catch (error) {
+      console.error("Error processing resume:", error);
+      toast({
+        title: "Error",
+        description: "Failed to process resume. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   async function handleGetSuggestions({
