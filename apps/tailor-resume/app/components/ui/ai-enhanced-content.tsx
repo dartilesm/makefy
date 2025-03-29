@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
-import { EyeIcon, SparklesIcon } from "lucide-react";
+import { EyeIcon, PencilIcon, SparklesIcon } from "lucide-react";
 import { AIButton } from "./ai-button";
 
 interface AIEnhancedContentProps {
@@ -75,9 +75,14 @@ export function AIEnhancedContent({
       />
       {onEdit && (
         <AIButton
-          label="Rewrite"
+          label={aiImprovement ? "Edit" : "Rewrite"}
           className="absolute -right-2 -top-3"
           onClick={onEdit}
+          icon={
+            aiImprovement ? (
+              <PencilIcon className="h-4 w-4 stroke-yellow-600" />
+            ) : undefined
+          }
         />
       )}
     </div>

@@ -61,7 +61,8 @@ export function AIEnhancedTextarea({
   });
 
   useEffect(() => {
-    handleImprove();
+    console.log("currentAIImprovement", currentAIImprovement);
+    if (!currentAIImprovement) handleImprove();
   }, []);
 
   useEffect(() => {
