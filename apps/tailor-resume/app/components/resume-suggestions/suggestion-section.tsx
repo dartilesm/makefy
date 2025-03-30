@@ -20,9 +20,7 @@ export function SuggestionSection({
     <div className={cn(className)}>
       <div className="mb-3 flex items-center gap-3">
         {icon && <span className="text-xl">{icon}</span>}
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          {title}
-        </h3>
+        <h3 className="text-lg font-semibold">{title}</h3>
       </div>
       <MarkdownViewer
         size="sm"

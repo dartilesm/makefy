@@ -35,10 +35,10 @@ export function ResumeSuggestions() {
   return (
     <Card className="border border-gray-200 bg-white/50 transition-all duration-300 dark:border-gray-800 dark:bg-gray-900/50">
       <CardHeader className="space-y-1 pb-4">
-        <CardTitle className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+        <CardTitle className="text-2xl font-bold tracking-tight">
           Resume Optimization Guide
         </CardTitle>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm">
           Enhance your resume with these tailored suggestions
         </p>
       </CardHeader>
