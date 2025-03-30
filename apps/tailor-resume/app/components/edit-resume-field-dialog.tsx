@@ -76,10 +76,10 @@ export function EditResumeFieldDialog({
     });
 
     const currentAiImprovements = originalForm.getValues("aiImprovements");
-    console.log({ currentAiImprovements });
     targetForm.setValue("aiImprovements", currentAiImprovements);
-    console.log({ targetForm: targetForm.getValues() });
   }
+
+  const fields = Object.entries(editingField?.fields || {});
 
   if (!editingField) return null;
 
@@ -95,7 +95,7 @@ export function EditResumeFieldDialog({
             className="space-y-4"
             autoComplete="off"
           >
-            {Object.entries(editingField.fields).map(([fieldName]) => {
+            {fields.map(([fieldName]) => {
               const fullPath = editingField.path
                 ? `${editingField.path}.${fieldName}`
                 : fieldName;
@@ -103,7 +103,7 @@ export function EditResumeFieldDialog({
               return (
                 <ResumeFormField
                   key={fieldName}
-                  fieldName={fieldName}
+                  fieldName={fields?.length > 1 ? fieldName : ""}
                   fieldPath={fullPath}
                   type={getFieldType(fieldName)}
                   suggestions={suggestions}
