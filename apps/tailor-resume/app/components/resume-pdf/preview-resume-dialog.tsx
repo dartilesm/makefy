@@ -19,16 +19,13 @@ import {
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Document, pdfjs, Thumbnail } from "react-pdf";
 import { ClassicTemplate } from "./templates/classic-template";
 import { ModernTemplate } from "./templates/modern-template";
 import { HarvardTemplate } from "./templates/harvard-template";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const TEMPLATES = {
   modern: {
