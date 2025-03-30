@@ -1,8 +1,7 @@
-import { google } from "@ai-sdk/google";
-import { generateObject, streamObject, streamText, smoothStream } from "ai";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { improvedFieldSchema } from "@/schemas/improved-file.schema";
+import { google } from "@ai-sdk/google";
+import { streamObject } from "ai";
+import { NextRequest, NextResponse } from "next/server";
 
 export const maxDuration = 30;
 export const dynamic = "force-dynamic";
@@ -54,7 +53,6 @@ export async function POST(request: NextRequest) {
             ${style === "casual" ? "8. Use more approachable and natural language" : ""}
           `,
       schema: improvedFieldSchema,
-      experimental_transform: smoothStream(),
     });
 
     return result.toTextStreamResponse();
