@@ -115,7 +115,9 @@ export function EditResumeFieldDialog({
               <Button type="button" variant="outline" onClick={handleCancel}>
                 Cancel
               </Button>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" disabled={!dialogForm.formState.isValid}>
+                Save changes
+              </Button>
             </div>
           </form>
         </Form>

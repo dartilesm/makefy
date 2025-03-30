@@ -75,6 +75,11 @@ export function AIEnhancedTextarea({
   async function handleImprove(style?: TEXT_STYLE) {
     if (!suggestions || isLoading) return;
 
+    // Reset the field value to trigger the form validation and prevent
+    // saving invalid values
+    dialogForm.setValue(fieldPath as keyof ResumeDataSchemaTypeExtended, "");
+    dialogForm.trigger();
+
     setLoadingStates((prev) => ({ ...prev, [style || "rewrite"]: true }));
 
     try {
