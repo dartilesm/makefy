@@ -24,7 +24,9 @@ export function AIEnhancedContent({
   className,
 }: AIEnhancedContentProps) {
   return (
-    <div className={cn("relative", className)}>
+    <div
+      className={cn("relative", { "bg-muted/40": aiImprovement }, className)}
+    >
       {aiImprovement && (
         <TooltipProvider delayDuration={0}>
           <Tooltip>
