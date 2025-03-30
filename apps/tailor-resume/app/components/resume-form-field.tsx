@@ -47,6 +47,7 @@ export function ResumeFormField({
       key={fieldName}
       control={dialogForm.control}
       name={fieldPath as any}
+      rules={{ required: true }}
       render={({ field }) => (
         <FormItem>
           <FormLabel>
