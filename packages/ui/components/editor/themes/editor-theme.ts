@@ -1,7 +1,5 @@
 import { EditorThemeClasses } from "lexical";
 
-import "./editor-theme.css";
-
 export const editorTheme: EditorThemeClasses = {
   ltr: "text-left",
   rtl: "text-right",
@@ -18,7 +16,7 @@ export const editorTheme: EditorThemeClasses = {
   link: "text-blue-600 hover:underline hover:cursor-pointer",
   list: {
     checklist: "relative",
-    listitem: "mx-8",
+    listitem: "mx-4",
     listitemChecked:
       'relative mx-2 px-6 list-none outline-none line-through before:content-[""] before:w-4 before:h-4 before:top-0.5 before:left-0 before:cursor-pointer before:block before:bg-cover before:absolute before:border before:border-primary before:rounded before:bg-primary before:bg-no-repeat after:content-[""] after:cursor-pointer after:border-white after:border-solid after:absolute after:block after:top-[6px] after:w-[3px] after:left-[7px] after:right-[7px] after:h-[6px] after:rotate-45 after:border-r-2 after:border-b-2 after:border-l-0 after:border-t-0',
     listitemUnchecked:
@@ -34,7 +32,7 @@ export const editorTheme: EditorThemeClasses = {
       "list-outside !list-[upper-alpha]",
       "list-outside !list-[lower-alpha]",
     ],
-    ul: "m-0 p-0 list-outside",
+    ul: "m-0 p-0 list-outside list-disc",
   },
   hashtag: "text-blue-600 bg-blue-100 rounded-md px-1",
   text: {
