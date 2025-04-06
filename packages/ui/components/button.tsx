@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@makefy/ui/lib/utils";
+import { Slot } from "@radix-ui/react-slot";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden relative z-[1] active:scale-[0.98] transition-transform duration-100 focus-visible:ring-offset-2",
@@ -260,7 +261,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       props.onClick?.(event);
     }
 
-    const Comp = asChild ? Slot : "button";
+    const Comp = asChild
+      ? (props: any) => <Slot {...props}>{children}</Slot>
+      : "button";
+
     return (
       <Comp
         className={cn(
@@ -270,13 +274,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         onClick={handleClick}
       >
+        {/* This effect is only applied to the button if it is not a child */}
         {isRippling && (
           <span
             className={cn(rippleVariants({ variant, variantColor }))}
             style={coords}
           />
         )}
-        {children}
+        {!asChild && children}
       </Comp>
     );
   },
