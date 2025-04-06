@@ -1,4 +1,3 @@
-import { AIEnhancedTextarea } from "@/components/ai-enhanced-textarea/ai-enhanced-textarea";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import {
   FormControl,
@@ -11,7 +10,7 @@ import {
 import { DeepPartial } from "ai";
 import { useFormContext } from "react-hook-form";
 import { ResumeDataSchemaTypeExtended } from "./resume-enhancer";
-
+import { ResumeFieldTextarea } from "@/app/components/resume-field-textarea";
 export const enum FIELDTYPE {
   TEXT = "text",
   TEXTAREA = "textarea",
@@ -56,7 +55,7 @@ export function ResumeFormField({
 
           <FormControl>
             {type === FIELDTYPE.TEXTAREA ? (
-              <AIEnhancedTextarea
+              <ResumeFieldTextarea
                 field={field}
                 fieldPath={fieldPath}
                 suggestions={suggestions}

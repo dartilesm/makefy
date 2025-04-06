@@ -8,26 +8,24 @@ import {
 } from "@/schemas/improved-file.schema";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { Textarea } from "@makefy/ui";
-import { cn } from "@makefy/ui/lib/utils";
 import { DeepPartial } from "ai";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps, useFormContext } from "react-hook-form";
-import { AITextareaLoading } from "./ai-textarea-loading";
-import { FormatStyleButtons } from "./format-style-buttons";
-import { SuggestionsAccordion } from "./suggestions-accordion";
+import { EnhancedTextarea } from "./ai-enhanced-textarea/ai-textarea";
+import { FormatStyleButtons } from "./ai-enhanced-textarea/format-style-buttons";
+import { SuggestionsAccordion } from "./ai-enhanced-textarea/suggestions-accordion";
 
-interface AIEnhancedTextareaProps {
+interface ResumeFieldTextareaProps {
   field: ControllerRenderProps<any, any>;
   fieldPath: string;
   suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
 }
 
-export function AIEnhancedTextarea({
+export function ResumeFieldTextarea({
   field,
   fieldPath,
   suggestions,
-}: AIEnhancedTextareaProps) {
+}: ResumeFieldTextareaProps) {
   // This field is used in the dialog form, so we need to use the form context
   const dialogForm = useFormContext<ResumeDataSchemaTypeExtended>();
 
@@ -111,25 +109,11 @@ export function AIEnhancedTextarea({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative flex flex-col gap-2">
-        <div
-          className={cn([
-            "absolute h-0 w-0 overflow-hidden p-1 transition-[height] duration-300 ease-in-out",
-            {
-              "bg-background border-input absolute h-full w-full overflow-hidden rounded-md border p-1":
-                isLoading,
-            },
-          ])}
-        >
-          <AITextareaLoading loading={isLoading} />
-        </div>
-
-        <Textarea
-          {...field}
-          aria-invalid={fieldState.invalid}
-          className="max-h-64 min-h-64 resize-none transition-[height] duration-300 ease-in-out [field-sizing:content]"
-        />
-      </div>
+      <EnhancedTextarea
+        field={field}
+        isInvalid={fieldState.invalid}
+        isLoading={isLoading}
+      />
 
       {(improvedField?.suggestionsApplied || currentAIImprovement) && (
         <SuggestionsAccordion

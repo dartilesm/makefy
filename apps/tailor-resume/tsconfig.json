@@ -9,15 +9,6 @@
       "@/components/*": [
         "app/components/*"
       ],
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/public/*": [
-        "public/*"
-      ]
     }
   },
   "include": [
