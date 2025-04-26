@@ -5,6 +5,8 @@ import {
 } from "@/schemas/resume-data.schema";
 import { resumeDataMocked } from "@/constants/resume-data-mock";
 import { createObjectReadableStream } from "@/utils/create-object-readable-stream";
+import { smoothStream, streamObject } from "ai";
+import { google } from "@ai-sdk/google";
 export const maxDuration = 30;
 export const dynamic = "force-dynamic";
 
@@ -23,7 +25,7 @@ export async function POST(request: NextRequest) {
     /* const result = streamObject({
       model: google("gemini-2.0-flash-001"),
       system:
-        "You are a resume parser. Extract structured information from the resume. Fix any spelling errors and normalize whitespace in the extracted text. Ensure consistent spacing and formatting in the output.",
+        "You are a resume parser. Extract structured information from the resume. Fix any spelling errors and normalize whitespace in the extracted text. Ensure consistent spacing and formatting in the output. If you detect bullet points, convert them to a list of items.",
       prompt: `Parse this resume into a structured format: ${resumeRawContent}`,
       schema: resumeDataSchema,
       experimental_transform: smoothStream(),
