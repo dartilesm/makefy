@@ -42,6 +42,9 @@ export default function ResumeEnhancer() {
       experience: resumeData?.experience || [],
       education: resumeData?.education || [],
       skills: resumeData?.skills || "",
+      projects: resumeData?.projects || [],
+      awards: resumeData?.awards || [],
+      volunteer: resumeData?.volunteer || [],
       aiImprovements: resumeData?.aiImprovements || {},
     },
   });

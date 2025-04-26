@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   page: {
     padding: 40,
     backgroundColor: "#ffffff",
+    fontFamily: "Helvetica",
   },
   header: {
     flexDirection: "row",
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 5,
   },
   contact: {
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     backgroundColor: "#f0f0f0",
     padding: "4 8",
     marginBottom: 8,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   },
   jobTitle: {
     fontSize: 12,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
   },
   company: {
     fontSize: 11,
@@ -85,42 +86,92 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
           </View>
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Professional Summary</Text>
-          <Text style={styles.description}>{data.summary}</Text>
-        </View>
+        {data.summary && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Professional Summary</Text>
+            <Text style={styles.description}>{data.summary}</Text>
+          </View>
+        )}
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Experience</Text>
-          {data.experience.map((exp, index) => (
-            <View key={index} style={styles.experienceItem}>
-              <Text style={styles.jobTitle}>{exp.title}</Text>
-              <Text style={styles.company}>{exp.company}</Text>
-              <Text style={styles.dates}>
-                {exp.startDate} - {exp.endDate || "Present"}
-              </Text>
-              <Text style={styles.description}>{exp.description}</Text>
-            </View>
-          ))}
-        </View>
+        {data.education.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Education</Text>
+            {data.education.map((edu, index) => (
+              <View key={index} style={styles.experienceItem}>
+                <Text style={styles.jobTitle}>{edu.degree}</Text>
+                <Text style={styles.company}>{edu.school}</Text>
+                <Text style={styles.dates}>
+                  {edu.startDate} - {edu.endDate || "Present"}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Skills</Text>
-          <Text style={styles.skills}>{data.skills}</Text>
-        </View>
+        {data.experience.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Experience</Text>
+            {data.experience.map((exp, index) => (
+              <View key={index} style={styles.experienceItem}>
+                <Text style={styles.jobTitle}>{exp.title}</Text>
+                <Text style={styles.company}>{exp.company}</Text>
+                <Text style={styles.dates}>
+                  {exp.startDate} - {exp.endDate || "Present"}
+                </Text>
+                <Text style={styles.description}>{exp.description}</Text>
+              </View>
+            ))}
+          </View>
+        )}
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Education</Text>
-          {data.education.map((edu, index) => (
-            <View key={index} style={styles.experienceItem}>
-              <Text style={styles.jobTitle}>{edu.degree}</Text>
-              <Text style={styles.company}>{edu.school}</Text>
-              <Text style={styles.dates}>
-                {edu.startDate} - {edu.endDate || "Present"}
-              </Text>
-            </View>
-          ))}
-        </View>
+        {data.skills && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Skills</Text>
+            <Text style={styles.skills}>{data.skills}</Text>
+          </View>
+        )}
+
+        {data.projects?.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Projects</Text>
+            {data.projects.map((project, index) => (
+              <View key={index} style={styles.experienceItem}>
+                <Text style={styles.jobTitle}>{project.name}</Text>
+                <Text style={styles.description}>{project.description}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {data.awards?.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Awards & Honors</Text>
+            {data.awards.map((award, index) => (
+              <View key={index} style={styles.experienceItem}>
+                <Text style={styles.jobTitle}>{award.title}</Text>
+                <Text style={styles.description}>{award.description}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {data.volunteer?.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Volunteer Work</Text>
+            {data.volunteer.map((vol, index) => (
+              <View key={index} style={styles.experienceItem}>
+                <Text style={styles.jobTitle}>{vol.role}</Text>
+                <Text style={styles.company}>{vol.organization}</Text>
+                <Text style={styles.dates}>
+                  {vol.startDate} - {vol.endDate || "Present"}
+                </Text>
+                {vol.description && (
+                  <Text style={styles.description}>{vol.description}</Text>
+                )}
+              </View>
+            ))}
+          </View>
+        )}
       </Page>
     </Document>
   );
