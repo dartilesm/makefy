@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  EmailContentType,
+  emailContentSchema,
+} from "@/app/api/generate-email/route";
+import { useResume } from "@/app/contexts/resume-context";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -17,17 +23,20 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from "@makefy/ui";
-import { MailIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { EnhancedTextarea } from "../ai-enhanced-textarea/ai-textarea";
-import { experimental_useObject as useObject } from "@ai-sdk/react";
-import {
-  EmailContentType,
-  emailContentSchema,
-} from "@/app/api/generate-email/route";
-import { useEffect, useState } from "react";
+
+const EMAIL_FORM_TABS = {
+  DETAILS: "Details",
+  TEMPLATE: "Template",
+};
 
 const emailFormSchema = z.object({
   recipientEmail: z.string().email("Please enter a valid email address"),
@@ -39,13 +48,16 @@ const emailFormSchema = z.object({
 
 type EmailFormData = z.infer<typeof emailFormSchema>;
 
-export function EmailResumeDialog() {
+export function EmailResumeDialog({ trigger }: { trigger: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { jobInfo } = useResume();
+
   const form = useForm<EmailFormData>({
     resolver: zodResolver(emailFormSchema),
     defaultValues: {
       recipientEmail: "",
-      jobTitle: "",
+      jobTitle: jobInfo?.jobTitle || "",
       companyName: "",
       subject: "",
       body: "",
@@ -72,117 +84,132 @@ export function EmailResumeDialog() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          className="gap-2"
-          variant="ghost"
-          variantColor="secondary"
-          size="sm"
-        >
-          <MailIcon className="h-4 w-4" />
-          Mail
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px]">
-        <DialogHeader>
-          <DialogTitle>Send Resume via Email</DialogTitle>
-          <DialogDescription>
-            Generate a professional email to send your resume to potential
-            employers.
-          </DialogDescription>
-        </DialogHeader>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {isOpen && (
+        <DialogContent className="flex  flex-col sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Send Resume via Email</DialogTitle>
+            <DialogDescription>
+              Generate a professional email to send your resume to potential
+              employers.
+            </DialogDescription>
+          </DialogHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(() => {})} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="recipientEmail"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Recipient Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="hiring@company.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(() => {})}
+              className="flex flex-1 flex-col justify-between gap-2"
+            >
+              <Tabs defaultValue={EMAIL_FORM_TABS.DETAILS}>
+                <TabsList className="mb-4 w-full">
+                  {Object.values(EMAIL_FORM_TABS).map((tab) => (
+                    <TabsTrigger key={tab} value={tab} className="w-full">
+                      {tab}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+                <TabsContent
+                  value={EMAIL_FORM_TABS.DETAILS}
+                  className="min-h-[450px] overflow-auto"
+                >
+                  <FormField
+                    control={form.control}
+                    name="recipientEmail"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Recipient Email *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="hiring@company.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <FormField
-              control={form.control}
-              name="jobTitle"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Job Title</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Software Engineer" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  <FormField
+                    control={form.control}
+                    name="jobTitle"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Job Title *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Software Engineer" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <FormField
-              control={form.control}
-              name="companyName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Company Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Acme Inc." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  <FormField
+                    control={form.control}
+                    name="companyName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Company Name *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Acme Inc." {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </TabsContent>
+                <TabsContent
+                  value={EMAIL_FORM_TABS.TEMPLATE}
+                  className="min-h-[450px] overflow-auto"
+                >
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Subject</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Job Application - {jobTitle}"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <FormField
-              control={form.control}
-              name="subject"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Subject</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Job Application - {jobTitle}"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  <FormField
+                    control={form.control}
+                    name="body"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <EnhancedTextarea
+                            {...field}
+                            isLoading={isLoading}
+                            aria-invalid={
+                              form.formState.errors.body !== undefined
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </TabsContent>
+              </Tabs>
 
-            <FormField
-              control={form.control}
-              name="body"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <EnhancedTextarea
-                      field={field}
-                      isLoading={isLoading}
-                      isInvalid={form.formState.errors.body !== undefined}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <DialogFooter>
-              <Button
-                type="submit"
-                disabled={!canSendEmail}
-                className="w-full sm:w-auto"
-              >
-                Generate Email
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
+              <DialogFooter>
+                <Button
+                  type="submit"
+                  disabled={!canSendEmail}
+                  className="w-full sm:w-auto"
+                >
+                  Generate Email
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      )}
     </Dialog>
   );
 }
