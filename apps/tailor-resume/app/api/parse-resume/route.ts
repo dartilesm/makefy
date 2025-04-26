@@ -1,8 +1,10 @@
 import { google } from "@ai-sdk/google";
-import { streamObject } from "ai";
+import { generateObject, streamObject } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import PDFParser, { Output } from "pdf2json";
 import { resumeDataSchema } from "../../../schemas/resume-data.schema";
+import { createObjectReadableStream } from "@/utils/create-object-readable-stream";
+import { resumeDataMocked } from "@/constants/resume-data-mock";
 
 export const maxDuration = 30;
 export const dynamic = "force-dynamic";
@@ -16,37 +18,46 @@ export async function POST(request: NextRequest) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const pdfData = await getPDFData(buffer);
 
-    // Extract text from PDF
-    const pages = pdfData.Pages || [];
-    let fullText = "";
+    /*     const pdfData = await streamObject({
+      model: google("gemini-1.5-flash-latest"),
+      schema: resumeDataSchema,
+      system:
+        "You are a resume parser. Extract structured information from the resume. Fix any spelling errors and normalize whitespace in the extracted text. Ensure consistent spacing and formatting in the output. If you detect bullet points, convert them to a list of items.",
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: "Parse the PDF",
+            },
+            {
+              type: "file",
+              data: buffer,
+              mimeType: "application/pdf",
+            },
+          ],
+        },
+      ],
+    });
+    return pdfData.toTextStreamResponse(); */
 
-    for (const page of pages) {
-      const texts = page.Texts || [];
-      for (const text of texts) {
-        const decodedText = decodeURIComponent(text.R?.[0]?.T || "");
-        fullText += decodedText;
-      }
-      fullText += "\n";
-    }
+    const stream = createObjectReadableStream(resumeDataMocked);
 
-    // Clean up the text
-    const cleanedText = fullText
-      .replace(/\s+/g, " ")
-      .trim()
-      .replace(/\\u[\dA-F]{4}/gi, (match) => {
-        return String.fromCharCode(parseInt(match.replace(/\\u/g, ""), 16));
-      });
-
-    return NextResponse.json({ rawContent: cleanedText });
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+      },
+    });
   } catch (error) {
     console.error("Error parsing PDF:", error);
     return NextResponse.json({ error: "Failed to parse PDF" }, { status: 500 });
   }
 }
 
-function getPDFData(buffer: Buffer): Promise<Output> {
+/* function getPDFData(buffer: Buffer): Promise<Output> {
   return new Promise((resolve, reject) => {
     const pdfParser = new PDFParser();
     pdfParser.on("pdfParser_dataReady", (pdfData) => {
@@ -60,3 +71,4 @@ function getPDFData(buffer: Buffer): Promise<Output> {
     pdfParser.parseBuffer(buffer);
   });
 }
+ */

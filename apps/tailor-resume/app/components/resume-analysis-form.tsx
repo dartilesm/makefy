@@ -23,7 +23,10 @@ import { useCallback, useEffect } from "react";
 import { AnalyzingScreen } from "@/app/components/analyzing-screen";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { resumeSuggestionsSchema } from "@/schemas/resume-suggestions.schema";
-import { experimental_useObject as useObject } from "@ai-sdk/react";
+import {
+  Experimental_UseObjectOptions,
+  experimental_useObject as useObject,
+} from "@ai-sdk/react";
 import { DeepPartial } from "ai";
 import { resumeDataSchema } from "@/schemas/resume-data.schema";
 import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
@@ -73,11 +76,14 @@ export function ResumeAnalysisForm({
 
   const {
     object: resumeData,
-    submit: getStructuredData,
+    submit: getResumeParsedData,
     isLoading: isResumeLoading,
   } = useObject<ResumeDataSchemaType>({
-    api: "/api/get-structured-resume-data",
+    api: "/api/parse-resume",
     schema: resumeDataSchema,
+    // As the ai sdk parses the body as json, we need to pass the fetch function
+    fetch:
+      handleFetchResumeData as Experimental_UseObjectOptions<ResumeDataSchemaType>["fetch"],
     onFinish: handleGetSuggestions,
   });
 
@@ -101,6 +107,17 @@ export function ResumeAnalysisForm({
     }
   }, [resumeData, suggestions, isSuggestionsLoading, isResumeLoading]);
 
+  async function handleFetchResumeData(url: string) {
+    const formData = new FormData();
+    formData.append("file", form.getValues().resume as File);
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+    return response;
+  }
+
   async function handleResumeStructuredData(
     e: React.FormEvent<HTMLFormElement>,
   ) {
@@ -116,25 +133,10 @@ export function ResumeAnalysisForm({
     }
 
     try {
-      // First parse the PDF using the parse-resume endpoint
       const formData = new FormData();
       formData.append("file", resume);
 
-      const response = await fetch("/api/parse-resume", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to parse resume");
-      }
-
-      const { rawContent } = await response.json();
-
-      // Then get structured data using the parsed text
-      await getStructuredData({
-        resumeRawContent: rawContent,
-      });
+      getResumeParsedData(formData);
     } catch (error) {
       console.error("Error processing resume:", error);
       toast({

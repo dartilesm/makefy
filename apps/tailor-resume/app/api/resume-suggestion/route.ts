@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Stream improvement suggestions based on job description
-    /* const result = streamObject({
-      model: google("gemini-1.5-flash-latest"),
+    /*     const result = streamObject({
+      model: google("gemini-2.0-flash-001"),
       system: `You are a career advisor. You will analyze a resume against a job description and provide specific suggestions to help the candidate optimize their resume for the role.`,
       prompt: `Analyze this resume against the job description and provide specific suggestions for improvement.
         Resume: ${JSON.stringify(resumeData)}
