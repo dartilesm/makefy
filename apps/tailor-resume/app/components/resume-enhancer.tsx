@@ -2,7 +2,10 @@
 
 import { ResumeData } from "@/app/components/resume-data/resume-data";
 import { ResumeSuggestions } from "@/app/components/resume-suggestions/resume-suggestions";
-import { ResumeAnalysisForm } from "@/app/components/resume-analysis-form";
+import {
+  ResumeAnalysisForm,
+  ResumeAnalysisFormValues,
+} from "@/app/components/resume-analysis-form";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { DeepPartial } from "ai";
 import { useState } from "react";
@@ -18,10 +21,13 @@ export interface ResumeDataSchemaTypeExtended extends ResumeDataSchemaType {
 }
 
 export default function ResumeEnhancer() {
-  const [resumeData, setResumeData] =
-    useState<DeepPartial<ResumeDataSchemaTypeExtended>>();
-  const [suggestions, setSuggestions] =
-    useState<DeepPartial<ResumeSuggestionsSchemaType>>();
+  const [data, setData] = useState<{
+    resumeData?: DeepPartial<ResumeDataSchemaTypeExtended>;
+    suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
+    jobInfo?: ResumeAnalysisFormValues;
+  }>({});
+
+  const { resumeData, suggestions, jobInfo } = data;
 
   const form = useForm<ResumeDataSchemaTypeExtended>({
     defaultValues: {
@@ -43,13 +49,20 @@ export default function ResumeEnhancer() {
   function handleComplete({
     resumeData,
     suggestions,
+    jobInfo,
   }: {
     resumeData: DeepPartial<ResumeDataSchemaTypeExtended>;
     suggestions: DeepPartial<ResumeSuggestionsSchemaType>;
+    jobInfo: ResumeAnalysisFormValues;
   }) {
-    setResumeData(resumeData);
-    setSuggestions(suggestions);
+    setData({ resumeData, suggestions, jobInfo });
     form.reset(resumeData);
+  }
+
+  function handleUpdateSuggestions(
+    suggestions: DeepPartial<ResumeSuggestionsSchemaType>,
+  ) {
+    setData({ ...data, suggestions });
   }
 
   return (
@@ -62,7 +75,8 @@ export default function ResumeEnhancer() {
         <ResumeProvider
           resumeForm={form}
           suggestions={suggestions}
-          setSuggestions={setSuggestions}
+          jobInfo={jobInfo}
+          setSuggestions={handleUpdateSuggestions}
         >
           <div className="container mx-auto h-full">
             <div className="flex flex-col gap-8 sm:flex-row">
