@@ -22,7 +22,6 @@ interface EditResumeFieldDialogProps {
   editingField: EditingField | null;
 }
 
-// Main Component
 export function EditResumeFieldDialog({
   onOpenChange,
   editingField,
