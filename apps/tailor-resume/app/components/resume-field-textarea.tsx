@@ -110,8 +110,8 @@ export function ResumeFieldTextarea({
   return (
     <div className="flex flex-col gap-4">
       <EnhancedTextarea
-        field={field}
-        isInvalid={fieldState.invalid}
+        {...field}
+        aria-invalid={fieldState.invalid}
         isLoading={isLoading}
       />
 

@@ -30,7 +30,7 @@ import { ResumeDataSchemaType } from "@/schemas/resume-data.schema";
 import { toast } from "@makefy/ui";
 import { FileUpload } from "@/app/components/file-upload";
 
-interface ResumeAnalysisFormValues {
+export interface ResumeAnalysisFormValues {
   resume: File | null;
   jobTitle: string;
   jobDescription: string;
@@ -40,9 +40,11 @@ interface ResumeAnalysisFormProps {
   onComplete: ({
     resumeData,
     suggestions,
+    jobInfo,
   }: {
     resumeData: DeepPartial<ResumeDataSchemaType>;
     suggestions: DeepPartial<ResumeSuggestionsSchemaType>;
+    jobInfo: ResumeAnalysisFormValues;
   }) => void;
   isLoading?: boolean;
 }
@@ -95,7 +97,7 @@ export function ResumeAnalysisForm({
       !isSuggestionsLoading &&
       !isResumeLoading
     ) {
-      onComplete({ resumeData, suggestions });
+      onComplete({ resumeData, suggestions, jobInfo: form.getValues() });
     }
   }, [resumeData, suggestions, isSuggestionsLoading, isResumeLoading]);
 
@@ -150,7 +152,6 @@ export function ResumeAnalysisForm({
     object?: DeepPartial<ResumeDataSchemaType>;
     error?: Error;
   }) {
-    console.log({ resumeData, error });
     if (
       !resumeData ||
       !form.getValues().jobTitle ||
