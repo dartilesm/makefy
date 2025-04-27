@@ -70,4 +70,7 @@ export const resumeDataMocked: ResumeDataSchemaType = {
   ],
   skills:
     "- Native Spanish and English speaker at intermediate level\n- Knowledge of creating applications integrated with artificial intelligence\n- Experience working with Tailwind CSS, Styled Components\n- Extensive experience working with testing tools such as Jest, React Testing Library, or Cypress\n- Familiarity with state management libraries such as Redux, Zustand, and React Context\n- Experience working with CMS such as Sanity and Strapi\n- Ability to work autonomously and manage different contexts",
+  projects: [],
+  awards: [],
+  volunteer: [],
 };

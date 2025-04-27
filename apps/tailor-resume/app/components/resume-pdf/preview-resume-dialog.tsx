@@ -70,7 +70,7 @@ export function PreviewResumeDialog() {
     // Find the selected button
     const selectedButton = container.querySelector(
       `[data-template="${template}"]`,
-    );
+    ) as HTMLElement;
     if (!selectedButton) return;
 
     // Calculate the center position

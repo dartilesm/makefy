@@ -33,9 +33,7 @@ export interface MarkdownViewerProps
     VariantProps<typeof markdownVariants> {
   content: string;
   components?: React.ComponentProps<typeof Markdown>["components"];
-  componentsClassName?: Partial<
-    Record<keyof React.ComponentProps<typeof Markdown>["components"], string>
-  >;
+  componentsClassName?: Partial<Record<keyof JSX.IntrinsicElements, string>>;
 }
 
 function getDefaultComponents(

@@ -40,14 +40,15 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarMenu>
-          </SidebarMenu>
+          <SidebarMenu></SidebarMenu>
         </SidebarGroup>
         <MakefySidebarBottomMenu>
           <MakefySidebarBottomMenu.FeedbackItem />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <MakefySidebarBottomMenu.ThemeItem theme={theme} />
+              <MakefySidebarBottomMenu.ThemeItem
+                theme={theme as keyof typeof ThemeIconsMap}
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" align="end">
               {themeIconList.map((themeIcon) => {
