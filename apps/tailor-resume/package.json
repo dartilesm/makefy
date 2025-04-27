@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "1.0.0",
-    "@ai-sdk/google": "1.1.11",
+    "@ai-sdk/google": "1.2.13",
     "@ai-sdk/openai": "1.0.0",
     "@ai-sdk/react": "1.1.11",
     "@makefy/supabase": "*",

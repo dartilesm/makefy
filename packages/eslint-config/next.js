@@ -30,6 +30,9 @@ module.exports = {
     JSX: true,
   },
   settings: {
+    next: {
+      rootDir: resolve(__dirname, '../apps/*'),
+    },
     'import/resolver': {
       typescript: {
         project,
