@@ -8,11 +8,12 @@ export const maxDuration = 30;
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
-  const result = await streamObject({
-    model: google("gemini-2.0-flash-001"),
-    system:
-      "You are a professional email writer specializing in job applications. Generate a template that can be customized with specific details later.",
-    prompt: `Create a professional job application email template.
+  try {
+    const result = await streamObject({
+      model: google("gemini-2.0-flash-001"),
+      system:
+        "You are a professional email writer specializing in job applications. Generate a template that can be customized with specific details later.",
+      prompt: `Create a professional job application email template.
 
 The email should have placeholders that will be replaced later:
 - [JOB_TITLE] for the position being applied for
@@ -34,8 +35,12 @@ The response must follow this exact format:
 }
 
 Make sure the email feels personal and engaging, not generic or robotic.`,
-    schema: emailContentSchema,
-  });
+      schema: emailContentSchema,
+    });
 
-  return result.toTextStreamResponse();
+    return result.toTextStreamResponse();
+  } catch (error) {
+    console.error(error);
+    return new Response("Internal Server Error", { status: 500 });
+  }
 }
