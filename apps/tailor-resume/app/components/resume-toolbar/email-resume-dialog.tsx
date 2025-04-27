@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  EmailContentType,
-  emailContentSchema,
-} from "@/app/api/generate-email/route";
 import { useResume } from "@/app/contexts/resume-context";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,6 +28,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { EnhancedTextarea } from "../ai-enhanced-textarea/ai-textarea";
+import {
+  EmailContentSchemaType,
+  emailContentSchema,
+} from "@/schemas/email-content-schema";
 
 const EMAIL_FORM_TABS = {
   DETAILS: "Details",
@@ -66,7 +66,7 @@ export function EmailResumeDialog({ trigger }: { trigger: React.ReactNode }) {
   });
 
   const { submit: generateEmailTemplate, isLoading } =
-    useObject<EmailContentType>({
+    useObject<EmailContentSchemaType>({
       api: "/api/generate-email",
       schema: emailContentSchema,
       onFinish: ({ object }) => {

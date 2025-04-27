@@ -1,21 +1,11 @@
+import { emailContentSchema } from "@/schemas/email-content-schema";
 import { google } from "@ai-sdk/google";
 import { streamObject } from "ai";
-import { z } from "zod";
 import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 export const maxDuration = 30;
 export const dynamic = "force-dynamic";
-
-export const emailContentSchema = z.object({
-  subject: z.string(),
-  body: z.string(),
-});
-
-export type EmailContentType = {
-  subject: string;
-  body: string;
-};
 
 export async function POST(request: NextRequest) {
   const result = await streamObject({
