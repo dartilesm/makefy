@@ -20,8 +20,7 @@ const nextConfig = {
         return config;
     },
     transpilePackages: ['@makefy/ui', '@makefy/supabase'],
-    reactStrictMode: false,
-    swcMinify: true
+    reactStrictMode: false
 };
 
 module.exports = nextConfig

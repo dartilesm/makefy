@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development next dev --experimental-https -p $MAKEFY_TAILOR_RESUME_PORT",
+    "dev": "NODE_ENV=development next dev --turbopack --experimental-https -p $MAKEFY_TAILOR_RESUME_PORT",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,31 +17,32 @@
     "@makefy/ui": "workspace:*",
     "@react-pdf/renderer": "^3.3.8",
     "ai": "4.2.8",
-    "framer-motion": "11.3.2",
-    "lucide-react": "0.408.0",
-    "next": "14.2.5",
+    "framer-motion": "12.9.2",
+    "lucide-react": "0.503.0",
+    "next": "15.3.1",
     "next-themes": "0.3.0",
     "pdf2json": "3.1.5",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-dropzone": "14.2.3",
     "react-hook-form": "7.52.1",
     "react-pdf": "9.1.0",
-    "zod": "3.22.4"
+    "zod": "3.24.3"
   },
   "devDependencies": {
+    "@makefy/eslint-config": "*",
+    "@makefy/typescript-config": "*",
+    "@next/eslint-plugin-next": "15.3.1",
+    "@svgr/webpack": "8.1.0",
     "@tailwindcss/typography": "0.5.15",
     "@types/node": "^20.11.5",
-    "@types/react": "18.2.61",
-    "@types/react-dom": "18.2.19",
-    "@svgr/webpack": "8.1.0",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
     "autoprefixer": "^10.0.1",
-    "eslint": "8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint": "9.25.1",
+    "eslint-config-next": "15.3.1",
     "postcss": "8.4.47",
     "tailwindcss": "3.4.14",
-    "typescript": "5.3.3",
-    "@makefy/eslint-config": "*",
-    "@makefy/typescript-config": "*"
+    "typescript": "5.3.3"
   }
 }

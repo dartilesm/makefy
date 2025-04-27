@@ -1,7 +1,5 @@
 import { google } from "@ai-sdk/google";
-import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
-import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { topic, tone } = await req.json();

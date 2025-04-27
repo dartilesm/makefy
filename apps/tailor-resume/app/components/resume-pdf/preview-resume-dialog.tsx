@@ -241,16 +241,14 @@ export function PreviewResumeDialog() {
               document={<CurrentTemplate data={resumeForm.getValues()} />}
               fileName="resume.pdf"
             >
-              {({ loading }) => (
-                <Button
-                  className="gap-2"
-                  variant="outline"
-                  variantColor="secondary"
-                >
-                  <Download className="h-4 w-4" />
-                  {loading ? "Generating..." : "Download PDF"}
-                </Button>
-              )}
+              <Button
+                className="gap-2"
+                variant="outline"
+                variantColor="secondary"
+              >
+                <Download className="h-4 w-4" />
+                Download PDF
+              </Button>
             </PDFDownloadLink>
           </div>
         </div>

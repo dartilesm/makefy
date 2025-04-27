@@ -24,7 +24,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@makefy/ui";
-import { useEffect, useState } from "react";
+import { JSX, ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { EnhancedTextarea } from "../ai-enhanced-textarea/ai-textarea";
@@ -48,7 +48,7 @@ const emailFormSchema = z.object({
 
 type EmailFormData = z.infer<typeof emailFormSchema>;
 
-export function EmailResumeDialog({ trigger }: { trigger: React.ReactNode }) {
+export function EmailResumeDialog({ trigger }: { trigger: JSX.Element }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { jobInfo } = useResume();
