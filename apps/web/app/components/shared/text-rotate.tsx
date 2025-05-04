@@ -1,5 +1,5 @@
 import { cn } from "@makefy/ui/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 
 type TextRotateProps = {
   children: string;

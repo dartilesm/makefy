@@ -14,13 +14,13 @@
     "@makefy/ui": "workspace:*",
     "@upstash/ratelimit": "2.0.1",
     "@vercel/kv": "2.0.0",
-    "framer-motion": "12.9.2",
     "lucide-react": "0.503.0",
-    "react-hook-form": "7.52.1",
+    "motion": "12.9.4",
     "next": "15.3.1",
     "next-plausible": "3.12.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "7.52.1",
     "resend": "4.0.0"
   },
   "devDependencies": {
