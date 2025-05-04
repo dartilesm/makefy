@@ -63,6 +63,14 @@ const config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -70,6 +78,26 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "button-border-rotation-keyframes": {
+          "0%": { "--r2": "0deg" },
+          "32.8228%": { "--r2": "0deg" },
+          "50%": { "--r2": "180deg" },
+          "82.8228%": { "--r2": "180deg" },
+          "100%": { "--r2": "360deg" },
+        },
+        "button-border-translation-keyframes": {
+          "0%": {
+            "--x": "var(--button-border-min-translation-x, 20px)",
+          },
+          "32.8228%": { "--x": "var(--button-border-translation-x, 180px)" },
+          "50%": { "--x": "var(--button-border-translation-x, 180px)" },
+          "82.8228%": {
+            "--x": "var(--button-border-min-translation-x, 20px)",
+          },
+          "100%": {
+            "--x": "var(--button-border-min-translation-x, 20px)",
+          },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -86,10 +114,27 @@ const config = {
             height: "0",
           },
         },
+        "ripple-effect": {
+          "0%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "50%": {
+            transform: "scale(20)",
+            opacity: "0.375",
+          },
+          "100%": {
+            transform: "scale(45)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
+        "button-border":
+          "button-border-rotation-keyframes -0.64s linear 3s infinite, button-border-translation-keyframes -0.64s linear 3s infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        ripple: "ripple-effect 0.9s ease 1 forwards",
       },
     },
   },

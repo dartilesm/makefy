@@ -209,7 +209,8 @@ export function EditDocumentDialog({
                   <div className="flex justify-end">
                     <Button
                       type="submit"
-                      variant="destructive"
+                      variant="solid"
+                      variantColor="destructive"
                       className="flex gap-2"
                       disabled={
                         !deleteForm.formState.isValid ||

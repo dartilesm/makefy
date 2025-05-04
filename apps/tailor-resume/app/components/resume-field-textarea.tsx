@@ -1,0 +1,132 @@
+"use client";
+
+import { ResumeDataSchemaTypeExtended } from "@/app/components/resume-enhancer";
+import { TEXT_STYLE } from "@/constants/text-style";
+import {
+  improvedFieldSchema,
+  ImprovedFieldSchemaType,
+} from "@/schemas/improved-file.schema";
+import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
+import { DeepPartial } from "ai";
+import { useEffect, useState } from "react";
+import { ControllerRenderProps, useFormContext } from "react-hook-form";
+import { EnhancedTextarea } from "./ai-enhanced-textarea/ai-textarea";
+import { FormatStyleButtons } from "./ai-enhanced-textarea/format-style-buttons";
+import { SuggestionsAccordion } from "./ai-enhanced-textarea/suggestions-accordion";
+
+interface ResumeFieldTextareaProps {
+  field: ControllerRenderProps<any, any>;
+  fieldPath: string;
+  suggestions?: DeepPartial<ResumeSuggestionsSchemaType>;
+}
+
+export function ResumeFieldTextarea({
+  field,
+  fieldPath,
+  suggestions,
+}: ResumeFieldTextareaProps) {
+  // This field is used in the dialog form, so we need to use the form context
+  const dialogForm = useFormContext<ResumeDataSchemaTypeExtended>();
+
+  const currentAIImprovement =
+    dialogForm.getValues("aiImprovements")?.[fieldPath] || "";
+  const fieldState = dialogForm.getFieldState(
+    fieldPath as keyof ResumeDataSchemaTypeExtended,
+  );
+
+  const [loadingStates, setLoadingStates] = useState<
+    Record<TEXT_STYLE, boolean>
+  >({
+    [TEXT_STYLE.REWRITE]: false,
+    [TEXT_STYLE.SHORTEN]: false,
+    [TEXT_STYLE.FORMAL]: false,
+    [TEXT_STYLE.CASUAL]: false,
+  });
+
+  const {
+    object: improvedField,
+    submit: improveField,
+    isLoading,
+  } = useObject<ImprovedFieldSchemaType>({
+    api: "/api/improve-resume-field",
+    schema: improvedFieldSchema,
+    onError: (error) => {
+      dialogForm.setError(fieldPath as keyof ResumeDataSchemaTypeExtended, {
+        message: "Oh no! Something went wrong. Please try again.",
+      });
+    },
+  });
+
+  useEffect(() => {
+    console.log("currentAIImprovement", currentAIImprovement);
+    if (!currentAIImprovement) handleImprove();
+  }, []);
+
+  useEffect(() => {
+    if (improvedField?.value) {
+      field.onChange(improvedField.value);
+      updateAiImprovements();
+    }
+  }, [improvedField?.value]);
+
+  async function handleImprove(style?: TEXT_STYLE) {
+    if (!suggestions || isLoading) return;
+
+    // Reset the field value to trigger the form validation and prevent
+    // saving invalid values
+    dialogForm.setValue(fieldPath as keyof ResumeDataSchemaTypeExtended, "");
+    dialogForm.trigger();
+
+    setLoadingStates((prev) => ({ ...prev, [style || "rewrite"]: true }));
+
+    try {
+      await improveField({
+        fieldContent: field.value,
+        suggestions,
+        style,
+      });
+    } finally {
+      setLoadingStates((prev) => ({ ...prev, [style || "rewrite"]: false }));
+    }
+  }
+
+  function updateAiImprovements() {
+    const currentAiImprovements = dialogForm!.getValues("aiImprovements");
+    const updatedAiImprovements = {
+      ...currentAiImprovements,
+      [fieldPath]: improvedField?.suggestionsApplied || "",
+    };
+
+    console.log({ currentAiImprovements });
+
+    dialogForm!.setValue("aiImprovements", updatedAiImprovements);
+  }
+
+  const currentLoadingState = Object.keys(loadingStates).find(
+    (key) => loadingStates[key as TEXT_STYLE],
+  );
+
+  return (
+    <div className="flex flex-col gap-4">
+      <EnhancedTextarea
+        {...field}
+        aria-invalid={fieldState.invalid}
+        isLoading={isLoading}
+      />
+
+      {(improvedField?.suggestionsApplied || currentAIImprovement) && (
+        <SuggestionsAccordion
+          content={improvedField?.suggestionsApplied || currentAIImprovement}
+        />
+      )}
+
+      <FormatStyleButtons
+        onImprove={handleImprove}
+        loadingStates={loadingStates}
+        currentLoadingState={currentLoadingState}
+        isLoading={isLoading}
+      />
+    </div>
+  );
+}

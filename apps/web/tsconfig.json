@@ -1,24 +1,13 @@
 {
   "extends": "@makefy/typescript-config/nextjs.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": [
+        "./*"
+      ],
       "@/components/*": [
         "app/components/*"
-      ],
-      "@/pages/*": [
-        "pages/*"
-      ],
-      "@/app/*": [
-        "app/*"
       ],
       "@/lib/*": [
         "lib/*"
@@ -29,28 +18,15 @@
       "@/public/*": [
         "public/*"
       ]
-    },
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    }
   },
   "include": [
     "next-env.d.ts",
+    "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "tailwind.config.ts"
   ],
   "exclude": [
     "node_modules"

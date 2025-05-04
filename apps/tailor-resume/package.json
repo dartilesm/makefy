@@ -1,0 +1,47 @@
+{
+  "name": "@makefy/tailor-resume",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development next dev --experimental-https -p $MAKEFY_TAILOR_RESUME_PORT",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "1.0.0",
+    "@ai-sdk/google": "1.2.13",
+    "@ai-sdk/openai": "1.0.0",
+    "@ai-sdk/react": "1.1.11",
+    "@makefy/supabase": "*",
+    "@makefy/ui": "workspace:*",
+    "@react-pdf/renderer": "^3.3.8",
+    "ai": "4.2.8",
+    "framer-motion": "11.3.2",
+    "lucide-react": "0.408.0",
+    "next": "14.2.5",
+    "next-themes": "0.3.0",
+    "pdf2json": "3.1.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-dropzone": "14.2.3",
+    "react-hook-form": "7.52.1",
+    "react-pdf": "9.1.0",
+    "zod": "3.22.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "0.5.15",
+    "@types/node": "^20.11.5",
+    "@types/react": "18.2.61",
+    "@types/react-dom": "18.2.19",
+    "@svgr/webpack": "8.1.0",
+    "autoprefixer": "^10.0.1",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.5",
+    "postcss": "8.4.47",
+    "tailwindcss": "3.4.14",
+    "typescript": "5.3.3",
+    "@makefy/eslint-config": "*",
+    "@makefy/typescript-config": "*"
+  }
+}
