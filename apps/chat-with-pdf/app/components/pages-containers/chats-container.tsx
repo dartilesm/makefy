@@ -20,7 +20,7 @@ import { Container } from "../ui/container";
 import { Heading } from "../ui/heading";
 import { SadFaceIcon } from "icons/sad-face";
 import { NewDocumentDialog } from "../header/document-title/new-document-dialog/new-document-dialog";
-import { Tables } from "@makefy/supabase/types";
+import { Tables } from "@makefy/supabase/types/database";
 
 type ChatsContainerProps =
   | {

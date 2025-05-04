@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -10,7 +10,7 @@ type SignUpProps = {
 };
 
 export async function signup(signUpData: SignUpProps) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const baseUrl = process.env.VERCEL_URL || "https://localhost:3000";
   const emailRedirectTo = `${baseUrl}/api/auth/callback`;

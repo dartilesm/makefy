@@ -10,7 +10,7 @@ import {
 import { cn } from "@makefy/ui/lib/utils";
 import { TrashIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
-import { RefObject, useEffect, useState } from "react";
+import { JSX, RefObject, useEffect, useState } from "react";
 import { DropzoneInputProps, useDropzone } from "react-dropzone";
 import {
   Controller,

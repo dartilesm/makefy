@@ -22,7 +22,7 @@ import {
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
 import Link from "next/link";
-import { createSupabaseClient } from "@makefy/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client/client";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid Email Address" }),

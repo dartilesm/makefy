@@ -1,6 +1,6 @@
 import { ChatProvider } from "@/app/context/chat-context";
 import { ChatScreen } from "../chat/chat-screen";
-import { Tables } from "@makefy/supabase/types";
+import { Tables } from "@makefy/supabase/types/database";
 
 type ChatIdContainerProps =
   | {

@@ -12,14 +12,12 @@ import { cn } from "@makefy/ui/lib/utils";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { MessageSquareQuoteIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
-import { useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import { DocumentCallback } from "react-pdf/dist/cjs/shared/types";
 import { useOnClickOutside } from "usehooks-ts";
 import { PdfToolbar } from "./pdf-toolbar";
-import { useTheme } from "next-themes";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/api/pdf-helper?url=unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -53,7 +51,9 @@ export function PdfViewer({ className }: { className?: string }) {
   const {
     globalContext: { chatData, setExtraData, documentState, setDocumentState },
   } = useGlobalChat();
-  useOnClickOutside(popoverRef, () => setSelectedTextOptions(null));
+  useOnClickOutside(popoverRef as RefObject<HTMLElement>, () =>
+    setSelectedTextOptions(null),
+  );
   /* Tools */
   const [currentZoom, setCurrentZoom] = useState<number>(1);
   const [enableChangePageOnScroll, setEnableChangePageOnScroll] =
@@ -63,7 +63,7 @@ export function PdfViewer({ className }: { className?: string }) {
   const [selectedTextOptions, setSelectedTextOptions] =
     useState<SelectedTextOptions | null>(null);
 
-  async function handlePdfData(pdf: DocumentCallback) {
+  async function handlePdfData(pdf: { getData: () => Promise<Uint8Array> }) {
     const pdfBytes = await pdf.getData();
 
     const pdfDoc = await PDFDocument.load(pdfBytes, { updateMetadata: false });

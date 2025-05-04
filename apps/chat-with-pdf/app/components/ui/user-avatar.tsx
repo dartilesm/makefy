@@ -3,7 +3,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@makefy/ui/components/avatar";
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 import { cn } from "@makefy/ui/lib/utils";
 
 interface UserAvatarProps {
@@ -11,7 +11,7 @@ interface UserAvatarProps {
 }
 
 export async function UserAvatar({ className }: UserAvatarProps) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const {
     data: { user },
     error,

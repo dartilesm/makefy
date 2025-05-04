@@ -1,8 +1,8 @@
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 import { redirect } from "next/navigation";
 
 export default async function PrivatePage() {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {

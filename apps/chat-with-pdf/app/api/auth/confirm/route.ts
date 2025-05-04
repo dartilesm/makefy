@@ -1,8 +1,8 @@
-import type { EmailOtpType } from "@makefy/supabase/types";
+import type { EmailOtpType } from "@makefy/supabase/types/supabase";
 import { type NextRequest } from "next/server";
 
 import { redirect } from "next/navigation";
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   const next = searchParams.get("next") ?? "/";
 
   if (token_hash && type) {
-    const supabase = createSupabaseServer();
+    const supabase = await createSupabaseServer();
 
     const { error } = await supabase.auth.verifyOtp({
       type,

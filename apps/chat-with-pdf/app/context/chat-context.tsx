@@ -12,8 +12,8 @@ import {
   useState,
 } from "react";
 import { updateChatMessages } from "../actions/update-chat-messages";
-import { Tables } from "@makefy/supabase/types";
-import { createSupabaseClient } from "@makefy/supabase/client";
+import { Tables } from "@makefy/supabase/types/database";
+import { createSupabaseClient } from "@makefy/supabase/client/client";
 import { generateDocumentTitle as generateDocumentTitleAction } from "../actions/generate-document-title";
 
 const EMPTY_CHAT_DATA: Partial<Tables<"Chat">> = {

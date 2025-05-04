@@ -1,7 +1,7 @@
 "use server";
 
-import { createSupabaseServer } from "@makefy/supabase/server";
-import { Tables } from "@makefy/supabase/types";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
+import { Tables } from "@makefy/supabase/types/database";
 
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
@@ -10,7 +10,7 @@ export async function deleteChat(
   chatId: Tables<"Chat">["id"],
   shouldRedirect = true,
 ) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { data, error } = await supabase
     .from("Chat")

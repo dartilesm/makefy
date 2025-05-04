@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -10,7 +10,7 @@ type LoginProps = {
 };
 
 export async function login(loginData: LoginProps) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { error } = await supabase.auth.signInWithPassword(loginData);
 

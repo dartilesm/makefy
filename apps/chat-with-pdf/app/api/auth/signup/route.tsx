@@ -1,5 +1,5 @@
 import { VerifyEmailTemplate } from "@/components/email-templates/verify-email-template";
-import { createSupabaseAdmin } from "@makefy/supabase/admin";
+import { createSupabaseAdmin } from "@makefy/supabase/client/admin";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);

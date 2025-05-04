@@ -1,6 +1,6 @@
-import type { SupabaseClient } from "@makefy/supabase/types";
+import type { SupabaseClient } from "@makefy/supabase/types/supabase";
 import { unstable_cache } from "next/cache";
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 
 async function retrieveDocuments(supabase: SupabaseClient) {
   const { data: documents, error: errorOnFetchingDocuments } = await supabase
@@ -15,7 +15,7 @@ async function retrieveDocuments(supabase: SupabaseClient) {
 }
 
 export async function getDocuments() {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

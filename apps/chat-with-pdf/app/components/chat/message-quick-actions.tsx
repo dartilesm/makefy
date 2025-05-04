@@ -12,7 +12,7 @@ import {
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
 import { Message } from "ai";
-import { AnimatePresence, CustomDomComponent, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useGlobalChat } from "hooks/use-global-chat";
 import {
   BookmarkIcon,
@@ -26,7 +26,7 @@ import { useParams } from "next/navigation";
 import { forwardRef, RefAttributes, useState } from "react";
 import { QUICK_ACTIONS } from "./constants/message-quick-actions";
 import { MessageActions } from "./types/message-actions";
-import { Tables } from "@makefy/supabase/types";
+import { Tables } from "@makefy/supabase/types/database";
 
 type MessageQuickActionsProps = {
   message: Message;
@@ -45,12 +45,14 @@ const quickActions: MessageActions[] = [
   },
   {
     Icon: RefreshCcwIcon,
+    SucessIcon: null,
     getLabel: () => "Regenerate response",
     value: QUICK_ACTIONS.REGENERATE,
     onlyLastMessage: true,
   },
   {
     Icon: BookmarkIcon,
+    SucessIcon: null,
     active: {
       Icon: forwardRef((props, ref) => (
         <BookmarkIcon ref={ref} className="h-4 w-4 fill-current" />
@@ -71,6 +73,7 @@ const quickActions: MessageActions[] = [
   },
   {
     Icon: FlagIcon,
+    SucessIcon: null,
     getLabel: () => "Report message (coming soon)",
     value: QUICK_ACTIONS.REPORT,
     onlyLastMessage: false,
@@ -178,9 +181,9 @@ export function MessageQuickActions({
             quickActionIndex,
           ) => {
             const AnimatedIcon = motion(Icon);
-            const AnimatedSucessIcon = (
-              SucessIcon ? motion(SucessIcon) : SucessIcon
-            ) as CustomDomComponent<LucideProps & RefAttributes<SVGSVGElement>>;
+            const AnimatedSucessIcon = SucessIcon
+              ? motion(SucessIcon)
+              : SucessIcon;
             const ActiveIcon = active?.Icon;
             if (onlyLastMessage && index !== messages.length - 1) {
               return null;
@@ -213,7 +216,7 @@ export function MessageQuickActions({
                         )}
                       {!active?.condition?.(message) &&
                         showSuccessIcon[value] &&
-                        SucessIcon && (
+                        AnimatedSucessIcon && (
                           <AnimatedSucessIcon
                             className="h-4 w-4"
                             stroke="currentColor"

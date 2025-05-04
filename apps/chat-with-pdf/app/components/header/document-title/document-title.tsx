@@ -12,7 +12,7 @@ import {
   PopoverTrigger,
 } from "@makefy/ui/components/popover";
 import { cn } from "@makefy/ui/lib/utils";
-import { Tables } from "@makefy/supabase/types";
+import { Tables } from "@makefy/supabase/types/database";
 import { ChevronDownIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";

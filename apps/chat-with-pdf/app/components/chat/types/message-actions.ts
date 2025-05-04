@@ -4,9 +4,9 @@ import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export type MessageActions = {
   Icon: ForwardRefExoticComponent<LucideProps & RefAttributes<SVGSVGElement>>;
-  SucessIcon?: ForwardRefExoticComponent<
+  SucessIcon: ForwardRefExoticComponent<
     LucideProps & RefAttributes<SVGSVGElement>
-  >;
+  > | null;
   active?: {
     Icon: ForwardRefExoticComponent<LucideProps & RefAttributes<SVGSVGElement>>;
     condition: (message: Message) => boolean;

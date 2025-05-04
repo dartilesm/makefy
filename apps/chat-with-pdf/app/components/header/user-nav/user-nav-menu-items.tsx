@@ -1,6 +1,6 @@
 "use client";
 
-import { createSupabaseClient } from "@makefy/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client/client";
 import {
   DropdownMenuGroup,
   DropdownMenuItem,

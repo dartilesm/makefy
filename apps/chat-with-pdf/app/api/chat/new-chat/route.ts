@@ -1,15 +1,15 @@
 import { deleteChat } from "@/app/actions/delete-chat";
 import { INPUT_NAME } from "@/components/header/document-title/constants/input-names";
-import { embedDocument, prepareDocument } from "@/lib/embed-document";
-import { getLoadingMessages } from "@/lib/get-loading-messages";
-import { getPdfData } from "@/lib/get-pdf-metadata";
-import { rateLimitRequests } from "@/lib/rate-limit-requests";
-import { createSupabaseServer } from "@makefy/supabase/server";
+import { embedDocument, prepareDocument } from "@/utils/embed-document";
+import { getLoadingMessages } from "@/utils/get-loading-messages";
+import { getPdfData } from "@/utils/get-pdf-metadata";
+import { rateLimitRequests } from "@/utils/rate-limit-requests";
+import { createSupabaseServer } from "@makefy/supabase/client/server";
 import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 import { PineconeRecord } from "@pinecone-database/pinecone";
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { Tables } from "@makefy/supabase/types";
+import { Tables } from "@makefy/supabase/types/database";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
@@ -85,7 +85,7 @@ async function* createNewChat({
   documentUrl: string;
   documentFile?: File;
 }) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   // Fetching PDF data and creating a new chat in the database
   yield getLoadingMessages({
     isViaLink: !!documentUrl,

@@ -3,7 +3,7 @@
 import React from "react";
 import { IoLogoGithub } from "react-icons/io5";
 import { Button, useToast } from "@makefy/ui";
-import { createSupabaseClient } from "@makefy/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client/client";
 
 export function Social({ redirectTo }: { redirectTo: string }) {
   const { toast } = useToast();

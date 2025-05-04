@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import { NewDocumentDialog } from "@/components/header/document-title/new-document-dialog/new-document-dialog";
-import { createSupabaseClient } from "@makefy/supabase/client";
+import { createSupabaseClient } from "@makefy/supabase/client/client";
 import Logo from "@/public/logo.svg";
 import {
   Avatar,
@@ -38,7 +38,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@makefy/ui/components/sidebar";
-import type { User } from "@makefy/supabase/types";
+import type { User } from "@makefy/supabase/types/supabase";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import RecentConversationsSidebarGroup from "./recent-conversation-sidebar-group";

@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
-import { AnimatePresence, inView, motion } from "framer-motion";
+import { AnimatePresence, inView, motion } from "motion/react";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { ArrowDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";

@@ -24,7 +24,7 @@ import {
   TabsTrigger,
   useToast,
 } from "@makefy/ui";
-import { Tables } from "@makefy/supabase/types";
+import { Tables } from "@makefy/supabase/types/database";
 import { LoaderCircleIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";

@@ -1,5 +1,5 @@
 import { Button } from "@makefy/ui";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { SadFaceIcon } from "icons/sad-face";
 import { SparkleIcon } from "icons/sparkle";
 import { CheckIcon, ClockIcon, LoaderCircleIcon, XIcon } from "lucide-react";

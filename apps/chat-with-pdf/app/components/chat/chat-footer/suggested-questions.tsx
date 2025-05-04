@@ -2,7 +2,7 @@
 
 import { Button } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useGlobalChat } from "hooks/use-global-chat";
 import {
   ChevronDownIcon,

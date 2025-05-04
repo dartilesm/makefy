@@ -9,7 +9,7 @@ import {
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
 import { Message } from "ai";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useGlobalChat } from "hooks/use-global-chat";
 import { SendIcon, XIcon } from "lucide-react";
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
