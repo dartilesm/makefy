@@ -50,10 +50,20 @@ export function ToolList() {
         <Link key={tool.href} href={tool.href} className="group">
           <Card className="hover:bg-muted/50 h-full transition-colors">
             <CardHeader>
-              <div className="bg-primary/10 text-primary mb-2 flex h-10 w-10 items-center justify-center rounded-lg">
+              <div
+                className="bg-primary/10 text-primary mb-2 flex h-10 w-10 items-center justify-center rounded-lg"
+                style={{
+                  viewTransitionName: `tool-icon-${tool.href.replace("/", "")}`,
+                }}
+              >
                 {tool.icon}
               </div>
-              <CardTitle className="group-hover:text-primary transition-colors">
+              <CardTitle
+                className="group-hover:text-primary transition-colors"
+                style={{
+                  viewTransitionName: `tool-name-${tool.href.replace("/", "")}`,
+                }}
+              >
                 {tool.title}
               </CardTitle>
             </CardHeader>

@@ -11,6 +11,12 @@ const nextConfig = {
         config.resolve.extensionAlias = {
             '.js': ['.js', '.ts', '.tsx'],
         };
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: ['@svgr/webpack'],
+        });
+
         return config;
     },
     transpilePackages: ['@makefy/ui', '@makefy/supabase'],

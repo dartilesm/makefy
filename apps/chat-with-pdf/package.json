@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development next dev --experimental-https",
+    "dev": "NODE_ENV=development next dev --experimental-https -p $MAKEFY_CHAT_WITH_PDF_PORT",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -50,7 +50,7 @@
     "@makefy/eslint-config": "workspace:*",
     "@makefy/typescript-config": "workspace:*",
     "@pinecone-database/pinecone": "2.2.2",
-    "@svgr/webpack": "^8.1.0",
+    "@svgr/webpack": "8.1.0",
     "@types/node": "20",
     "@types/react": "18.2.61",
     "@types/react-dom": "18.2.19",

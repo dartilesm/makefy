@@ -15,7 +15,8 @@ import { Input } from "@makefy/ui/components/input";
 import { useState } from "react";
 import { MarkdownViewer } from "@/app/components/markdown-viewer";
 import { ToolHero } from "@/app/components/tool-hero";
-import { HelpCircleIcon } from "lucide-react";
+import { HelpCircleIcon, ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function QAGenerator() {
   const [content, setContent] = useState("");
@@ -48,6 +49,15 @@ export default function QAGenerator() {
 
   return (
     <>
+      <div className="container mx-auto max-w-4xl p-4">
+        <Link href="/">
+          <Button variant="ghost" className="mb-4 gap-2">
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back
+          </Button>
+        </Link>
+      </div>
+
       <ToolHero
         title="Q&A Generator"
         description="Generate comprehensive questions and answers from any text or topic. Perfect for study materials, quizzes, and educational content."
