@@ -3,7 +3,7 @@
 import { cn } from "@makefy/ui/lib/utils";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { AnimatedSparkles } from "./animated-sparkles";
 import { ResumeSuggestionsSchemaType } from "@/schemas/resume-suggestions.schema";
 import { DeepPartial } from "ai";

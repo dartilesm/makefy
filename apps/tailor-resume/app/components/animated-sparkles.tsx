@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@makefy/ui/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { SparkleIcon } from "@makefy/ui/icons/sparkle";
 
 const SparkleIconAnimated = motion(SparkleIcon);
