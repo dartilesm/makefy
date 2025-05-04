@@ -2,7 +2,7 @@
 
 import { Button } from "@makefy/ui/components/button";
 import Link from "next/link";
-import { MessageSquareIcon, PenLineIcon } from "lucide-react";
+import { FileIcon, MessageSquareIcon, PenLineIcon } from "lucide-react";
 
 type AppTileProps = {
   name: string;
@@ -25,6 +25,12 @@ const apps: AppTileProps[] = [
     description: "Powerful text manipulation tools",
     icon: PenLineIcon,
     href: process.env.NEXT_PUBLIC_MAKEFY_TEXT_TOOLS_URL!,
+  },
+  {
+    name: "Tailor Resume",
+    description: "Tailor your resume in seconds",
+    icon: FileIcon,
+    href: process.env.NEXT_PUBLIC_MAKEFY_TAILOR_RESUME_URL!,
   },
 ];
 

@@ -23,6 +23,7 @@ export * from "./scroll-area";
 export * from "./sheet";
 export * from "./select";
 export * from "./sidebar";
+export * from "./stepper";
 export * from "./switch";
 export * from "./tabs";
 export * from "./textarea";
@@ -36,3 +37,6 @@ export * from "./use-toast";
 // Custom components
 export * from "./modules";
 export * from "./tag";
+export * from "./markdown-viewer";
+export * from "./magic-button";
+export * from "./accordion";

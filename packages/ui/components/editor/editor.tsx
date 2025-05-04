@@ -1,0 +1,171 @@
+"use client";
+
+import {
+  InitialConfigType,
+  LexicalComposer,
+} from "@lexical/react/LexicalComposer";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { EditorState, LexicalEditor, SerializedEditorState } from "lexical";
+
+import { editorTheme } from "@makefy/ui/components/editor";
+
+import { TooltipProvider } from "@makefy/ui/components/tooltip";
+
+import { nodes } from "./nodes";
+import { Plugins } from "./plugins";
+
+import { TRANSFORMERS, $convertFromMarkdownString } from "@lexical/markdown";
+import { useEffect, useRef } from "react";
+import { VariantProps, cva } from "class-variance-authority";
+import { cn } from "@makefy/ui/lib/utils";
+
+export const textareaVariants = cva(
+  "border-input placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[60px] w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        outline:
+          "border-border/60 dark:border-border/70 border-2 shadow-none hover:border-gray-300 dark:hover:border-gray-600",
+        flat: "bg-background/50 text-secondary-foreground shadow border-none shadow-none [filter:brightness(0.9)] dark:[filter:brightness(2)] hover:[filter:brightness(0.85)] dark:hover:[filter:brightness(2.2)] placeholder:text-secondary-foreground/50",
+      },
+      variantColor: {
+        default: "focus:ring-secondary focus-visible:ring-secondary",
+        primary: "focus:ring-primary focus-visible:ring-primary",
+        warning: "focus:ring-warning focus-visible:ring-warning",
+        destructive: "focus:ring-destructive focus-visible:ring-destructive",
+        success: "focus:ring-success focus-visible:ring-success",
+      },
+    },
+    compoundVariants: [
+      {
+        variant: "outline",
+        variantColor: "destructive",
+        className:
+          "border-destructive text-destructive dark:border-destructive dark:text-destructive hover:border-destructive dark:hover:border-destructive",
+      },
+      {
+        variant: "outline",
+        variantColor: "success",
+        className:
+          "border-success text-success dark:border-success dark:text-success hover:border-success dark:hover:border-success",
+      },
+      {
+        variant: "flat",
+        variantColor: "primary",
+        className: cn(
+          "bg-primary/20 hover:bg-primary/10 text-primary placeholder:text-primary hover:border-primary",
+          // dark classes
+          "dark:bg-primary/30 dark:hover:bg-primary/20 dark:[filter:brightness(1)] dark:hover:[filter:brightness(1)] dark:text-primary dark:placeholder:text-primary dark:hover:border-primary",
+        ),
+      },
+      {
+        variant: "flat",
+        variantColor: "default",
+        className: cn(
+          "bg-secondary/80 hover:bg-secondary/90 text-secondary-foreground/70 placeholder:text-secondary-foreground/70 hover:border-secondary",
+          // dark classes
+          "dark:bg-secondary/80 dark:hover:bg-secondary/50 dark:[filter:brightness(1)] dark:hover:[filter:brightness(1)] dark:text-secondary-foreground/70 dark:placeholder:text-secondary-foreground/70 dark:hover:border-secondary",
+        ),
+      },
+      {
+        variant: "flat",
+        variantColor: "warning",
+        className: cn(
+          "bg-warning/20 hover:bg-warning/30 text-warning placeholder:text-warning hover:border-warning",
+          // dark classes
+          "dark:bg-warning/30 dark:hover:bg-warning/20 dark:[filter:brightness(1)] dark:hover:[filter:brightness(1)] dark:text-warning dark:placeholder:text-warning dark:hover:border-warning",
+        ),
+      },
+      {
+        variant: "flat",
+        variantColor: "destructive",
+        className: cn(
+          "bg-destructive/20 hover:bg-destructive/30 text-destructive placeholder:text-destructive hover:border-destructive",
+          // dark classes
+          "dark:bg-destructive/20 dark:hover:bg-destructive/10 dark:[filter:brightness(1)] dark:hover:[filter:brightness(1)] dark:text-destructive/80 dark:placeholder:text-destructive/80 dark:hover:border-destructive",
+        ),
+      },
+      {
+        variant: "flat",
+        variantColor: "success",
+        className: cn(
+          "bg-success/20 hover:bg-success/30 text-success placeholder:text-success hover:border-success",
+          // dark classes
+          "dark:bg-success/30 dark:hover:bg-success/20 dark:[filter:brightness(1)] dark:hover:[filter:brightness(1)] dark:text-success dark:placeholder:text-success dark:hover:border-success",
+        ),
+      },
+    ],
+    defaultVariants: {
+      variant: "outline",
+      variantColor: "default",
+    },
+  },
+);
+
+const editorConfig: InitialConfigType = {
+  namespace: "Editor",
+  theme: editorTheme,
+  nodes,
+  onError: (error: Error) => {
+    console.error(error);
+  },
+};
+
+interface EditorProps extends VariantProps<typeof textareaVariants> {
+  value: string;
+  onChange?: (editorState: EditorState) => void;
+  onSerializedChange?: (editorSerializedState: SerializedEditorState) => void;
+  className?: string;
+}
+
+export function Editor({
+  value = "",
+  onChange,
+  onSerializedChange,
+  className,
+  variant,
+  variantColor,
+}: EditorProps) {
+  const editorRef = useRef<LexicalEditor | null>(null);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.update(() => {
+        $convertFromMarkdownString(value, TRANSFORMERS);
+      });
+    }
+  }, [value]);
+
+  return (
+    <div
+      className={cn(
+        "bg-background overflow-hidden rounded-lg border shadow",
+        textareaVariants({ variant, variantColor }),
+        className,
+      )}
+      tabIndex={0}
+    >
+      <LexicalComposer
+        initialConfig={{
+          ...editorConfig,
+          editorState(editor) {
+            editorRef.current = editor;
+            return $convertFromMarkdownString(value, TRANSFORMERS);
+          },
+        }}
+      >
+        <TooltipProvider>
+          <Plugins />
+
+          <OnChangePlugin
+            ignoreSelectionChange={true}
+            onChange={(editorState) => {
+              onChange?.(editorState);
+              onSerializedChange?.(editorState.toJSON());
+            }}
+          />
+        </TooltipProvider>
+      </LexicalComposer>
+    </div>
+  );
+}
