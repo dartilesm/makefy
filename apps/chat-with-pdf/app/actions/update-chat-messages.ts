@@ -15,7 +15,7 @@ export async function updateChatMessages({
   messages,
   documentMetadata,
 }: UpdateChatMessagesParams) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   await supabase
     .from("Chat")

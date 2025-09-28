@@ -10,7 +10,7 @@ type SignUpProps = {
 };
 
 export async function signup(signUpData: SignUpProps) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const baseUrl = process.env.VERCEL_URL || "https://localhost:3000";
   const emailRedirectTo = `${baseUrl}/api/auth/callback`;

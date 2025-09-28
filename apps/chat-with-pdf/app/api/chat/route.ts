@@ -1,4 +1,4 @@
-import { rateLimitRequests } from "@/lib/rate-limit-requests";
+import { rateLimitRequests } from "@/utils/rate-limit-requests";
 import { google } from "@ai-sdk/google";
 import { Message, StreamData, convertToCoreMessages, streamText } from "ai";
 import { Tables } from "@makefy/supabase/types";
@@ -77,12 +77,12 @@ export async function POST(req: Request) {
   const data = new StreamData();
   data.append(messageData);
 
-  const result = streamText({
+  const result = await streamText({
     model: google("gemini-1.5-flash-latest"),
     messages: convertToCoreMessages(messages),
     system: systemInstructions,
     maxTokens: 3000,
-    onFinish({ text, toolCalls, toolResults, usage, finishReason, ...rest }) {
+    onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
       console.log({
         onFinish: {
           text,
@@ -90,7 +90,6 @@ export async function POST(req: Request) {
           toolResults,
           usage,
           finishReason,
-          ...rest,
         },
       });
       data.close();

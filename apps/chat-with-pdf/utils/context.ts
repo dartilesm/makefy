@@ -6,7 +6,7 @@ export async function getContext(query: string, documentId: string) {
   // User query embeddings
   const userQueryEmbeddings = await getEmbeddings(query);
 
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const { data: documentSections, error } = await supabase.rpc(
     "match_documents",

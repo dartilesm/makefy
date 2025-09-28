@@ -1,6 +1,6 @@
 "use server";
 
-import { getContext } from "@/lib/context";
+import { getContext } from "@/utils/context";
 import { createSupabaseServer } from "@makefy/supabase/server";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
@@ -22,7 +22,7 @@ export async function generateDocumentTitle(documentId: string) {
   });
 
   if (object.title) {
-    const supabase = createSupabaseServer();
+    const supabase = await createSupabaseServer();
     const { data } = await supabase.auth.getSession();
     revalidatePath(`/chat/${documentId}`);
     revalidateTag(documentId);

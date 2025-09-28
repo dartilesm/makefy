@@ -26,6 +26,8 @@ const ThemeIconsMap = {
   dark: MoonIcon,
 };
 
+console.log({ Logo });
+
 const themeIconList = Object.keys(ThemeIconsMap);
 export function AppSidebar() {
   const { theme, setTheme } = useTheme();

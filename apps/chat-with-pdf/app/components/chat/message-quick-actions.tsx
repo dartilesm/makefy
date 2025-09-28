@@ -12,7 +12,7 @@ import {
 } from "@makefy/ui";
 import { cn } from "@makefy/ui/lib/utils";
 import { Message } from "ai";
-import { AnimatePresence, CustomDomComponent, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useGlobalChat } from "hooks/use-global-chat";
 import {
   BookmarkIcon,
@@ -178,9 +178,7 @@ export function MessageQuickActions({
             quickActionIndex,
           ) => {
             const AnimatedIcon = motion(Icon);
-            const AnimatedSucessIcon = (
-              SucessIcon ? motion(SucessIcon) : SucessIcon
-            ) as CustomDomComponent<LucideProps & RefAttributes<SVGSVGElement>>;
+            const AnimatedSucessIcon = motion(SucessIcon ? SucessIcon : "svg");
             const ActiveIcon = active?.Icon;
             if (onlyLastMessage && index !== messages.length - 1) {
               return null;

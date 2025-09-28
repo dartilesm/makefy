@@ -7,7 +7,7 @@ export const verifyOtp = async (data: {
   otp: string;
   type: string;
 }) => {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const res = await supabase.auth.verifyOtp({
     email: data.email,

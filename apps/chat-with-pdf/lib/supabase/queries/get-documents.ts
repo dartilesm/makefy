@@ -15,7 +15,7 @@ async function retrieveDocuments(supabase: SupabaseClient) {
 }
 
 export async function getDocuments() {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

@@ -41,7 +41,7 @@ async function generateAndUpdateSuggestedQuestions(
 }
 
 export async function getChat(id: string) {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { data, error: errorOnFetchingSession } = await supabase.auth.getUser();
 
   if (errorOnFetchingSession) {

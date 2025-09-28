@@ -10,8 +10,8 @@ if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
   throw new Error("Missing env.NEXT_PUBLIC_SUPABASE_ANON_KEY");
 }
 
-export function createSupabaseServer(): SupabaseClient {
-  const cookieStore = cookies();
+export async function createSupabaseServer(): Promise<SupabaseClient> {
+  const cookieStore = await cookies();
 
   // TODO: add types for example: SupabaseClient<Database>.
   // NOTE: it was removed since it was causing issues with the types.

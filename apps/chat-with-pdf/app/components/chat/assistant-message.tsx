@@ -43,7 +43,15 @@ export function AssistantMessage({
       rehypePlugins={[rehypeRaw]}
       className="px-4 py-3"
       components={{
-        p: ({ children }) => <p className="text-sm">{children}</p>,
+        p: ({ children }) => {
+          // Check if the children contains a <div> element
+          const hasDiv = (children as string).includes("<div");
+          return hasDiv ? (
+            <div className="text-sm">{children}</div>
+          ) : (
+            <p className="text-sm">{children}</p>
+          );
+        },
         a: ({ children, href }) => (
           <a href={href} className="text-blue-500 hover:underline">
             {children}
