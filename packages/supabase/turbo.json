@@ -8,6 +8,12 @@
                 "@makefy/supabase#gen:types:local"
             ]
         },
+        "start:db": {
+            "cache": false,
+            "env": [
+                "VERCEL_ENV"
+            ]
+        },
         "gen:types:local": {
             "cache": false,
             "env": [
