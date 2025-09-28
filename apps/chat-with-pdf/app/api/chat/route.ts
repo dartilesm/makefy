@@ -1,4 +1,4 @@
-import { rateLimitRequests } from "@/lib/rate-limit-requests";
+import { rateLimitRequests } from "@/utils/rate-limit-requests";
 import { google } from "@ai-sdk/google";
 import { Message, StreamData, convertToCoreMessages, streamText } from "ai";
 import { Tables } from "@makefy/supabase/types";

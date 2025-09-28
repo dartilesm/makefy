@@ -1,6 +1,6 @@
 "use server";
 
-import { getContext } from "@/lib/context";
+import { getContext } from "@/utils/context";
 import { createSupabaseServer } from "@makefy/supabase/server";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";

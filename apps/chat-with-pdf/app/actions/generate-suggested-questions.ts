@@ -1,6 +1,6 @@
 "use server";
 
-import { getContext } from "@/lib/context";
+import { getContext } from "@/utils/context";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { revalidatePath } from "next/cache";
