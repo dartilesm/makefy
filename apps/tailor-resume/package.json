@@ -30,18 +30,19 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "1.51.0",
+    "@makefy/eslint-config": "*",
+    "@makefy/typescript-config": "*",
+    "@svgr/webpack": "8.1.0",
     "@tailwindcss/typography": "0.5.15",
     "@types/node": "^20.11.5",
     "@types/react": "18.2.61",
     "@types/react-dom": "18.2.19",
-    "@svgr/webpack": "8.1.0",
     "autoprefixer": "^10.0.1",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.5",
     "postcss": "8.4.47",
     "tailwindcss": "3.4.14",
-    "typescript": "5.3.3",
-    "@makefy/eslint-config": "*",
-    "@makefy/typescript-config": "*"
+    "typescript": "5.3.3"
   }
 }
