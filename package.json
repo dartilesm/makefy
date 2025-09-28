@@ -31,9 +31,21 @@
     "node": ">=20"
   },
   "packageManager": "bun@1.0.35",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalogs": {
+      "next-dependencies": {
+        "next": "15.5.4",
+        "react": "19.1.1",
+        "react-dom": "19.1.1",
+        "@types/react": "19.1.15",
+        "@types/react-dom": "19.1.9",
+        "eslint-config-next": "15.5.4"
+      }
+    }
+  },
   "dependencies": {}
 }
