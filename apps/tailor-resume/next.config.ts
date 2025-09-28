@@ -10,26 +10,23 @@ const nextConfig: NextConfig = {
     return config;
   },
 
-  experimental: {
-    turbo: {
-      rules: {
-        "*.svg": {
-          loaders: [
-            {
-              loader: "@svgr/webpack",
-              options: {
-                icon: true,
-              },
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              icon: true,
             },
-          ],
-          as: "*.js",
-        },
+          },
+        ],
+        as: "*.js",
       },
     },
   },
   transpilePackages: ["@makefy/ui", "@makefy/supabase"],
   reactStrictMode: false,
-  swcMinify: true,
 };
 
 export default nextConfig;
